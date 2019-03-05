@@ -1,0 +1,1 @@
+Qual o valor de pi?;Pi vale 3,1419
