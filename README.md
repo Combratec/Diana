@@ -4,11 +4,13 @@ Chatbot com um método de inteligência Artificial
 # Versão 8.0 
 
 - Remoção da biblioteca Mipand 
-- Remoção de bibliotecas pesadas 
-- Remoção de instaladores desnecessários 
+- [X] Remoção de bibliotecas pesadas 
+- [X] Remoção de instaladores desnecessários 
 - Fazer documentação
 - Salvar áudio de questões já respondidas
 - Remover audios salvos
 - Remover métodos de resposta alternativa
 - Refatoração completa do código
-- Remoção de tela hack
+- [X] Remoção de tela hack
+- Remoção das imanges hack
+- [X] Remoção da tela de avaliação
