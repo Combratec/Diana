@@ -5,11 +5,11 @@ __author__      = 'Gabriel Gregório da Silva'
 __email__       = 'gabriel.gregorio.1@outlook.com'
 
 __diana__       = 'https://dianachatbot.blogspot.com/'
-__description__ = 'Chat bot da Combratec com um método de Inteligência Artificial'
+__description__ = 'Chatbot da Combratec com um método de Inteligência Artificial'
 __copyright__   = 'Copyright 2018-2019, Combratec'
 __status__      = 'Development'
 __date__        = '09/02/2019'
-__version__     = '7.2.6'
+__version__     = '7.2.7'
 
 __project__     = 'https://combratecinova.blogspot.com'
 __Social__      = 'https://www.facebook.com/combratec'
@@ -44,19 +44,6 @@ tela.geometry("446x546+100+100")
 
 global acesso_em_modo_texto
 acesso_em_modo_texto = "nao"
-
-# Escolha de temas
-proseguir = "sim"
-try:
-    arquivo = open("Analise/tema.txt","r", encoding="utf8")
-except:
-    proseguir = "não"
-    tema_atual = "nenhum"
-    print("Impossivel atualizar temas!")
-
-if proseguir == "sim":
-    tema_atual = str(arquivo.read()[0:7])
-    arquivo.close()
 
 # Definição de segurança que analisa o arquivo configurações
 # Caso o arquivo configurações não seja localizado é criado um automaticamente através da string "esperado"
@@ -195,12 +182,8 @@ def atualiza_configuracoes_reconhecimento(): # Atualização do Reconhecimento d
         arquivo.close()
 
         # Atualização da imagem da tela de configuração e da tela do menu
-        if tema_atual=="#hacker":
-            configuracoes_reconhecimento_imagem = PhotoImage(file="Imagens/configurações/hack/ativado.png")
-            menu_reconhecimento_img = PhotoImage(file="Imagens/Menu/hack/rec_ati.png")
-        else:
-            configuracoes_reconhecimento_imagem = PhotoImage(file="Imagens/configurações/ativado.png")
-            menu_reconhecimento_img = PhotoImage(file="Imagens/Menu/rec_ati.png")
+        configuracoes_reconhecimento_imagem = PhotoImage(file="Imagens/configurações/ativado.png")
+        menu_reconhecimento_img = PhotoImage(file="Imagens/Menu/rec_ati.png")
         
         # redimensionamento de imagens
         configuracoes_reconhecimento_imagem = configuracoes_reconhecimento_imagem.subsample(4,4)
@@ -221,12 +204,8 @@ def atualiza_configuracoes_reconhecimento(): # Atualização do Reconhecimento d
         arquivo.close()
 
         # Atualização de imagens
-        if tema_atual=="#hacker":
-            menu_reconhecimento_img = PhotoImage(file="Imagens/Menu/hack/rec_des.png")
-            configuracoes_reconhecimento_imagem = PhotoImage(file="Imagens/configurações/hack/desativado.png")
-        else:
-            menu_reconhecimento_img = PhotoImage(file="Imagens/Menu/rec_des.png")
-            configuracoes_reconhecimento_imagem = PhotoImage(file="Imagens/configurações/desativado.png")
+        menu_reconhecimento_img = PhotoImage(file="Imagens/Menu/rec_des.png")
+        configuracoes_reconhecimento_imagem = PhotoImage(file="Imagens/configurações/desativado.png")
 
         # Redimensionamento de imagens
         configuracoes_reconhecimento_imagem = configuracoes_reconhecimento_imagem.subsample(4,4)
@@ -262,14 +241,7 @@ def atualizar_historico():
     historico_arquivo = open("Analise/histórico.txt","r", encoding="utf8")
     historico_arquivo_ler = historico_arquivo.read()
     historico_arquivo.close()
- 
-    """ Análise de strings, é possivel que o arquivo esteja vazio, nesse caso, 
-        a variável será |resetada| para ' '. Lá em baixo, essa definição é chamada
-        para buscar o conteudo do arquivo 'histórico.txt', e ele tenta converter para string,
-        já que o Python retorna um tupla, quando o arquivo estava vazio, ele dava um
-        erro, essa etapa elimina justamente esse bug de acesso! caso não exista a posição [0],
-        o Python vai criar pelo menos um espaço em branco, que já elimina o bug.
-    """
+
     try:
         invalidade = str(historico_arquivo_ler[0]) 
     except:
@@ -295,12 +267,8 @@ def atualiza_configuracoes_fala(): # Atualização da Fala
         arquivo.close()
 
         # Atualização da imagem da tela de configuração e da tela do menu
-        if tema_atual=="#hacker":
-            configuracoes_fala_imagem = PhotoImage(file="Imagens/configurações/hack/ativado.png")
-            menu_fala_img = PhotoImage(file="Imagens/Menu/hack/fala_ati.png")
-        else:
-            configuracoes_fala_imagem = PhotoImage(file="Imagens/configurações/ativado.png")
-            menu_fala_img = PhotoImage(file="Imagens/Menu/fala_ati.png")
+        configuracoes_fala_imagem = PhotoImage(file="Imagens/configurações/ativado.png")
+        menu_fala_img = PhotoImage(file="Imagens/Menu/fala_ati.png")
 
         # Redimensionamento das imagens
         configuracoes_fala_imagem = configuracoes_fala_imagem.subsample(4,4)
@@ -320,12 +288,8 @@ def atualiza_configuracoes_fala(): # Atualização da Fala
         arquivo.close()
 
         # Atualização da tela de configuração
-        if tema_atual=="#hacker":
-            configuracoes_fala_imagem = PhotoImage(file="Imagens/configurações/hack/desativado.png")
-            menu_fala_img = PhotoImage(file="Imagens/Menu/hack/fala_des.png")
-        else:
-            configuracoes_fala_imagem = PhotoImage(file="Imagens/configurações/desativado.png")
-            menu_fala_img = PhotoImage(file="Imagens/Menu/fala_des.png")
+        configuracoes_fala_imagem = PhotoImage(file="Imagens/configurações/desativado.png")
+        menu_fala_img = PhotoImage(file="Imagens/Menu/fala_des.png")
 
         # Redimensionamento das imagens
         configuracoes_fala_imagem = configuracoes_fala_imagem.subsample(4,4)
@@ -395,13 +359,6 @@ def testar_configuracoes_reconhecimento_de_voz():
                 audio = microfone.listen(source) 
             except:
                 microfone_nao_localizado()
-            ''' O erro de permissão acontece quando a Diana 
-                não consegue acessar um arquivo, geralmente 
-                acontece dentro de alguns pendrive com bom
-                tempo de uso. Outros erros podem acontecer 
-                quando a internet está desconectada, ou quando 
-                acontece um erro no servidor ou até quando a 
-                Diana não consegue escutar por causa do microfone''' 
             try:
                 frase = microfone.recognize_google(audio,language='pt-BR') # Tentativa de escultar
             except PermissionError: # Erro de permissão
@@ -485,10 +442,8 @@ def abrir_site_SPEECHRECOGNITION():
 
 def abrir_site_ajuda(): # Abertura de teste [ Efeitos especiais! ou quase... foi um teste ]
     # Escolha da imagem
-    if tema_atual=="#hacker":
-        menu_ajuda_img = PhotoImage(file="Imagens/Menu/hack/abrindo.png")
-    else:
-        menu_ajuda_img = PhotoImage(file="Imagens/Menu/abrindo.png")
+    menu_ajuda_img = PhotoImage(file="Imagens/Menu/abrindo.png")
+
     # Atualização da imagem
     menu_ajuda_img_botao["image"] = menu_ajuda_img
     menu_ajuda_img_botao.update()
@@ -500,10 +455,8 @@ def abrir_site_ajuda(): # Abertura de teste [ Efeitos especiais! ou quase... foi
     time.sleep(2)
 
     # Escolha da imagem
-    if tema_atual=="#hacker":
-        menu_ajuda_img = PhotoImage(file="Imagens/Menu/hack/ajuda.png")
-    else:
-        menu_ajuda_img = PhotoImage(file="Imagens/Menu/ajuda.png")
+    menu_ajuda_img = PhotoImage(file="Imagens/Menu/ajuda.png")
+
     # Atualização da imagem
     menu_ajuda_img_botao["image"] = menu_ajuda_img # Imagem normal voltando
     menu_ajuda_img_botao.image = menu_ajuda_img
@@ -586,11 +539,6 @@ class atualizacoes(): # Gerenciador de layouts e eventos
         frame_historico.grid_forget()              # Destruir a tela do histórico
         frameMenu.grid(row=1,column=1,stick=NSEW)  # Construir a tela de menu
 
-        ''' Controle especializado em telas diferentes de acordo com as configurações 
-        de reconhecimento e fala.
-        Pode ser que a pessoa não possa usar o modo de reconhecimento de voz, nesse
-        caso ela poderá usar o 'modo fala | escreve' ou 'escreve | escreve', é uma forma
-        da pessoa usar a diana em diferentes condições de forma automática'''
     def menu_interacao(): 
         # Limpeza de resíduos de texto
         # deletar dados de texto da tela escreve / escreve
@@ -622,10 +570,8 @@ class atualizacoes(): # Gerenciador de layouts e eventos
         # reconhecimento de voz ativado e fala desativada!
         if controlar_reconhecimento=="s" and controlar_voz=="n": # Com reconhecimento, mas sem a voz
             frameMenu.grid_forget()
-            if tema_atual=="#hacker": 
-                tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/clique-me.png") # Atualizar a imagem (tinha um bug aqui)
-            else:
-                tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/clique-me.png") # Atualizar a imagem (tinha um bug aqui)
+
+            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/clique-me.png") # Atualizar a imagem (tinha um bug aqui)
             tela_rec_img_mic = tela_rec_img_mic.subsample(3,3)
             tela_rec_ouvir["image"] = tela_rec_img_mic
             tela_rec_ouvir.update()  # Imagem já atualizada
@@ -637,10 +583,7 @@ class atualizacoes(): # Gerenciador de layouts e eventos
         if controlar_reconhecimento=="s" and controlar_voz=="s": # Se tudo está ok, partiu tela principal
             frameMenu.grid_forget()
             # Carregamento de imagens
-            if tema_atual=="#hacker":  
-                interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/esperando.png") # Carregando imagem novamente para solucionar outro bug
-            else:
-                interacao_esperando_img = PhotoImage(file="Imagens/fala/esperando.png") # Carregando imagem novamente para solucionar outro bug
+            interacao_esperando_img = PhotoImage(file="Imagens/fala/esperando.png") # Carregando imagem novamente para solucionar outro bug
             # Atualização de imagem
             interacao_esperando_img_botao["image"] = interacao_esperando_img 
             interacao_esperando_img_botao.update()
@@ -956,12 +899,8 @@ class processo_rec():
                    microfone.adjust_for_ambient_noise(source) # Cuidando do ruido ambiente
                  
                    # Carregamento de imagem
-                   if tema_atual=="#hacker":  
-                       interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/ouvindo.png")
-                       tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/ouvindo.png")
-                   else:
-                       interacao_esperando_img = PhotoImage(file="Imagens/fala/ouvindo.png")
-                       tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/ouvindo.png")
+                   interacao_esperando_img = PhotoImage(file="Imagens/fala/ouvindo.png")
+                   tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/ouvindo.png")
 
                    # Atualização da imagem
                    interacao_esperando_img_botao["image"] = interacao_esperando_img 
@@ -994,12 +933,8 @@ class processo_rec():
                     print("____Erro")
 
                     # Carrega imagens da tela de interação
-                    if tema_atual=="#hacker":  
-                        interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/falando.png")
-                        tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/repita.png")
-                    else:
-                        interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
-                        tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/repita.png")
+                    interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
+                    tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/repita.png")
 
                     # Atualização da tela de interação
                     interacao_esperando_img_botao["image"] = interacao_esperando_img # Ative a tela de falando
@@ -1061,12 +996,8 @@ class processo_rec():
         # Aqui deu tudo certo e o meu  digitado vale a minha entrada
         digitado = entrada 
         # Carregamento de imagem
-        if tema_atual=="#hacker":  
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/pensando.png") # Já que a voz demora, vamos colocar um pensando na parada
-            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/pensando.png")
-        else:
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/pensando.png") # Já que a voz demora, vamos colocar um pensando na parada
-            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/pensando.png")
+        interacao_esperando_img = PhotoImage(file="Imagens/fala/pensando.png") # Já que a voz demora, vamos colocar um pensando na parada
+        tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/pensando.png")
         # Atualização de imagem da tela interação
         interacao_esperando_img_botao["image"] = interacao_esperando_img
         interacao_esperando_img_botao.image = interacao_esperando_img
@@ -1116,12 +1047,8 @@ class processo_rec():
         resposta_padrao = "Me diga você!"
 
         # Carregamento de imagem 
-        if tema_atual=="#hacker":  
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/falando.png")
-            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/falando.png")
-        else:
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
-            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/falando.png")
+        interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
+        tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/falando.png")
         # Atualização da imagem
         interacao_esperando_img_botao["image"] = interacao_esperando_img 
         interacao_esperando_img_botao.update()
@@ -1163,19 +1090,13 @@ class processo_rec():
                  base = delimitador.delimitar("Diga alguma coisa!")
                  
                  # Carregamento de imagem
-                 if tema_atual=="#hacker":  
-                     interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/ouvindo.png")
-                 else:
-                     interacao_esperando_img = PhotoImage(file="Imagens/fala/ouvindo.png")
+                 interacao_esperando_img = PhotoImage(file="Imagens/fala/ouvindo.png")
                  # Atualização da imagem central da tela de interação
                  interacao_esperando_img_botao["image"] = interacao_esperando_img
                  interacao_esperando_img_botao.update()
 
                  # Carregar imagem da tela reconhece | escreve
-                 if tema_atual=="#hacker": 
-                    tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/ouvindo.png")
-                 else:
-                    tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/ouvindo.png")
+                 tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/ouvindo.png")
                  tela_rec_img_mic = tela_rec_img_mic.subsample(3,3)
                  # Atualizar imagem da tela reconhece | escreve
                  tela_rec_ouvir["image"] = tela_rec_img_mic 
@@ -1196,19 +1117,13 @@ class processo_rec():
               entrada = frase
               if entrada == "":
                  # Carregar imagem
-                 if tema_atual=="#hacker":  
-                     interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/falando.png")
-                 else:
-                     interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
+                 interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
                  # Atualizar imagem principal da tela de interação
                  interacao_esperando_img_botao["image"] = interacao_esperando_img 
                  interacao_esperando_img_botao.update()
 
                  # Carregar imagem da tela reconhece | escreve
-                 if tema_atual=="#hacker": 
-                     tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/repita.png")
-                 else:
-                     tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/repita.png")
+                 tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/repita.png")
                  tela_rec_img_mic = tela_rec_img_mic.subsample(3,3)
                  # Atualizar imagem da tela reconhece escreve
                  tela_rec_ouvir["image"] = tela_rec_img_mic # Atualizar a telinha
@@ -1227,19 +1142,13 @@ class processo_rec():
                  manter = "cai fora kkkk" # Uffa, deu tudo certo!
 
         # Carregando tela imagem da tela de interação
-        if tema_atual=="#hacker":  
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/falando.png")
-        else:
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
+        interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
         # Atualizando imagem da tela de interação
         interacao_esperando_img_botao["image"] = interacao_esperando_img
         interacao_esperando_img_botao.update()
 
         # Carrega a imagem
-        if tema_atual=="#hacker": 
-            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/falando.png") 
-        else:
-            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/falando.png") 
+        tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/falando.png") 
         tela_rec_img_mic = tela_rec_img_mic.subsample(3,3)
         # Atualizar imagem da tela reconhece | escreve
         tela_rec_ouvir["image"] = tela_rec_img_mic
@@ -1267,12 +1176,8 @@ class processo_rec():
         print("Diana: {}".format(resposta_alternativa))
 
         # Carregamento de imagem
-        if tema_atual=="#hacker":  
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/esperando.png")
-            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/clique-me.png")
-        else:
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/esperando.png")
-            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/clique-me.png")
+        interacao_esperando_img = PhotoImage(file="Imagens/fala/esperando.png")
+        tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/clique-me.png")
         # Atualização de imagem
         interacao_esperando_img_botao["image"] = interacao_esperando_img 
         interacao_esperando_img_botao.update()
@@ -1301,12 +1206,8 @@ class processo_rec():
         total = arquivo[3]
 
         # Carregamento de imagem
-        if tema_atual=="#hacker":  
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/falando.png")
-            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/falando.png")
-        else:
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
-            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/falando.png")
+        interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
+        tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/falando.png")
         # Atualização de imagem
         interacao_esperando_img_botao["image"] = interacao_esperando_img
         interacao_esperando_img_botao.update()
@@ -1343,12 +1244,8 @@ class processo_rec():
                    base = delimitador.delimitar("Diana: Diga alguma coisa!")
 
                    # Carregamento de imagem
-                   if tema_atual=="#hacker":  
-                       interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/ouvindo.png")
-                       tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/ouvindo.png")
-                   else:
-                       interacao_esperando_img = PhotoImage(file="Imagens/fala/ouvindo.png")
-                       tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/ouvindo.png")
+                   interacao_esperando_img = PhotoImage(file="Imagens/fala/ouvindo.png")
+                   tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/ouvindo.png")
                    # Atualização de imagem
                    interacao_esperando_img_botao["image"] = interacao_esperando_img # Atualizar Imagem da melhor tela do mundo
                    interacao_esperando_img_botao.update()
@@ -1378,12 +1275,8 @@ class processo_rec():
                 if entrada == "": # ERRO QUALQUER
                     print("nenhum conteudo encontrado")
                     # Carregamento de imagem
-                    if tema_atual=="#hacker":  
-                        interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/falando.png")
-                        tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/repita.png") 
-                    else:
-                        interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
-                        tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/repita.png") 
+                    interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
+                    tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/repita.png") 
                     # Atualização de imagem
                     interacao_esperando_img_botao["image"] = interacao_esperando_img
                     interacao_esperando_img_botao.update()
@@ -1413,10 +1306,7 @@ class processo_rec():
 
         # Salvando dados no histórico
         diana.salvaHistorico(pergunta,resposta) 
-        if tema_atual=="#hacker":  
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/falando.png")
-        else:
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
+        interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
         interacao_esperando_img_botao["image"] = interacao_esperando_img # Atualizar a imagem da melhor tela do mundo
         interacao_esperando_img_botao.update()
 
@@ -1430,12 +1320,8 @@ class processo_rec():
         
         print("Diana: {}".format(segunda_resposta_padrao))
         # Carregamento de imagem
-        if tema_atual=="#hacker":  
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/esperando.png")
-            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/clique-me.png")
-        else:
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/esperando.png")
-            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/clique-me.png")
+        interacao_esperando_img = PhotoImage(file="Imagens/fala/esperando.png")
+        tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/clique-me.png")
         # Atualização de imagem
         interacao_esperando_img_botao["image"] = interacao_esperando_img # Normalizando a melhor tela do mundo
         interacao_esperando_img_botao.update()
@@ -1488,20 +1374,14 @@ class processo_rec():
         diana.salvaHistorico(pergunta,resposta) # salvar dados no histórico
 
         # Esse trecho pode ser removido.
-        if tema_atual=="#hacker":
-            escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/hack/falando.png")
-        else:
-            escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/falando.png")
+        escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/falando.png")
         escreve_fala_imagem_btn["image"] = escreve_fala_imagem
         escreve_fala_imagem_btn.update()
 
         # Gera uma resposta criativa, executa o som e retorna a resposta
         resposta_padrao = gerar_res_criativa()
 
-        if tema_atual=="#hacker":
-            escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/hack/esperando.png")
-        else:
-            escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/esperando.png")
+        escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/esperando.png")
         escreve_fala_imagem_btn["image"] = escreve_fala_imagem
         escreve_fala_imagem_btn.image = escreve_fala_imagem
 
@@ -1549,20 +1429,14 @@ class processo_rec():
 
         diana.salvaHistorico(pergunta,resposta) # Salvando dados no histórico!
     
-        if tema_atual=="#hacker":
-            escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/hack/falando.png")
-        else:
-            escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/falando.png")
+        escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/falando.png")
         escreve_fala_imagem_btn["image"] = escreve_fala_imagem
         escreve_fala_imagem_btn.update()
 
         # Gera uma resposta criativa, executa o som e retorna a resposta
         resposta_padrao = gerar_res_criativa()
 
-        if tema_atual=="#hacker":
-            escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/hack/esperando.png")
-        else:
-            escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/esperando.png")
+        escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/esperando.png")
         escreve_fala_imagem_btn["image"] = escreve_fala_imagem
         escreve_fala_imagem.image = escreve_fala_imagem
 
@@ -1599,14 +1473,9 @@ class processo_rec():
             tts.save("ultima_resposta.mp3")      # Gerando o som
 
             # Atualizar a parte visual das telas, principal, esc/voz e rec/esc
-            if tema_atual=="#hacker":
-                interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/falando.png")
-                escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/hack/falando.png")
-                tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/falando.png")
-            else:
-                interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
-                escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/falando.png")
-                tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/falando.png")
+            interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
+            escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/falando.png")
+            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/falando.png")
 
             # Redimensionamento de imagens
             tela_rec_img_mic = tela_rec_img_mic.subsample(3,3)
@@ -1640,23 +1509,15 @@ class processo_rec():
             tela_rec_text.insert(END, "\nDiana: {}\n".format(resposta))
             tela_rec_text.see("end")
             
-        if tema_atual=="#hacker":
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/esperando.png")
-        else:
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/esperando.png")
+        interacao_esperando_img = PhotoImage(file="Imagens/fala/esperando.png")
         interacao_esperando_img_botao["image"] = interacao_esperando_img # Atualiza melhor tela do mundo
         interacao_esperando_img_botao.image = interacao_esperando_img            
-        if tema_atual=="#hacker":
-            escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/hack/esperando.png")
-        else:
-            escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/esperando.png")
+
+        escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/esperando.png")
         escreve_fala_imagem_btn["image"] = escreve_fala_imagem
         escreve_fala_imagem_btn.image = escreve_fala_imagem
 
-        if tema_atual=="#hacker": 
-            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/clique-me.png")
-        else:
-            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/clique-me.png")
+        tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/clique-me.png")
         tela_rec_img_mic = tela_rec_img_mic.subsample(3,3)
         tela_rec_ouvir["image"] = tela_rec_img_mic # atualiza tela ouve e escreve
         tela_rec_ouvir.image = tela_rec_img_mic
@@ -1833,13 +1694,7 @@ class processo_rec():
                     processo_rec.continuar_assunto(digitado,entrada,assunto_resp,resposta)
             else:
                 print("__Resposta encontrada")
-                if resposta == "nãoPossoFazerNada!":
-                    permissao_para_hacker()
-                if resposta == "boa_sorte_**noHuman":
-                    arquivo = open("Analise/tema.txt","w", encoding="utf8")
-                    arquivo.write("#normal")
-                    arquivo.close()
-                    tela.destroy()
+
                 # responder a pergunta
                 processo_rec.responder_apenas(resposta,entrada)
             print("Finaliza controlador de partes\n")
@@ -2262,10 +2117,8 @@ def atualizar(): # Rotina de atualização da primeira tela (Tela de load estilo
     tela.configure(background="#dcdcdc")
     tela.update()
     while True:
-        if tema_atual=="#hacker":
-            link_arquivo = "Imagens/load/animação_hack/"+str(x)+".png"
-        else:
-            link_arquivo = "Imagens/load/animação/"+str(x)+".png"
+
+        link_arquivo = "Imagens/load/animação/"+str(x)+".png"
         imagem = PhotoImage(file=link_arquivo)
         image_botao["image"] = imagem
         image_botao.update()
@@ -2278,141 +2131,8 @@ def atualizar(): # Rotina de atualização da primeira tela (Tela de load estilo
             break
         x=x+1
 
-def permissao_para_hacker():
-    print("ERRO - feche o arquivo!")
-    try:
-        tela.wm_attributes('-type', 'splash')
-    except:
-        pass
-
-    try:
-        tela.attributes("-alpha", 0.95)
-    except:
-        pass
-
-    tela.configure(background="black",highlightcolor="red",highlightbackground="red",highlightthickness=2,padx=30,pady=30)
-    tela.geometry("400x280+100+100")
-    tela.grid_columnconfigure(1,weight=1)
-    tela.rowconfigure(1,weight=1)
-    tela_secreta.grid(row=1,column=1,sticky=NS)
-
-    # Atualização de dados
-    arquivo = atualizar_dados_de_controle_rec_voz_arqler_total() 
-    status = arquivo[0]
-    controlar_reconhecimento = arquivo[0] 
-    controlar_voz = arquivo[1]
-    arquivo_ler = arquivo[2]
-    total = arquivo[3]
-
-    # Abertura do arquivo configurações
-    arquivo = open("configurações","r", encoding="utf8")
-    acao_geral = str(arquivo.read()) # Leitura de todo o arquivo [IMPORTANTÍSSIMO]
-    arquivo.close()
-
-    # Reset das configurações de criar assunto ou continuar assunto
-    arquivo = open("configurações","w", encoding="utf8")
-    acao_modo_texto = acao_geral[0:108]+"n "+acao_geral[109:len(acao_geral)]
-    arquivo.write(acao_modo_texto)
-    arquivo.close()
-
-    # deletar dados de texto da tela escreve / escreve
-    texto_tela_5.delete('1.0', END) 
-    # Deletar dados da tela que reconhece e escreve
-    texto_tela_5.insert(1.0, "\nIai, vamos conversar?") 
-    # Atualizar dados da tela que você escreve e ela fala
-    escreve_fala_base = delimitador.delimitar("Olá, vamos conversar!")
-    escreve_fala_resposta["text"] = escreve_fala_base 
-
-    # reconhecimento de voz desativado e fala ativada!
-    if controlar_reconhecimento=="n" and controlar_voz=="s": 
-        frame_escreve_fala.grid_forget()
-    # reconhecimento de voz ativado e fala desativada!
-    if controlar_reconhecimento=="s" and controlar_voz=="n": # Saindo da tela que reconhece sua voz e que responde escrevendo
-        tela_rec_esc.grid_forget()# Tela reconhece e responde escrevendo
-    # reconhecimento de voz ativado e fala ativada!
-    if controlar_reconhecimento=="s" and controlar_voz=="s": # Saindo da tela divina que está tudo funcionando
-        frame_interacao.grid_forget()
-    # reconhecimento de voz desativado e fala desativada!
-    if controlar_reconhecimento=="n" and controlar_voz=="n": # Saindo da tela "basicona", somente texto
-        tela_5.grid_forget()
-
-    tela_secreta.grid(row=1,column=1,sticky=NS)
-
-def invocar_o_hulk():
-    tela["highlightcolor"] = "#00ff01"
-    tela["highlightbackground"] = "#00ff01"
-    label_nao_sou["foreground"] = "#00ff01"
-    validacao_label["foreground"] = "#00ff01"
-    borda_validacao["highlightcolor"] = "#00ff01"
-    borda_validacao["highlightbackground"] = "#00ff01"
-    captcha_img = PhotoImage(file="Imagens/tela especial/captcha_no.png")
-    captcha_bt["image"] = captcha_img
-    captcha_bt.update()
-    captcha_bt.image = captcha_img
-
-def mudar_validacao_nao():
-    x=1
-    while x<=12:
-        texto= "Imagens/tela especial/animação/bt/bloco_"+str(x)+".png"
-        quadrado_img = PhotoImage(file=texto)
-        quadrado_img = quadrado_img.subsample(2,2)
-        quadrado_bt["image"] = quadrado_img
-        quadrado_bt.update()
-        time.sleep(0.02)
-        x=x+1
-    time.sleep(2)
-
-    label_nao_sou["text"] = "Xo humano safado!  "
-    quadrado_img = PhotoImage(file="Imagens/tela especial/animação/bt/bloco_12.png")
-    quadrado_img = quadrado_img.subsample(2,2)
-    quadrado_bt["image"] = quadrado_img
-    quadrado_bt.update()
-    quadrado_bt.image = quadrado_img
-    time.sleep(4)
-    tela.destroy()
-
-def mudar_validacao_ok():
-    x=1
-    while x<=20:
-        texto= "Imagens/tela especial/animação/bt/bloco_"+str(x)+".png"
-        quadrado_img = PhotoImage(file=texto)
-        quadrado_img = quadrado_img.subsample(2,2)
-        quadrado_bt["image"] = quadrado_img
-        quadrado_bt.update()
-        time.sleep(0.02)
-        if x==12:
-            time.sleep(1)
-        x=x+1
-
-    invocar_o_hulk()        
-    label_nao_sou["text"] = "Bem vindo irmão!    "
-    quadrado_img = PhotoImage(file="Imagens/tela especial/animação/bt/bloco_20.png")
-    quadrado_img = quadrado_img.subsample(2,2)
-    quadrado_bt["image"] = quadrado_img
-    quadrado_bt.update()
-    quadrado_bt.image = quadrado_img
-
-    # Reset das configurações de criar assunto ou continuar assunto
-    arquivo = open("Analise/tema.txt","w", encoding="utf8")
-    arquivo.write("#hacker #normal")
-    arquivo.close()
-    time.sleep(4)
-    tela.destroy()
-
-def atualiza_robo():
-    quadrado_bt["command"] = mudar_validacao_ok
-
 def fechar_tudo():
     tela.destroy()
-
-def verificar_senhas():
-    if str(secreta_senha_et.get()) == "__admin__" and str(secreta_login_et.get()) == "__admin__":
-        tela_secreta.grid_forget()
-        tela.geometry("530x180+100+100")
-        tela.configure(padx=10,pady=10)
-        validacao_frame.grid(row=1,column=1)
-    else:
-        tela.destroy()
 
 # Definição usada para usar o modo escreve escreve sendo o modo reconhece escreve
 '''
@@ -2448,95 +2168,16 @@ def usar_modo_texto():
     # Cancelamento da execução do modo se ...passar...
     acesso_em_modo_texto = "nao"
 
-#===========================================================================
-# TELA DE LOGIN
-tela_secreta = Frame(tela,background="black")
 
-tela_secreta.grid_columnconfigure(1,weight=1)
-tela_secreta.rowconfigure(0,weight=1)
 
-barra_titulo = Frame(tela_secreta,background="black")
-x_fechar_image = PhotoImage(file="Imagens/tela especial/x_v.png")
-x_fechar_image = x_fechar_image.subsample(2,2)
 
-x_fechar_bt = Button(tela_secreta,image=x_fechar_image)
-x_fechar_bt.configure(background="black",highlightbackground="black")
-x_fechar_bt.configure(activebackground="black",border=0,command=fechar_tudo)
-x_fechar_bt.grid(row=0,column=1,sticky=E)
-barra_titulo.grid(row=0,column=1,sticky=EW)
 
-tela_secreta.rowconfigure(1,weight=1)
-tela_secreta.grid_columnconfigure(1,weight=1)
-aviso_caixa_cima = Frame(tela_secreta,background="black",highlightcolor="red")
-aviso_caixa_cima.configure(highlightbackground="red",highlightthickness=1)
-aviso_caixa_cima.configure(border=0,width=900,padx=15,pady=15)
-
-cadeado_imagem = PhotoImage(file="Imagens/tela especial/trancado.png")
-cadeado_imagem= cadeado_imagem.subsample(6,6)
-cadeado_bt = Label(aviso_caixa_cima,image=cadeado_imagem,background="black")
-cadeado_bt.grid(row=1,column=1,sticky=NS)
-
-endereco_ms_lb = Label(aviso_caixa_cima,text="endereço da conexao: 192.168.0.104:712")
-endereco_ms_lb.configure(font=("",10),padx = 10,background = "black",foreground = "red")
-endereco_ms_lb.grid(row=1,column=2,sticky=EW)
-
-aviso_caixa_cima.grid(row=1,column=1)
-
-tela_secreta.rowconfigure(2,weight=1)
-aviso_caixa_inferior = Frame(tela_secreta,background = "black")
-aviso_caixa_inferior.configure(highlightcolor="red",highlightbackground="red")
-aviso_caixa_inferior.configure(highlightthickness=1, width=200,padx=15,pady=15)
-aviso_caixa_inferior.grid_columnconfigure(2,weight=1)
-
-secreta_login_lb = Label(aviso_caixa_inferior,text=" login: ",background="black",foreground="red",pady=5)
-secreta_login_et = Entry(aviso_caixa_inferior,background="black",highlightthickness=1,border=0)
-secreta_login_et.configure(highlightcolor="red",highlightbackground="red",foreground="red")
-secreta_login_lb.grid(row=1,column=1)
-secreta_login_et.grid(row=1,column=2,sticky=EW)
-
-secreta_senha_lb = Label(aviso_caixa_inferior,text=" senha: ",background="black")
-secreta_senha_lb.configure(foreground="red",pady=5)
-secreta_senha_et = Entry(aviso_caixa_inferior,background="black",highlightthickness=1)
-secreta_senha_et.configure(border=0,highlightcolor="red",highlightbackground="red",foreground="red")
-secreta_senha_lb.grid(row=2,column=1)
-secreta_senha_et.grid(row=2,column=2,sticky=EW)
-
-fazer_login = Button(aviso_caixa_inferior,text="Login",background="black",highlightthickness=1)
-fazer_login.configure(border=0, highlightbackground="red",highlightcolor="red")
-fazer_login.configure(activebackground="black",foreground="red",activeforeground="red",command=verificar_senhas)
-fazer_login.grid(row=4,column=1,columnspan=2)
-
-aviso_caixa_inferior.grid(row=2,column=1,sticky=EW)
 # FIM DA TELA DE LOGIN
 #===========================================================================
 # TELA DE VALIDAÇÃO
-cor_padrao_validacao = "red"
 
-validacao_frame = Frame(tela,background="black")
 
-valide_humano = Button(validacao_frame,background="black",border=0,highlightthickness=0,activebackground="black",foreground="black",activeforeground="black",text="deletar",command=atualiza_robo)
-valide_humano.grid(row=0,column=1)
 
-validacao_label_organize = Frame(validacao_frame,background="black")
-validacao_label = Label(validacao_label_organize,text="Validação contra humanos",foreground=cor_padrao_validacao,background="black",font=("",12))
-validacao_label.grid(row=1,column=1,sticky=E)
-validacao_label_organize.grid(row=1,column=1,sticky=EW)
-
-borda_validacao = Frame(validacao_frame,background="black",highlightcolor=cor_padrao_validacao,highlightbackground=cor_padrao_validacao,highlightthickness=2,padx=10)
-
-quadrado_img = PhotoImage(file="Imagens/tela especial/animação/bt/bloco_1.png")
-quadrado_img = quadrado_img.subsample(2,2)
-quadrado_bt = Button(borda_validacao,image=quadrado_img,background="black",foreground="black",activebackground="black",border=0,highlightthickness=0,command=mudar_validacao_nao)
-quadrado_bt.grid(row=1,column=1)
-
-label_nao_sou = Label(borda_validacao,text="Não sou um humano",foreground=cor_padrao_validacao,background="black",font=("",18),padx=30)
-label_nao_sou.grid(row=1,column=2)
-
-captcha_img = PhotoImage(file="Imagens/tela especial/captcha.png")
-captcha_bt = Label(borda_validacao,image=captcha_img,background="black",padx=10)
-captcha_bt.grid(row=1,column=3)
-borda_validacao.grid(row=2,column=1)
-# FIM DA TELA DE VALIDAÇÃO
 #===========================================================================
 # tela de interação puramente escrita
 fundo_esc_esc = "#940092"
@@ -2548,14 +2189,6 @@ borda_esc_frente = "#555"
 
 borda_esc_esc = "#940092"
 texto_interacao_simples = "#940092"
-if tema_atual=="#hacker": 
-    borda_esc_frente = "#00ff01"
-    fundo_esc_esc = "black"
-    fundo_esc_esc_barrinha="red"
-    frente_esc_texto_geral = "#00ff01"
-    fundo_esc_text = "black"
-    borda_esc_esc = "#00ff01"
-    texto_interacao_simples = "#00ff01"
 
 tela_5 = Frame(tela,background=fundo_esc_esc) 
 tela_5.grid_columnconfigure(1,weight=1)
@@ -2618,10 +2251,6 @@ frame_botoes_tela_5.grid(row=3,column=1,sticky=EW)
 escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/esperando.png")
 escreve_fala_voltar_img = PhotoImage(file="Imagens/tela_fala_escreve/voltar.png")
 escreve_fala_enviar_img = PhotoImage(file="Imagens/tela_fala_escreve/enviar.png")
-if tema_atual=="#hacker":
-    escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/hack/esperando.png")
-    escreve_fala_voltar_img = PhotoImage(file="Imagens/tela_fala_escreve/hack/voltar.png")
-    escreve_fala_enviar_img = PhotoImage(file="Imagens/tela_fala_escreve/hack/enviar.png")
 
 # Redimensionamento das imagens
 escreve_fala_enviar_img = escreve_fala_enviar_img.subsample(2,2)
@@ -2638,17 +2267,7 @@ cor_tx_titulo_superior = "#05d1ff"
 cor_fundo_titulo = "#496a7c"
 
 borda_da_entrada = "#333"
-if tema_atual=="#hacker":
-    cor_fundo_geral = "black"# Todos os backgrounds
-    borda_dos_botoes = "black"# Todas as bordas dos três principais botões
-    cor_tx_titulo = "#00ff01"# Cor do título
-    cor_tx_resposta = "#00ff01"# Cor da resposta
-    cor_en_entrada = "#00ff01"
 
-    cor_tx_titulo_superior = "black"
-    cor_fundo_titulo = "#00ff01"
-
-    borda_da_entrada = "#00ff01" # borda do entry
 
 # Definições da tela básica
 frame_escreve_fala = Frame(tela,background=cor_fundo_geral)
@@ -2940,36 +2559,21 @@ nona_estrela_btn_enviar = Button(frame_nove_estrela,text="Deixa uma mensagem no 
 # FINALIZA TELAS DE AVALIAÇÃO #
 #===========================================================================
 # TELA DE INTERAÇÃO, RECONHECIMENTO DE VOZ E RESPOSTA POR TEXTO #
-if tema_atual=="#hacker": 
-    # Esquema de cores
-    rec_esc_fundo_geral = "black"     # Fundo azul dos frames e dos botões
-    fundo__titulo_geral = "#00ff01"   # Fundo do titulo principal
-    cor_titulo_geral = "black"        # Cor do titulo principal
-    cor_text_preto = "#00ff01"        # Cor do texto do Text
-    fundo_f3 = "black"                # Cor de fundo do Text
-    rec_esc_frente_geral = "#00ff01"  # Cor do texto do Entry
-    bordas_db = "#00ff01"             # Bordas do Entry
-    # Carregamento de imagens
-    tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/hack/clique-me.png")
-    tela_rec_img_voltar = PhotoImage(file="Imagens/reconhece_escreve/hack/voltar.png")
-    # Redimensionamento de imagens
-    tela_rec_img_mic = tela_rec_img_mic.subsample(3,3)
-    tela_rec_img_voltar=tela_rec_img_voltar.subsample(3,3)
-else:
-    # Esquema de cores
-    rec_esc_fundo_geral = "#00d1ff" # Fundo azul dos frames e dos botões
-    fundo__titulo_geral = "#00d1ff" # Fundo do título principal
-    cor_titulo_geral = "#496a7c"    # Cor do título principal
-    cor_text_preto = "black"        # Cor do texto do Text
-    fundo_f3 = "#f3f3f3"            # Cor de fundo do Text
-    rec_esc_frente_geral = "black"  # Cor do texto do Entry
-    bordas_db = "#dbdbdb"           # Bordas do Entry
-    # Carregamento de imagens
-    tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/clique-me.png")
-    tela_rec_img_voltar = PhotoImage(file="Imagens/reconhece_escreve/voltar.png")
-    # Redimensionamento de imagens
-    tela_rec_img_mic = tela_rec_img_mic.subsample(3,3)
-    tela_rec_img_voltar=tela_rec_img_voltar.subsample(3,3)
+
+# Esquema de cores
+rec_esc_fundo_geral = "#00d1ff" # Fundo azul dos frames e dos botões
+fundo__titulo_geral = "#00d1ff" # Fundo do título principal
+cor_titulo_geral = "#496a7c"    # Cor do título principal
+cor_text_preto = "black"        # Cor do texto do Text
+fundo_f3 = "#f3f3f3"            # Cor de fundo do Text
+rec_esc_frente_geral = "black"  # Cor do texto do Entry
+bordas_db = "#dbdbdb"           # Bordas do Entry
+# Carregamento de imagens
+tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/clique-me.png")
+tela_rec_img_voltar = PhotoImage(file="Imagens/reconhece_escreve/voltar.png")
+# Redimensionamento de imagens
+tela_rec_img_mic = tela_rec_img_mic.subsample(3,3)
+tela_rec_img_voltar=tela_rec_img_voltar.subsample(3,3)
 
 # Definições da tela
 tela_rec_esc = Frame(tela)
@@ -3029,26 +2633,7 @@ texto_modo_ativo_ok = "#000"         # Texto no modo ativo "ok"(bibliotecas dete
 fundo_configuracoes = "white"        # Background geral de todos os fundos brancos
 texto_modo_ativo_erro = "green"      # Texto no modo ativo "erro"(bibliotecas não detectadas)
 
-# Condicionais de estilo
-if tema_atual=="#hacker":            # Se o tema a escolher for o hacking
-    letra_roxa = "#00ff01"           # Cor de todas as letras roxas purple
-    fundo_verde = "#00ff01"          # Cor da de fundo escala taxa de variação
-    dois_titulos = "#00ff01"         # Cor dos dos títulos "RECONHECIMENTO DE VOZ" e "FALA ONLINE PT-BR"
-    fundo_botao = "black"            # Cor de fundo dos botões ligado e desligado
-    letra_verde = "#00ff01"          # Cor de todas as letras verdes green
-    letra_titulos = "black"          # Cor dos três principais títulos
-    letra_azul_site = "#00ffff"      # Cor de todas as letras azul dos textos "site"
-    fundo_azul_titulo = "#00ff01"    # Cor de fundo dos dois principais títulos azuis
-    fundo_modo_ativo = "black"       # Cor de fundo quando mouse estiver sobre o widget
-    texto_modo_ativo_ok = "white"    # Texto no modo ativo "ok"(bibliotecas detectadas)
-    fundo_configuracoes = "black"    # Background geral de todos os fundos brancos
-    texto_modo_ativo_erro = "orange" # Texto no modo ativo "erro"(bibliotecas não detectadas)
-
-# Condicionais de imagens
-if tema_atual=="#hacker":
-    configuracoes_voltar_imagem = PhotoImage(file="Imagens/configurações/hack/volta_config.png")
-else:
-    configuracoes_voltar_imagem = PhotoImage(file="Imagens/configurações/volta_config.png")
+configuracoes_voltar_imagem = PhotoImage(file="Imagens/configurações/volta_config.png")
 
 # Atualização do estado do botão
 arquivo = atualizar_dados_de_controle_rec_voz_arqler_total()
@@ -3056,22 +2641,14 @@ status_loc_voz = arquivo[1] # VOZ
 status_loc_rec = arquivo[0] # REC
 
 # Condicionais de imagem para o botão de estado da fala
-if status_loc_voz=="n" and tema_atual=="#hacker":
-        configuracoes_fala_imagem = PhotoImage(file="Imagens/configurações/hack/desativado.png")
-elif status_loc_voz=="n" and tema_atual!="#hacker":
+if status_loc_voz=="n":
         configuracoes_fala_imagem = PhotoImage(file="Imagens/configurações/desativado.png")
-elif tema_atual=="#hacker":
-        configuracoes_fala_imagem = PhotoImage(file="Imagens/configurações/hack/ativado.png")
 else:
         configuracoes_fala_imagem = PhotoImage(file="Imagens/configurações/ativado.png")
 
 # Condicionais de imagem para o botão de estado do reconhecimento de voz
-if status_loc_rec=="n" and tema_atual=="#hacker":
-        configuracoes_reconhecimento_imagem = PhotoImage(file="Imagens/configurações/hack/desativado.png")
-elif status_loc_rec=="n" and tema_atual!="#hacker":
+if status_loc_rec=="n":
         configuracoes_reconhecimento_imagem = PhotoImage(file="Imagens/configurações/desativado.png")
-elif tema_atual=="#hacker":
-        configuracoes_reconhecimento_imagem = PhotoImage(file="Imagens/configurações/hack/ativado.png")
 else:
         configuracoes_reconhecimento_imagem = PhotoImage(file="Imagens/configurações/ativado.png")
 
@@ -3251,27 +2828,15 @@ configuracoes_frame_8.rowconfigure(1, weight=1)
 # FINALIZA TELA DE CONFIGURAÇÃO 
 #===========================================================================
 # TELA DE INTERAÇÃO 
-
-# Configurações de tema
-if tema_atual=="#hacker":
-    interacao_esperando_img = PhotoImage(file="Imagens/fala/hack/esperando.png")
-    interacao_voltar_img = PhotoImage(file="Imagens/fala/hack/voltar.png")
-    interacao_falar_img = PhotoImage(file="Imagens/fala/hack/falar.png")
-    interacao_ajuda_img = PhotoImage(file="Imagens/fala/hack/ajuda.png")
-else:
-    interacao_esperando_img = PhotoImage(file="Imagens/fala/esperando.png")
-    interacao_voltar_img = PhotoImage(file="Imagens/fala/voltar.png")
-    interacao_falar_img = PhotoImage(file="Imagens/fala/falar.png")
-    interacao_ajuda_img = PhotoImage(file="Imagens/fala/ajuda.png")
+interacao_esperando_img = PhotoImage(file="Imagens/fala/esperando.png")
+interacao_voltar_img = PhotoImage(file="Imagens/fala/voltar.png")
+interacao_falar_img = PhotoImage(file="Imagens/fala/falar.png")
+interacao_ajuda_img = PhotoImage(file="Imagens/fala/ajuda.png")
 
 # Configurações de cores
 cor_fg_titulo_sub = "black"
 cor_fundo = "white"
 cor_bd_hg_at = "white"
-if tema_atual=="#hacker":
-    cor_fundo = "black"
-    cor_fg_titulo_sub = "#00ff01"
-    cor_bd_hg_at = "black"
 
 # Configurações de redimensionamento
 interacao_esperando_img = interacao_esperando_img.subsample(1,1)
@@ -3337,21 +2902,6 @@ bg_lb_inf = "#00cccb"          # Cor de fundo dos label histórico e aprendizado
 bd_lb_inf = "#00cccb"          # Cor da borda dos label histórico e aprendizados
 fg_tx_princ = "black"          # Cor do texto do Text principal
 bd_tx_princ = "#fff"           # Cor da borda do text
-if tema_atual=="#hacker":
-    fundo_branco = "black"     # Todos os backgrounds brancos
-    fundo_azul = "#00ff01"     # Todos os backgrounds azuis
-    fg_bt_volt = "#00ff01"     # Texto do botão voltar
-    bg_bt_volt = "black"       # Fundo do botão voltar
-    bd_bt_volt = "#00ff01"     # Borda do botão voltar
-    fg_tx_princ = "#00ff01"    # Cor do texto do Text
-    tx_bt_limpar = "red"       # Texto do botão limpar
-    bg_bt_limpar = "black"     # Fundo do botão limpar
-    tx_lb_historico = "black"  # Texto do título "histórico"
-    tx_lb_inf = "#00ff01"      # Cor do texto dos label histórico e aprendizados
-    bg_lb_inf = "black"        # Cor de fundo dos label histórico e aprendizados
-    bd_lb_inf = "#00ff01"      # Cor da borda dos label histórico e aprendizados
-    bg_ac_bt_volt = "black"    # Fundo do btn voltar quando ativo
-    bd_tx_princ = "#00ff01"    # Cor da borda do text
 
 # Definições do frame
 frame_historico = Frame(tela,background=fundo_branco)
@@ -3433,55 +2983,30 @@ tema_botao_frente_ativo = "white"          # Múltiplas funções
 menu_fundo = "#1976d2"                     # Múltiplas funções
 menu_texto_branco_verde = "white"          # Múltiplas funções
 fundo_verde_azul = "#1976d2"               # Múltiplas funções
-if tema_atual=="#hacker":
-    tema_fundo = "black"                   # Tema geral do fundo
-    tema_botao = "#00ff01"                 # Múltiplas funções
-    tema_botao_frente = "black"            # Múltiplas funções
-    tema_botao_frente_ativo = "black"      # Múltiplas funções
-    menu_fundo = "black"                   # Múltiplas funções
-    menu_texto_branco_verde = "#00ff01"    # Múltiplas funções
-    fundo_verde_azul = "#00ff01"           # Múltiplas funções
 
 # Atualização de dados
 arquivo = atualizar_dados_de_controle_rec_voz_arqler_total()
 status_rec = arquivo[0]
 status_voz = arquivo[1]
 
-# Condicionais de imagem de fala para tela inicial
-if status_voz == "n" and tema_atual=="#hacker": # Voz desativada e tema hacker
-    controlar_voz  = "n"
-    menu_fala_img = PhotoImage(file="Imagens/Menu/hack/fala_des.png")
-elif status_voz== "n" and tema_atual!="#hacker": # Voz desativada e tema normal
+if status_voz== "n":
     controlar_voz  = "n"
     menu_fala_img = PhotoImage(file="Imagens/Menu/fala_des.png")
-elif tema_atual=="#hacker": # Voz ativada e tema hacker
-    controlar_voz  = "s" 
-    menu_fala_img = PhotoImage(file="Imagens/Menu/hack/fala_ati.png")
-else:  # Voz ativada e tema normal
+else:
     controlar_voz  = "s" 
     menu_fala_img = PhotoImage(file="Imagens/Menu/fala_ati.png")
 
 # Condicionais de imagem do reconhecimento de voz para tela inicial
-if status_rec== "n" and tema_atual=="#hacker": # Rec desativado e tema hacker
-    controlar_reconhecimento = "n" 
-    menu_reconhecimento_img = PhotoImage(file="Imagens/Menu/hack/rec_des.png")
-elif status_rec== "n" and tema_atual!="#hacker": # Rec desativada e tema normal
+if status_rec== "n": # Rec desativada e tema normal
     controlar_reconhecimento = "n" 
     menu_reconhecimento_img = PhotoImage(file="Imagens/Menu/rec_des.png")
-elif tema_atual=="#hacker": # Voz ativada e tema hacker
-    menu_reconhecimento_img = PhotoImage(file="Imagens/Menu/hack/rec_ati.png")
-else:# Voz ativada e tema normal
+else:
     menu_reconhecimento_img = PhotoImage(file="Imagens/Menu/rec_ati.png")
 
 # Definições de imagem sem animação
-if tema_atual=="#hacker":
-    menu_ajuda_img = PhotoImage(file="Imagens/Menu/hack/ajuda.png")          # ícone de ajuda
-    menu_historico_img = PhotoImage(file="Imagens/Menu/hack/histórico.png")  # ícone do histórico
-    menu_config_img = PhotoImage(file="Imagens/Menu/hack/config.png")        # ícone das configurações
-else:
-    menu_ajuda_img = PhotoImage(file="Imagens/Menu/ajuda.png")               # ícone de ajuda
-    menu_historico_img = PhotoImage(file="Imagens/Menu/histórico.png")       # ícone do histórico
-    menu_config_img = PhotoImage(file="Imagens/Menu/config.png")             # ícone das configurações
+menu_ajuda_img = PhotoImage(file="Imagens/Menu/ajuda.png")               # ícone de ajuda
+menu_historico_img = PhotoImage(file="Imagens/Menu/histórico.png")       # ícone do histórico
+menu_config_img = PhotoImage(file="Imagens/Menu/config.png")             # ícone das configurações
 
 # Redimensionamento das imagens
 menu_fala_img = menu_fala_img.subsample(1,1)
@@ -3563,17 +3088,8 @@ fundo_load = "white"             # fundo de toda a tela
 fundo_load_texto = "black"       # texto básico de toda a tela
 titulo_cor_branca = "white"      # Cor do titulo
 titulo_cor_fundo = "#00d1ff"     # Cor de fundo do título
-if tema_atual=="#hacker":
-    fundo_load = "black"         # fundo de toda a tela
-    fundo_load_texto = "#00ff01" # texto básico de toda a tela
-    titulo_cor_branca = "black"  # Cor do titulo 
-    titulo_cor_fundo = "#00ff01" # Cor de fundo do título
 
-# Carregamento de imagens
-if tema_atual=="#hacker":
-    inicia_config_img = PhotoImage(file="Imagens/Testes/hack/20.png")
-else:
-    inicia_config_img = PhotoImage(file="Imagens/Testes/20.png")
+inicia_config_img = PhotoImage(file="Imagens/Testes/20.png")
 
 # Configurações do frame da tela de testes
 inicia_frame = Frame(tela)
@@ -3688,15 +3204,9 @@ tela.configure(background="#dcdcdc")
 tela_de_load = Frame(tela,border=0)
 tela_de_load.rowconfigure(1,weight=1)
 
-#Condicionais de temas
-if tema_atual=="#hacker":
-    tela_de_load["background"] = "black" # Tela de fundo
-    imagem = PhotoImage(file="Imagens/load/animação_hack/1.png")# Imagem inicial
-    image_botao = Label(tela_de_load,image=imagem, background="black") # Imagem_label
-else:
-    tela_de_load["background"] = "#dcdcdc" # Tela de fundo
-    imagem = PhotoImage(file="Imagens/load/animação/1.png") # Imagem inicial
-    image_botao = Label(tela_de_load,image=imagem, background="#dcdcdc")# Imagem_label
+tela_de_load["background"] = "#dcdcdc" # Tela de fundo
+imagem = PhotoImage(file="Imagens/load/animação/1.png") # Imagem inicial
+image_botao = Label(tela_de_load,image=imagem, background="#dcdcdc")# Imagem_label
 
 image_botao.grid(row=1,column=1)
 tela_de_load.grid(row=1,column=1,sticky=NSEW)
@@ -3748,21 +3258,4 @@ Função:       Fazer o reconhecimento de voz
 Site:         https://pypi.org/project/SpeechRecognition/
 Instalação:   pip3 install speechrecognition
 Créditos:     Copyright 2014-2017 Anthony Zhang (Uberi).
-
-************ Nota especial ************
-
-Olá amigo ou amiga curiosa que decidiu fuçar no meu código, eu sou o Gabriel Gregório e tenho um recadinho para você.
-
-Talvez você tenha achado o código não muito bonito, sem um padrão geral ou até com algumas quebras de hierarquia. Bom, eu reconheço isso, não consegui fazer muito melhor por que as minhas aulas estão voltando e por que faz apenas 1 mês e alguns dias que eu comecei a estudar programação orientada a objetos com Tkinter, até então, eu nunca tinha feito uma interface gráfica através de texto, isso sem contar o HTML e CSS, mas ambos eu não me aprofundei muito e o HTML é uma linguagem de marcação, então nem conta muito. Portanto eu peço que vocês compreendam que eu fiz o melhor que consegui no tempo que eu tenho. Desculpem-me pela bagunça, pelos nomes gigantes das variáveis e pela falta de comentários geral!
-
-As ideias estão a mil aqui, mas eu tive que mover várias delas para a aba de versão futura, por causa do tempo. Acreditando que você compreendeu que eu estou aprendendo, eu também peço que vocês compreendam a respeito dos erros de português e até da aparentem burrice da Diana algumas vezes. Ainda não consegui encontrar uma forma de comparar a semelhança entre duas frases melhor do que o mipand.
-
-O banco de dados dela foi feito de várias formas, teve um pessoal do grupo treinamento da Diana que me mandaram algumas perguntas e respostas, teve um amigo, o Fabiano San que cuidou dela durante a Fatec Aberta de Araçatuba gerando mas de 800 interações diretas com os usuários, e haja paciência para analisar tudo isso e tentar contextualizar. E também teve algumas perguntas e respostas que eu adicionei pessoalmente. ( Haja erros de português que eu nem percebi ou que eu deixei, já que foram recorrentes, então achei melhor deixar para manter uma interação mais humana ).
-
-Caso você se sinta ofendido com algum comentário da Diana, saiba que ela é completamente “burra”! Tudo que ela tem é baseado em comentários de diversas pessoas que podem ser quase aleatórios dependendo da tolerância do Mipand, portanto, não se sinta ofendido e entenda que ela é apenas algo para diversão e aprendizado, não a leve ela a sério em nada, você tem acesso ao código e pode perceber o quanto a Diana não sabe de nada!
-
-[ Fins comerciais ]
-Outro detalhe importante, é que você não pode usar ela para fins comerciais, primeiramente porque isso seria uma puta sacanagem comigo, eu passo meses trabalhando nas outras versões da Diana, e um mês inteiro trabalhando nessa versão, para vir alguém e sair vendendo o meu código por ai ou até ganhando os créditos de forma completamente indevida! Então por favor, tenha bom senso! 
-
-Você pode sim modificar ela e apresentá-la como parte de um TCC, apresentação ou qualquer coisa desde que tenha pelo menos os créditos, para mim ou para o meu projeto, o projeto Combratec Inova, que alias eu gostaria que você entrasse lá e curtisse a minha página! É por lá que a Diana dá sinais de vida e também é por lá que você poderá me enviar dicas e sugestões para a Diana 8.0. Obrigado e boa fuçada! 
 '''
