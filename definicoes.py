@@ -33,6 +33,7 @@ class diana(): # Classe principal
           try:
               import pip
           except:
+              pass
             
       ignorar_instalacao = "nao"
       
