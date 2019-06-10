@@ -7,4 +7,8 @@ Chatbot com um método de inteligência Artificial
 - Remoção de bibliotecas pesadas 
 - Remoção de instaladores desnecessários 
 - Fazer documentação
-- Refatoração do código
+- Salvar áudio de questões já respondidas
+- Remover audios salvos
+- Remover métodos de resposta alternativa
+- Refatoração completa do código
+- Remoção de tela hack
