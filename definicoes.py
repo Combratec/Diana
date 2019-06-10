@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-# Deixei aqui alguns trechos de código que a Diana usa com bastante frequência, eles fazem testes, processamentos e até salvam dados no histórico.
 
 class diana(): # Classe principal 
    def __init__(self):
@@ -8,12 +7,12 @@ class diana(): # Classe principal
 
    # Esta definição realiza testes dos principais módulos e retorna o status de funcionamento deles, além de tentar instalar módulos ausentes.
    def testa_modulos():
-      mipand_modulo            = "1"    # Módulo de processamento de texto
-      os_modulo                = "1"    # Módulo básico não usado!
-      speechrecognition_modulo = "1"    # Módulo de reconhecimento de voz
-      pyaudio_modulo           = "1"    # Módulo auxiliar que pode ser necessário
-      playsound_modulo         = "1"    # Módulo de reprodução de arquivos em mp3
-      gtts_modulo              = "1"    # Módulo gerador de fala
+      mipand_modulo            = "1"
+      os_modulo                = "1"
+      speechrecognition_modulo = "1"
+      pyaudio_modulo           = "1"
+      playsound_modulo         = "1"   
+      gtts_modulo              = "1"
       # Setando valores padrão.
       RES_OS                   ="[*]"
       RES_AST                  ="[*]"
@@ -30,85 +29,57 @@ class diana(): # Classe principal
       RES_SPEECH_RECOGNITION   ="[*]"
       ERRO = "[?]"
 
-      #######################################################################################################
-      # Deixei aqui diversos códigos que podem ser necessários para a instalação de algumas bibliotecas.    #
-      # Eles levam em conta alguns problemas já relatados e alguns problemas que eu pessoalmente ja passei .#
-      # Caso aconteça algum problema na sua máquina em relação aos códigos, é da sua total responsabilidade!#
-      #######################################################################################################
-
-      # Função caso  haja necessidade de instalação do pip3
       def instalar_atualizar_pip_3():
           try:
               import pip
           except:
-             os.system("py get-pip.py") # Instalação do pip se necessário
-          # Atualizações necessárias!
-          os.system("python -m pip install --upgrade pip setuptools wheel")
-          os.system("python -m pip install --upgrade pip")
-          os.system("py -m pip install --upgrade pip")
-          os.system("sudo pip3 install --upgrade pip")
-          os.system("sudo pip install --upgrade pip")
-          os.system("pip install --upgrade pip")
 
-
-      ''' Decisão se haverá tentativa de instalação ou não de algum módulo faltante '''
       arquivo = open("Analise/quantidade_acesso.txt","r",encoding="utf8") # começa com 1
       arquivo_acessar = int(arquivo.read())
       arquivo.close()
 
-#      ignorar_instalacao="sim" # Ignorar qualquer tipo de instalação
-#      if arquivo_acessar<5:        
-
-      ignorar_instalacao="nao"
-
+      ignorar_instalacao = "nao"
+      
       try:
          import os
       except:
-         print("[X] OS NÃO ENCONTRADO")
          RES_OS = ERRO
          os_modulo = "0"
 
       try:
          import ast                 
       except:
-         print("[X] AST NÃO ENCONTRADO")
          RES_AST = ERRO
 
       try:
          import time                 
       except:
-         print("[X] TIME NÃO ENCONTRADO")
          RES_TIME = ERRO
 
       try:
          import mipand
       except:
-         print("[X] MIPAND NÃO ENCONTRADO")
          RES_MIPAND = ERRO
          mipand_modulo = "0"
 
       try:
           import webbrowser           
       except:
-         print("[X] WEBBROWSER NÃO ENCONTRADO")
          RES_WEBBROWSER = ERRO
 
       try:
          import definicoes          
       except:
-         print("[X] DEFINIÇÕES NÃO ENCONTRADO")
          RES_DEFINICOES = ERRO           
 
       try:
          import alternativa  
       except:
-         print("[X] ALTERNATIVA NÃO ENCONTRADO")
          RES_ALTERNATIVA = ERRO
 
       try:
          import delimitador    
       except:
-         print("[X] DELIMITADOR NÃO ENCONTRADO")
          RES_DELIMITADOR = ERRO
  
       try:
@@ -117,25 +88,14 @@ class diana(): # Classe principal
          try:
             import Tkinter          
          except:
-            print("[X] TKINTER NÃO ENCONTRADO")
             RES_TKINTER = ERRO    
 
       try:
          import gtts               
       except:
-         print("[X] GTTS não encontrado!")
-         if ignorar_instalacao=="nao":
-             instalar_atualizar_pip_3()
-             os.system("pip install gTTS")
-             os.system("py -m pip install -U gtts")
-             os.system("sudo pip3 install gtts")
-             os.system("pip install gtts")
-             os.system("pip install gTTS")
          try:
             import gtts               
          except:
-            print("[ERRO] Não consegui instalar o GTTS, preciso dele para falar")
-            print("[ERRO] Instale por esse link: https://pypi.org/project/gTTS/")
             RES_GTTS    = ERRO
             gtts_modulo = "0"
 
@@ -143,141 +103,25 @@ class diana(): # Classe principal
           try:
               import pyaudio            
           except:
-              print("[X] PYAUDIO não encontrado!")
-              if ignorar_instalacao=="nao":
-                  # Instalar ou atualizar o pip3 se necessário
-                  instalar_atualizar_pip_3()
-                  # Instalação de ferramentas que podem o pyaudio depende
-                  os.system("py -m pip install -U wheel")
-                  os.system("python -m pip install pyaudio")
-                  os.system("py -m pip install pyaudio")
-                  os.system("pip install -U setuptools")  
-                  os.system("pip install -U virtualenv")
-                  os.system("pip install setuptools --upgrade")
-                  os.system("py -m pip install -U setuptools")  
-                  os.system("py -m pip install -U virtualenv")
-                  os.system("py -m pip install setuptools --upgrade")
-                  os.system("sudo pip3 install -U setuptools")  
-                  os.system("sudo pip3 install -U virtualenv")
-                  os.system("sudo pip3 install setuptools --upgrade")
-                  # Tentativa de instalação básica
-                  os.system("brew install portaudio")
-                  os.system("pip install pyaudio")
-                  os.system("pip3 install pyaudio")
-                  os.system("sudo pip3 install pyaudio")
-                  os.system("pip install PyAudio")
-                  os.system("py -m pip install -U pyaudio")
-                  # Instalação para sistemas linux
-                  os.system("sudo apt-get install portaudio19-dev python-all-dev python3-all-dev && sudo pip3 install pyaudio")
-                  os.system("sudo apt-get install libportaudio0 libportaudio2 libportaudiocpp0 portaudio19-dev")
-                  os.system("sudo apt-get install python-pyaudio python3-pyaudio")
-                  os.system("sudo apt-get install python3-pyaudio")
-                  os.system("sudo apt-get install portaudio19-dev")
-                  os.system("sudo apt-get install libportaudio-dev")
-                  os.system("sudo apt-get install python-dev")
-                  os.system("sudo pip3 install pyaudio")
-                  os.system("sudo pip install pyaudio")  
-              try:
-                  import pyaudio            
-              except:
-                 if ignorar_instalacao=="nao":
-                     os.system("python pacotes/instalador_pyaudio.py")
-                     os.system("py pacotes/instalador_pyaudio.py")
-                 try:
-                     import pyaudio            
-                 except:
-                     print("[ERRO] Não consegui instalar o PyAudio 0.2.11!")
-                     print("[ERRO] Baixe e instale por esse link: https://pypi.org/project/PyAudio/")
-                     pyaudio_modulo = "0"
-                     RES_PYAUDIO = ERRO
+              pyaudio_modulo = "0"
+              RES_PYAUDIO = ERRO
+
       instalacao_pyaudio_definicao()
 
-      # Importação básica
       verificar_atualizar_pyaudio = "sim"
-      try:
-         import pyaudio            
-      except:
-         verificar_atualizar_pyaudio = "nem tenta"
-
-      if verificar_atualizar_pyaudio == "sim":
-          try:
-              versao_pyaudio = str(pyaudio.__version__)
-          except:
-              print("A pasta pyaudio está interferindo no funcionamento da\n Diana no seu sistema operacional, posso remove-la?")
-              os.system("del pyaudio")
-              instalacao_pyaudio_definicao()
-              versao_pyaudio == "deu ruim!"
-
-          # PyAudio na versão correta
-          if versao_pyaudio == "0.2.11":
-              print("PyAudio na versão {}".format(versao_pyaudio))
-          else:
-              os.system("sudo pip3 install --ignore-installed pyaudio")
-              os.system("py -m pip install -U pyaudio")
-              os.system("python -m pip install --upgrade pyaudio")
-              os.system("py -m pip install --upgrade pyaudio")
-
+      
       try:
          import playsound
       except:
-         print("[X] PLAYSOUND não encontrado!")
-         if ignorar_instalacao=="nao":
-             # Instalar ou atualizar o pip3 se necessário
-             instalar_atualizar_pip_3()
-             os.system("py get-pip.py")
-             os.system("py -m pip install -U pyaudio")
-             os.system("python -m pip install --upgrade pip")
-             os.system("py -m pip install -U playsound")
-             os.system("sudo pip3 install playsound")
-             os.system("sudo pip install playsound")
-             os.system("pip install playsound")
-             os.system("pip3 install playsound")
-         try:
-            import playsound           
-         except:
-             print("[ERRO] Não consegui instalar o playsound, preciso dele para reproduzir arquivos de audio")
-             print("[ERRO] Baixe e instale por esse link: https://pypi.org/project/playsound/")
-             RES_PLAYSOUND = ERRO
-             playsound_modulo = "0"
+         RES_PLAYSOUND = ERRO
+         playsound_modulo = "0"
 
       try:
          import speech_recognition
       except:
-         print("[X] SPEECH_RECOGNITION não encontrado! ")
-         if ignorar_instalacao=="nao":
-             # Instalar ou atualizar o pip3 se necessário
-             instalar_atualizar_pip_3()
-             # Instalação para Linux
-             os.system("sudo pip3 install speechrecognition")
-             os.system("sudo pip3 install SpeechRecognition")
-             # Instalação para Windows
-             os.system("py -m pip install -U speechrecognition")
-             # Instalação geral
-             os.system("pip3 install speechrecognition")
-             os.system("pip install speechrecognition")
-         try:
-             import speech_recognition
-         except:
-            print("[ERRO] Não consegui instalar o Speech Recognition, preciso dele para fazer reconhecimento de voz")
-            print("[ERRO] Baixe por esse link: https://pypi.org/project/SpeechRecognition/")
-            RES_SPEECH_RECOGNITION = ERRO
-            speechrecognition_modulo = "0"
+         RES_SPEECH_RECOGNITION = ERRO
+         speechrecognition_modulo = "0"
 
-      print("{} OS                ".format(RES_OS))     
-      print("{} AST               ".format(RES_AST))
-      print("{} TIME              ".format(RES_TIME))
-      print("{} GTTS              ".format(RES_GTTS))
-      print("{} MIPAND            ".format(RES_MIPAND))    
-      print("{} TKINTER           ".format(RES_TKINTER))       
-      print("{} PYAUDIO           ".format(RES_PYAUDIO))    
-      print("{} PLAYSOUND         ".format(RES_PLAYSOUND))       
-      print("{} WEBBROWSER        ".format(RES_WEBBROWSER))       
-      print("{} DEFINICOES        ".format(RES_DEFINICOES))       
-      print("{} ALTERNATIVA       ".format(RES_ALTERNATIVA))       
-      print("{} DELIMITADOR       ".format(RES_DELIMITADOR))       
-      print("{} SPEECH RECOGNITION".format(RES_SPEECH_RECOGNITION))       
- 
-     # Retorno dos dados coletados
       return mipand_modulo,os_modulo,speechrecognition_modulo,pyaudio_modulo,playsound_modulo,gtts_modulo
 
    # Teste completo do conjunto de fala
