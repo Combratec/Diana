@@ -33,11 +33,7 @@ class diana(): # Classe principal
           try:
               import pip
           except:
-
-      arquivo = open("Analise/quantidade_acesso.txt","r",encoding="utf8") # começa com 1
-      arquivo_acessar = int(arquivo.read())
-      arquivo.close()
-
+            
       ignorar_instalacao = "nao"
       
       try:
