@@ -9,14 +9,11 @@ __description__ = 'Chat bot da Combratec com um método de Inteligência Artific
 __copyright__   = 'Copyright 2018-2019, Combratec'
 __status__      = 'Development'
 __date__        = '09/02/2019'
-__version__     = '7.2.6'
+__last update__ = '13/06/2019'
+__version__     = '7.2.7'
 
 __project__     = 'https://combratecinova.blogspot.com'
 __Social__      = 'https://www.facebook.com/combratec'
-
-
-'''Passe para o final, você precisa ler os termos, a nota e os créditos dos módulos que foram usados antes de sair editando o código da Diana.
-'''
 
 # Carregamento imediato apenas dos módulos necessários
 import time
@@ -45,7 +42,6 @@ tela.geometry("446x546+100+100")
 global acesso_em_modo_texto
 acesso_em_modo_texto = "nao"
 
-# Definição de segurança que analisa o arquivo configurações
 # Caso o arquivo configurações não seja localizado é criado um automaticamente através da string "esperado"
 def atualizar_dados_de_controle_rec_voz_arqler_total():
         print("...Atualizando dados de controle...")
@@ -71,9 +67,7 @@ def atualizar_dados_de_controle_rec_voz_arqler_total():
         try: 
             status = str(arquivo.read())[108] 
         except:
-            print(" ** ** ** ** Erro grave!, POSIÇÃO 108 INEXISTENTE")
-            print(" ** ** ** ** A posição não existe")
-            print(" ** ** ** ** Vou reescrever o arquivo configurações")
+            print("Erro, posição 108 não existe!")
             arquivo = open("configurações","w", encoding="utf8")
             arquivo.write(esperado)
             arquivo.close()
@@ -81,6 +75,7 @@ def atualizar_dados_de_controle_rec_voz_arqler_total():
             arquivo.close()
         except:
             pass
+         
         # Quantidade de caracteres
         arquivo = open("configurações","r", encoding="utf8")
         arquivo_ler = str(arquivo.read())
@@ -108,15 +103,11 @@ def atualizar_dados_de_controle_rec_voz_arqler_total():
         else:
             print("Reconhecimento ativado")
             controlar_reconhecimento = "s"
-
-        # **** USO DO RETURN ****
-        # arquivo = atualizar_dados_de_controle_rec_voz_arqler_total()
-        # controlar_reconhecimento = arquivo[0]
-        # controlar_voz = arquivo[1]
-        # arquivo_ler = arquivo[2]
-        # total = arquivo[3]
+           
         return controlar_reconhecimento,controlar_voz,arquivo_ler,total
-atualizar_dados_de_controle_rec_voz_arqler_total() # Executar a primeira definição de segurança
+
+# Executar a primeira definição de segurança
+atualizar_dados_de_controle_rec_voz_arqler_total()
 
 # Abertura do arquivo configurações
 arquivo = open("configurações","r", encoding="utf8")
@@ -142,7 +133,6 @@ basico_status = "ok"               # Sistemas básicos
 reconhecimento_status = "ok"       # Sistemas de reconhecimento
 fala_status = "ok"                 # sistemas de fala
 
-# Etapa de verificação dos módulos para a primeira inicialização
 # Módulos básicos indisponíveis
 if mipand == "0" or os == "0":
    basico_status = "erro"
@@ -970,8 +960,8 @@ class processo_rec():
                     texto_tela_5.insert(END, "\nVocê: {}".format(entrada))    # O Text dessa tela vai receber o que você acabou de digitar
                     texto_tela_5.see("end")
                     if acesso_em_modo_texto=="sim":
-                        entrada = str(tela_rec_entry.get())                       # A 'entrada' vai receber o Entry da tela mais básica
-                        tela_rec_entry.delete(0, 'end')                           # Ele vai ser destruído, ou melhor, seu texto vai ser apagado
+                        entrada = str(tela_rec_entry.get())                        # A 'entrada' vai receber o Entry da tela mais básica
+                        tela_rec_entry.delete(0, 'end')                            # Ele vai ser destruído, ou melhor, seu texto vai ser apagado
                         tela_rec_text.insert(END, "\nVocê: {}".format(entrada))    # O Text dessa tela vai receber o que você acabou de digitar
                         tela_rec_text.see("end")
 
@@ -1793,12 +1783,6 @@ def fechar_tudo():
     tela.destroy()
 
 # Definição usada para usar o modo escreve escreve sendo o modo reconhece escreve
-'''
-Temporariamente, a Diana no modo reconhece/escreve,
-se passa pelo modo escreve/escreve, foi uma forma
-de economizar código, e aproveitar uma estrutura já
-existente, infelizmente isso está uma bela bagunça.
-'''
 def usar_modo_texto():
     print("acesso em modo texto")
     global acesso_em_modo_texto
@@ -1960,8 +1944,6 @@ escreve_fala_enviarenviar.grid(row=1,column=3)
 # Finaliza frame dos botões
 escreve_fala_frame_botoes.grid(row=4,column=1)
 # FIM DA TELA DE INTERAÇÃO ESCRITA E COM RESPOSTA DE FALA #
-#===========================================================================
-
 #===========================================================================
 # TELA DE INTERAÇÃO, RECONHECIMENTO DE VOZ E RESPOSTA POR TEXTO #
 
@@ -2377,7 +2359,6 @@ frame_inferior_historico.grid(row=4,column=1,sticky=EW)
 
 # FINALIZA TELA DO HISTÓRICO #
 #===========================================================================
-
 # TELA DO MENU #
 
 # Definições do tema
@@ -2484,10 +2465,9 @@ menu_conversar.configure(background=tema_botao,foreground=tema_botao_frente,font
 menu_conversar.grid(row=1,column=1,sticky=EW)
 botoes_do_menu_c_a.grid(row=3,column=1,sticky=EW)
 # FINALIZA TELA DO MENU #
-
 #===========================================================================
-
 # TELA DE TESTES BÁSICOS #
+
 # Cores do tema
 fundo_load = "white"             # fundo de toda a tela
 fundo_load_texto = "black"       # texto básico de toda a tela
@@ -2599,9 +2579,7 @@ inicia_em_espera_2_label.grid(row=6, column=2,sticky=W)
 
 guias_de_testes.grid(row=3,column=1,sticky=EW)
 # FINALIZA TELA DE TESTES BÁSICOS #
-
-#--------------------------------------------#
-
+#===========================================================================
 # COMEÇA TELA DE LOAD
 tela.configure(background="#dcdcdc") 
 
@@ -2609,13 +2587,14 @@ tela.configure(background="#dcdcdc")
 tela_de_load = Frame(tela,border=0)
 tela_de_load.rowconfigure(1,weight=1)
 
-tela_de_load["background"] = "#dcdcdc" # Tela de fundo
-imagem = PhotoImage(file="Imagens/load/animação/1.png") # Imagem inicial
-image_botao = Label(tela_de_load,image=imagem, background="#dcdcdc")# Imagem_label
+tela_de_load["background"] = "#dcdcdc"                               # Tela de fundo
+imagem = PhotoImage(file="Imagens/load/animação/1.png")              # Imagem inicial
+image_botao = Label(tela_de_load,image=imagem, background="#dcdcdc") # Imagem_label
 
 image_botao.grid(row=1,column=1)
 tela_de_load.grid(row=1,column=1,sticky=NSEW)
-# Termina tela de load
+#===========================================================================
+# TERMINA TELA DE LOAD
 
 atualizar() # Chamar o load
 tela.mainloop() 
