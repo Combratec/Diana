@@ -54,7 +54,7 @@ class diana(): # Classe principal
          RES_TIME = ERRO
 
       try:
-         import mipand
+         from pyanalise import compare
       except:
          RES_MIPAND = ERRO
          mipand_modulo = "0"
@@ -182,7 +182,7 @@ class diana(): # Classe principal
   
    # Processamento de dados
    def processamento(digitado): 
-      import mipand
+      from pyanalise import compare
       armazena = 0 # Variável de inicialização da precisão
       var = 1
 
@@ -214,7 +214,7 @@ class diana(): # Classe principal
                if p==fim:
                   finaliza=p
                   banco=lista_falas[x][comeca:finaliza]
-                  result=mipand.ler(digitado.lower(),banco.lower()) # IMPORTANTE - MELHORA OS RESULTADOS 
+                  result=compare.frase(digitado.lower(),banco.lower()) # IMPORTANTE - MELHORA OS RESULTADOS 
                   if result>armazena:
                      busca=x
                      arquivos_dad = var
