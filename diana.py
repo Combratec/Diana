@@ -9,7 +9,7 @@ __description__ = 'Chat bot da Combratec com um método de Inteligência Artific
 __copyright__   = 'Copyright 2018-2019, Combratec'
 __status__      = 'Development'
 __date__        = '09/02/2019'
-__last update__ = '13/06/2019'
+__last_update__ = '13/06/2019'
 __version__     = '7.2.7'
 
 __project__     = 'https://combratecinova.blogspot.com'
@@ -45,7 +45,7 @@ acesso_em_modo_texto = "nao"
 # Caso o arquivo configurações não seja localizado é criado um automaticamente através da string "esperado"
 def atualizar_dados_de_controle_rec_voz_arqler_total():
         print("...Atualizando dados de controle...")
-        esperado = "reconhecimento=1\nfala=1\nmipand=0\nplaysound=0\ngtts=0\npyaudio=0\nspeechRecognition=0\nvariação=079\nproxima_ação=n"
+        esperado = "reconhecimento=1\nfala=1\npyanalise=0\nplaysound=0\ngtts=0\npyaudio=0\nspeechRecognition=0\nvariação=079\nproxima_ação=n"
         def criar_arquivo_config():
             try:
                 arquivo = open("configurações","r", encoding="utf8")
@@ -121,7 +121,7 @@ arquivo.close()
 
 # Análise de funcionalidade e disponibilidade dos módulos
 resultados = diana.testa_modulos() # Análise da disponibilidade dos módulos recomendados
-mipand = resultados[0]             # Módulo de processamento de dados
+pyanalise = resultados[0]             # Módulo de processamento de dados
 os = resultados[1]                 # Inútil até agora
 speechrecognition = resultados[2]  # Módulo que de reconhecimento de voz
 pyaudio = resultados[3]            # Em analise...
@@ -134,7 +134,7 @@ reconhecimento_status = "ok"       # Sistemas de reconhecimento
 fala_status = "ok"                 # sistemas de fala
 
 # Módulos básicos indisponíveis
-if mipand == "0" or os == "0":
+if pyanalise == "0" or os == "0":
    basico_status = "erro"
    print("****** Módulos básicos não encontrados!") 
 # Módulos de reconhecimento de voz
@@ -146,12 +146,12 @@ if playsound == "0" or gtts == "0":
    fala_status = "erro"
    print("****** Módulos de fala não encontrado!")
 
-# Abertura dos dados de precisão do mipand ( É tipo uma confiança para comparar palavras )
+# Abertura dos dados de precisão do pyanalise ( É tipo uma confiança para comparar palavras )
 arquivo = open("configurações","r", encoding="utf8")       # Abrindo o arquivo configurações
 atualizar_variacao = arquivo.read()  # Conversão para string
-scale = int(atualizar_variacao[91:94])    # Variação do mipand (Precisão das respostas)
+scale = int(atualizar_variacao[91:94])    # Variação do pyanalise (Precisão das respostas)
 arquivo.close()                           # Fechando o arquivo
-print("variação do mipand definida para {}".format(scale)) # Printando a "scale" apenas para confirmação
+print("variação do pyanalise definida para {}".format(scale)) # Printando a "scale" apenas para confirmação
 
 # Atualização do reconhecimento de voz (Ativado ou Desativado)
 def atualiza_configuracoes_reconhecimento(): # Atualização do Reconhecimento de voz
@@ -368,7 +368,7 @@ def testar_configuracoes_reconhecimento_de_voz():
                 configuracoes_reconhecimento_testar_label["text"] = frase # Exibir a fala da pessoa
                 configuracoes_reconhecimento_testar_label.update()
 
-# Controle da precisão do mipand através barra móvel
+# Controle da precisão do pyanalise através barra móvel
 def resize(event=None):
 
     arquivo = open("configurações","r", encoding="utf8")
@@ -379,7 +379,7 @@ def resize(event=None):
     total_arquivo = int(len(atualizar_variacao)-1) # Atualizar posicionamento para escalas uma escala mais natural
     if posi_Analise==0: # Se o amigão conseguiu a proeza de colocar em zero    
         # Não fazer nada hahaha
-        print("* ISSO NÂO PODIA TER ACONTECIDO!, mipand definido para zero!")
+        print("* ISSO NÂO PODIA TER ACONTECIDO!, pyanalise definido para zero!")
     else:  
         arquivo = open("configurações","w", encoding="utf8")
         # Se ele chegou a 100, temos 3 dígitos, portando é só escrever
@@ -411,9 +411,9 @@ def abrir_site_playsound():
     import webbrowser
     webbrowser.open('https://pypi.org/project/playsound/')
 
-def abrir_site_mipand():
+def abrir_site_pyanalise():
     import webbrowser
-    webbrowser.open('https://github.com/Combratec/mipand/')
+    webbrowser.open('https://github.com/gabriel-gregorio-da-silva/pyanalise')
 
 def abrir_site_PIP3():
     import webbrowser
@@ -487,11 +487,6 @@ class atualizacoes(): # Gerenciador de layouts e eventos
             if ignorar=="nao":
                 arquivo.close() # fechar o arquivo
         
-        # Se a quantidade de acessos na Diana for igual a 4 ou igual a 8, pedir uma avaliação!
-        if arquivo_acessar==4 or arquivo_acessar==8:        
-            menu_conversar.grid_forget()                 # Destruir o botão conversar 
-            menu_avaliar.grid(row=1,column=1,sticky=EW)  # Construir o botão avaliar
-   
         # Acessar o arquivo e somar mais um
         arquivo_acessar=str(arquivo_acessar+1)
         arquivo = open("Analise/quantidade_acesso.txt","w",encoding="utf8")
@@ -1004,7 +999,7 @@ class processo_rec():
         assunto_resp = resultados[1]
         posicao_no_assunto_resp = resultados[2]
 
-        # Atualizar variação do mipand!
+        # Atualizar variação do pyanalise!
         arquivo = open("configurações","r", encoding="utf8")
         atualizar_variacao = arquivo.read()
         precisao_esperada_resp = int(atualizar_variacao[91:94])
@@ -1325,7 +1320,7 @@ class processo_rec():
     def criar_assunto_modo_texto(digitado,entrada,resposta): # Modo criar assunto
         global acesso_em_modo_texto
         print("\n___Criar assunto no modo texto___")
-        # Dentro da tolerância do mipand, caso não haja semelhança entre o que você
+        # Dentro da tolerância do pyanalise, caso não haja semelhança entre o que você
         # digitou e o os dados do banco de dados, vamos ter que criar uma lista
         # É aqui que á mágica acontece! Mas, esse é o modo texto
         arquivo = atualizar_dados_de_controle_rec_voz_arqler_total() #Atualização de dados
@@ -2111,20 +2106,20 @@ configuracoes_modulo = Label(tela_frame_configuracoes,text="  Módulos necessár
 configuracoes_modulo.configure(background=fundo_azul_titulo,foreground=letra_titulos,pady=5,padx=10,font=("",15))
 configuracoes_modulo.grid(row=3,column=1,sticky=EW)
 
-# Frame do Mipand
+# Frame do pyanalise
 configuracoes_frame_3 = Frame(tela_frame_configuracoes)
 # Carregamento do botão de acordo com o status na inicialização
-if mipand == "0":
-    configuracoes_mipand = Button(configuracoes_frame_3,text="Preciso do Mipand!")
-    configuracoes_mipand.configure(font=("",16),background=fundo_configuracoes,foreground="red",highlightbackground="red",activebackground=fundo_modo_ativo,activeforeground=texto_modo_ativo_erro,relief=FLAT)
+if pyanalise == "0":
+    configuracoes_pyanalise = Button(configuracoes_frame_3,text="Preciso do pyanalise!")
+    configuracoes_pyanalise.configure(font=("",16),background=fundo_configuracoes,foreground="red",highlightbackground="red",activebackground=fundo_modo_ativo,activeforeground=texto_modo_ativo_erro,relief=FLAT)
 else:
-    configuracoes_mipand = Button(configuracoes_frame_3,text="Mipand")
-    configuracoes_mipand.configure(font=("",16),background=fundo_configuracoes,foreground=letra_verde,highlightbackground=letra_verde,activebackground=fundo_modo_ativo,activeforeground=texto_modo_ativo_ok,relief=FLAT)
-configuracoes_mipand.grid(row=2,column=1,columnspan=2,sticky=EW)
-# Carregamento com  o site do Mipand
-configuracoes_mipand_link = Button(configuracoes_frame_3,text=" SITE ",command=abrir_site_mipand)
-configuracoes_mipand_link.configure(font=("",16),background=fundo_configuracoes,foreground=letra_azul_site,highlightbackground=letra_azul_site,activebackground=fundo_modo_ativo,activeforeground=texto_modo_ativo_ok,relief=FLAT)
-configuracoes_mipand_link.grid(row=2,column=1,columnspan=2,sticky=E)
+    configuracoes_pyanalise = Button(configuracoes_frame_3,text="pyanalise")
+    configuracoes_pyanalise.configure(font=("",16),background=fundo_configuracoes,foreground=letra_verde,highlightbackground=letra_verde,activebackground=fundo_modo_ativo,activeforeground=texto_modo_ativo_ok,relief=FLAT)
+configuracoes_pyanalise.grid(row=2,column=1,columnspan=2,sticky=EW)
+# Carregamento com  o site do pyanalise
+configuracoes_pyanalise_link = Button(configuracoes_frame_3,text=" SITE ",command=abrir_site_pyanalise)
+configuracoes_pyanalise_link.configure(font=("",16),background=fundo_configuracoes,foreground=letra_azul_site,highlightbackground=letra_azul_site,activebackground=fundo_modo_ativo,activeforeground=texto_modo_ativo_ok,relief=FLAT)
+configuracoes_pyanalise_link.grid(row=2,column=1,columnspan=2,sticky=E)
 configuracoes_frame_3.grid(row=4,column=1,sticky=EW)
 configuracoes_frame_3.grid_columnconfigure(1, weight=3)
 
@@ -2196,11 +2191,11 @@ configuracoes_gtts_link.grid(row=2,column=1,columnspan=2,sticky=E)
 configuracoes_frame_7.grid(row=8,column=1,sticky=EW)
 configuracoes_frame_7.grid_columnconfigure(1, weight=3)
 
-# Frame de controle da taxa de variação do mipand
+# Frame de controle da taxa de variação do pyanalise
 configuracoes_frame_8 = Frame(tela_frame_configuracoes)
 configuracoes_frame_8.configure(background=fundo_verde,padx=9,pady=9)
 # Texto sobre a função
-taxa_variacao = Label(configuracoes_frame_8,text="Taxa de variação para o Mipand")
+taxa_variacao = Label(configuracoes_frame_8,text="Taxa de precisão do pyanalise")
 taxa_variacao.configure(font=("",17),background=fundo_verde,foreground=letra_titulos)
 taxa_variacao.grid(row=0,column=1,sticky=N+S+E+W)
 # Escala da taxa de variação
@@ -2455,10 +2450,6 @@ lider_dos_blocos.grid(row=2,column=1)
 botoes_do_menu_c_a = Frame(frameMenu,background=tema_fundo)
 botoes_do_menu_c_a.grid_columnconfigure(1,weight=1)
 
-# Botão avalie-me
-menu_avaliar = Button(botoes_do_menu_c_a, text="Avalie-me",command=atualizacoes.menu_avaliacao)
-menu_avaliar.configure(background=tema_botao,foreground=tema_botao_frente,font=("",14),pady=2,relief=FLAT,activeforeground="blue",activebackground=tema_botao,highlightbackground=tema_botao)
-
 # Botão conversar
 menu_conversar = Button(botoes_do_menu_c_a, text="conversar",command=atualizacoes.menu_interacao)
 menu_conversar.configure(background=tema_botao,foreground=tema_botao_frente,font=("",14),pady=2,relief=FLAT,activeforeground="blue",activebackground=tema_botao,highlightbackground=tema_botao)
@@ -2526,18 +2517,18 @@ if playsound == "1":
 inicia_erro_label.configure(command=abrir_site_playsound,relief=FLAT,highlightbackground=fundo_load, activebackground="#111",activeforeground="white")
 inicia_erro_label.grid(row=2,column=2,sticky=W)
 
-# label do mipand
-inicia_mipand_label = Label(guias_de_testes ,text="MIPAND: ")
-inicia_mipand_label.configure(background=fundo_load,foreground=fundo_load_texto)
-inicia_mipand_label.grid(row=3,column=1,sticky=E)
-if mipand == "0":
+# label do pyanalise
+inicia_pyanalise_label = Label(guias_de_testes ,text="pyanalise: ")
+inicia_pyanalise_label.configure(background=fundo_load,foreground=fundo_load_texto)
+inicia_pyanalise_label.grid(row=3,column=1,sticky=E)
+if pyanalise == "0":
     inicia_funcionando_label = Button(guias_de_testes ,text="Erro. Clique aqui para instalar...")
     inicia_funcionando_label.configure(background=fundo_load,foreground="red")
-if mipand == "1":
+if pyanalise == "1":
     inicia_funcionando_label = Button(guias_de_testes ,text="Funcionando...")
     inicia_funcionando_label.configure(background=fundo_load,foreground=fundo_load_texto)
-# status do mipand
-inicia_funcionando_label.configure(command=abrir_site_mipand, relief=FLAT, highlightbackground=fundo_load, activebackground="#111", activeforeground="white")
+# status do pyanalise
+inicia_funcionando_label.configure(command=abrir_site_pyanalise, relief=FLAT, highlightbackground=fundo_load, activebackground="#111", activeforeground="white")
 inicia_funcionando_label.grid(row=3,column=2,sticky=W)
 
 # label do pip3
