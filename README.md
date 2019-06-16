@@ -9,6 +9,11 @@ Chatbot com um método de inteligência Artificial
 - [X] Remoção de bibliotecas pesadas 
 - [X] Remoção de instaladores desnecessários 
 - [ ] Fazer documentação
+- [ ] Remoção das telas de fala_esc
+- [ ] Remoção das telas de esc_rec
+- [ ] Remoção das telas de fala_rec
+- [ ] Criar tela unica completa
+- [ ] Criar nova tela de splash
 - [ ] Salvar áudio de questões já respondidas
 - [ ] Remover audios salvos
 - [ ] Remover métodos de resposta alternativa
