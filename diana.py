@@ -1254,6 +1254,7 @@ class processo_rec():
                        entrada = ""
                        frase = entrada
                 entrada = frase
+
                 if entrada == "": # ERRO QUALQUER
                     print("nenhum conteudo encontrado")
                     # Carregamento de imagem
@@ -1449,41 +1450,51 @@ class processo_rec():
         pergunta = entrada # Adaptação para os nomes dessa definição
         # Se a voz estiver ativada
         if controlar_voz == "s":
-            from gtts import gTTS                # Módulo que gera arquivo de fala em mp3
-            from playsound import playsound      # Módulo que executa arquivos em mp3
-            tts = gTTS(text=resposta, lang='pt') # configuração do gerador
-            tts.save("ultima_resposta.mp3")      # Gerando o som
+            try:
+                from gtts import gTTS
+            except Exception as erro:
+                messagebox.showinfo('Temos um problema!','Você precisa instalar e configurar o módulo gtts. \nErro:'+str(erro))
+            else:
+                try:
+                    from playsound import playsound
+                except Exception as erro_2:
+                    messagebox.showinfo('Temos um problema!','Você precisa instalar e configurar o módulo playsound. \nErro:'+str(erro_2))
+                else:
+                    tts = gTTS(text=resposta, lang='pt') # configuração do gerador
+                    tts.save("ultima_resposta.mp3")      # Gerando o som
 
-            # Atualizar a parte visual das telas, principal, esc/voz e rec/esc
-            interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
-            escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/falando.png")
-            tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/falando.png")
+                    # Atualizar a parte visual das telas, principal, esc/voz e rec/esc
+                    interacao_esperando_img = PhotoImage(file="Imagens/fala/falando.png")
+                    escreve_fala_imagem = PhotoImage(file="Imagens/tela_fala_escreve/falando.png")
+                    tela_rec_img_mic = PhotoImage(file="Imagens/reconhece_escreve/falando.png")
 
-            # Redimensionamento de imagens
-            tela_rec_img_mic = tela_rec_img_mic.subsample(3,3)
+                    # Redimensionamento de imagens
+                    tela_rec_img_mic = tela_rec_img_mic.subsample(3,3)
 
-            # Atualiza tela principal
-            interacao_esperando_img_botao["image"] = interacao_esperando_img
-            interacao_esperando_img_botao.update()
-            # Atualiza tela escreve/fala
-            escreve_fala_imagem_btn["image"] = escreve_fala_imagem
-            escreve_fala_imagem_btn.update()
-            # Atualiza tela rec/esc
-            tela_rec_ouvir["image"] = tela_rec_img_mic 
-            tela_rec_ouvir.update()
+                    # Atualiza tela principal
+                    interacao_esperando_img_botao["image"] = interacao_esperando_img
+                    interacao_esperando_img_botao.update()
+
+                    # Atualiza tela escreve/fala
+                    escreve_fala_imagem_btn["image"] = escreve_fala_imagem
+                    escreve_fala_imagem_btn.update()
+
+                    # Atualiza tela rec/esc
+                    tela_rec_ouvir["image"] = tela_rec_img_mic 
+                    tela_rec_ouvir.update()
             
-            # Modo antigo, esc/voz
-            string = "Diana: "+resposta
-            base = delimitador.delimitar(string) # reposta da Diana!
-            escreve_fala_resposta["text"] = base # Modo escreve e ela fala
+                    # Modo antigo, esc/voz
+                    string = "Diana: "+resposta
+                    base = delimitador.delimitar(string) # reposta da Diana!
+                    escreve_fala_resposta["text"] = base # Modo escreve e ela fala
+ 
+                    # Modo reconhece a voz e escreve
+                    tela_rec_text.insert(END, "\nDiana: {} ".format(resposta))
+                    tela_rec_text.see("end")
 
-            # Modo reconhece a voz e escreve
-            tela_rec_text.insert(END, "\nDiana: {} ".format(resposta))
-            tela_rec_text.see("end")
-
-            playsound("ultima_resposta.mp3") # Executar o arquivo
-            print("___Diana disse: ",resposta)
-            #diana.salvaHistorico(pergunta,resposta) # Salvar no histórico
+                    playsound("ultima_resposta.mp3") # Executar o arquivo
+                    print("___Diana disse: ",resposta)
+                    #diana.salvaHistorico(pergunta,resposta) # Salvar no histórico
         else: # Fala desativada, exibe apenas a resposta
             print("___",resposta)
             texto_tela_5.insert(END, "\nDiana: {}\n".format(resposta))
