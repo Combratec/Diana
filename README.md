@@ -21,6 +21,9 @@ Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade
 - [X] Remoção das telas de esc_rec e seus respectivos lixos
 - [X] Remoção das telas de fala_rec e seus respectivos lixos
 - [ ] Criar tela unica completa
+- [ ] Criar o design das novas telas
+- [X] Integrar reconhecimento de voz
+- [X] Integrar fala
 - [ ] Criar nova tela de splash ou não. Os testes são feitos em segundos.
 - [ ] Salvar áudio de questões já respondidas
 - [X] Remoção da tela de Menu - Vamos direto ao ponto, telas são legais, mas o foco sempre foi conversar com a voz!
