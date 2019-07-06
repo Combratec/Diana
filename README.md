@@ -23,8 +23,8 @@ Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade
 - [ ] Criar tela unica completa
 - [ ] Criar nova tela de splash ou não. Os testes são feitos em segundos.
 - [ ] Salvar áudio de questões já respondidas
-- [ ] Remoção da tela de Menu - Vamos direto ao ponto, telas são legais, mas o foco sempre foi conversar com a voz!
-- [ ] Remoção da tela de histórico - Eu gosto, mas não vejo muita utilidade agora
+- [X] Remoção da tela de Menu - Vamos direto ao ponto, telas são legais, mas o foco sempre foi conversar com a voz!
+- [X] Remoção da tela de histórico - Eu gosto, mas não vejo muita utilidade agora
 
 - - - 
 
