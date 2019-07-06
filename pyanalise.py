@@ -1,12 +1,13 @@
-# ! / usr / bin / python3
-# - * - codificação: utf-8 - * -
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
 
-__author__       =  ' Gabriel Gregório da Silva '
-__email__        =  ' gabriel.gregorio.1@outlook.com '
-__description__  =  ' Comparador de frases'
-__status__       =  ' Desenvolvimento '
-__DATE__         =  ' 05/04/2019 '
-__version__      =  ' 1.1'
+__author__       = 'Gabriel Gregório da Silva'
+__email__        = 'gabriel.gregorio.1@outlook.com'
+__description__  = 'Comparador de frases'
+__status__       = 'Development'
+__date__         = '05/04/2019'
+__last_update__  = '18/06/2019'
+__version__      = '1.2'
 
 
 # Módulo pyanalise
