@@ -1,5 +1,5 @@
 # Diana
-Chatbot com um método de inteligência Artificial
+Chatbot com um método de aprendizado
 
 # Versão 8.0 
 Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade
@@ -20,7 +20,7 @@ Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade
 - [X] Remoção das telas de fala_esc e seus respectivos lixos
 - [X] Remoção das telas de esc_rec e seus respectivos lixos
 - [X] Remoção das telas de fala_rec e seus respectivos lixos
-- [ ] Criar tela unica completa
+- [X] Criar tela unica completa
 - [ ] Criar o design das novas telas
 - [X] Integrar reconhecimento de voz
 - [X] Integrar fala
