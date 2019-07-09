@@ -232,8 +232,8 @@ def def_tenho_que_falar():
         imagem = PhotoImage(file='Imagens/reconhece_escreve/icon_speak.png')
 
     imagem = imagem.subsample(16,16)
-    som_interacao['image'] = imagem
-    som_interacao.image = imagem
+    status_audio['image'] = imagem
+    status_audio.image = imagem
 
 
 def troca_tela(mudar):
@@ -247,39 +247,60 @@ def troca_tela(mudar):
         tela_frame_configuracoes.grid(row=1,column=1,sticky=NSEW)
 
 def falar(mensagem):
-   try:
-      from gtts import gTTS             # Importação do gerador de fala
-      from playsound import playsound   # Importação do reprodutor de áudio
-      tts = gTTS(text=mensagem, lang='pt')
-      tts.save("teste.mp3")
-      playsound("teste.mp3")
-   except Exception as erro:
-      print('Fala cancelada!')
-      return "[Erro] "+str(erro)
-   else:
-      print('Fala concluida!')
-      return True
+    try:
+        from gtts import gTTS             # Importação do gerador de fala
+        from playsound import playsound   # Importação do reprodutor de áudio
+        tts = gTTS(text=mensagem, lang='pt')
+        tts.save("teste.mp3")
+        playsound("teste.mp3")
+    except Exception as erro:
+        print('Fala cancelada!')
+        return "[Erro] "+str(erro)
+    else:
+        print('Fala concluida!')
+        return True
 
 def ouvir():
-   # https://pypi.org/project/SpeechRecognition/
-   # RECOMENDA-SE o uso do Python 3.6
-   try:
-      import speech_recognition as sr
-      import pyaudio
-      microfone = sr.Recognizer()
-   except Exception as e:
-      return "[Erro] "+str(e)
-   else:
-      with sr.Microphone() as source:
-         microfone.adjust_for_ambient_noise(source)
-         print("Diga alguma coisa: ")
-         audio = microfone.listen(source)
-         try:
-            frase = microfone.recognize_google(audio,language='pt-BR')
-         except:
-            return '[Erro] Diga alguma coisa!'
-         else:
-            return frase
+    # https://pypi.org/project/SpeechRecognition/
+    # RECOMENDA-SE o uso do Python 3.6
+    tela.update()
+    try:
+        import speech_recognition as sr
+        import pyaudio
+        microfone = sr.Recognizer()
+
+        # Valores abaixo deste limiar são silêncio
+        microfone.energy_threshold = 300
+    except Exception as e:
+        return "[Erro] "+str(e)
+    else:
+        btn_rec['state'] = 'disabled'
+        with sr.Microphone() as source:
+            microfone.adjust_for_ambient_noise(source)
+            print("Diga alguma coisa: ")
+
+            imagem = PhotoImage(file='Imagens/reconhece_escreve/icon_mic_a.png')
+            imagem = imagem.subsample(16,16)
+            btn_rec['image'] = imagem
+            btn_rec.image = imagem
+            btn_rec.update()
+            tela.update()
+            try:
+                audio = microfone.listen(source)
+                frase = microfone.recognize_google(audio,language='pt-BR')
+                tela.update()
+            except:
+                msg = '[Erro] Diga alguma coisa!'
+            else:
+                msg = frase
+            finally:
+                imagem = PhotoImage(file='Imagens/reconhece_escreve/icon_mic.png')
+                imagem = imagem.subsample(16,16)
+                btn_rec['image'] = imagem
+                btn_rec.image = imagem
+                btn_rec.update()
+                btn_rec['state'] = 'normal'
+                return msg
 
 # Precisão do PyAnalise
 def resize(event=None):
@@ -299,54 +320,41 @@ interacao = Frame(tela)
 interacao.grid_columnconfigure(2,weight=1)
 interacao.rowconfigure(2,weight=1)
 
-# ESQUEMA DE CORES
-rec_esc_fundo_geral = "black"   # Fundo azul dos frames e dos botões
-fundo__titulo_geral = "black"   # Fundo do título principal
-cor_titulo_geral = "white"      # Cor do título principal
-cor_text_preto = "white"        # Cor do texto do Text
-fundo_f3 = "black"              # Cor de fundo do Text
-rec_esc_frente_geral = "white"  # Cor do texto do Entry
-bordas_db = "black"             # Bordas do Entry
-
 # CONFIGURAÇÔES DOS WIDGETS
-config_btn = {'highlightbackground':rec_esc_fundo_geral,'border':0,'background':rec_esc_fundo_geral,'relief':FLAT,'activebackground':rec_esc_fundo_geral}
-config_entry = {'foreground':rec_esc_frente_geral,'background':rec_esc_fundo_geral,'highlightbackground':bordas_db,'highlightcolor':bordas_db,'font':("",14)}
+config_btn = {'highlightbackground':'blue','border':0,'bg':'blue','relief':SUNKEN,'activebackground':'blue','highlightthickness':0}
+config_entry = {'fg':'white','bg':'blue','highlightbackground':'white','highlightcolor':'white','font':("",14)}
 
 # CARREGAMENTO DE IMAGENS
-inte_icon_mic    = PhotoImage(file="Imagens/reconhece_escreve/icon_mic.png")
-inte_icon_voltar = PhotoImage(file="Imagens/reconhece_escreve/icon_speak.png")
-inte_icon_return = PhotoImage(file="Imagens/reconhece_escreve/icon_return.png")
-inte_icon_config = PhotoImage(file="Imagens/reconhece_escreve/icon_config.png")
-inte_icon_mic    = inte_icon_mic.subsample(16,16)
-inte_icon_voltar = inte_icon_voltar.subsample(16,16)
-inte_icon_return = inte_icon_return.subsample(16,16)
-inte_icon_config = inte_icon_config.subsample(16,16)
+icon_mic    = PhotoImage(file="Imagens/reconhece_escreve/icon_mic.png")    
+icon_speak  = PhotoImage(file="Imagens/reconhece_escreve/icon_speak.png")
+icon_git    = PhotoImage(file="Imagens/reconhece_escreve/icon_return_b.png")
+icon_config = PhotoImage(file="Imagens/reconhece_escreve/icon_config.png")
+icon_mic    = icon_mic.subsample(16,16)
+icon_speak  = icon_speak.subsample(16,16)
+icon_git    = icon_git.subsample(16,16)
+icon_config = icon_config.subsample(16,16)
 
 # VOLTAR
-config_btn['image'] = inte_icon_return
-btn_voltar_rec = Button(interacao,config_btn)
-btn_voltar_rec['command'] = lambda btn_voltar_rec=btn_voltar_rec: messagebox.showinfo('Então','Esse botão não serve para nada!')
-btn_voltar_rec.grid(row=1,column=1)
+btn_git = Button(interacao,config_btn,image = icon_git)
+btn_git['command'] = lambda: abrir_site('https://github.com/Combratec/Diana')
+btn_git.grid(row=1,column=1,sticky=NSEW)
 
 # TITULO
-lbl_titulo = Label(interacao,text="DIANA 8",background=fundo__titulo_geral,foreground=cor_titulo_geral,font=("",17))
+lbl_titulo = Label(interacao,text="DIANA 8",bg='blue',fg='white',font=("Arial",20,'bold'))
 lbl_titulo.grid(row=1,column=2,sticky=NSEW)
 
 # CONFIG
-config_btn['image'] = inte_icon_config
-btn_config_rec = Button(interacao,config_btn)
-btn_config_rec['command'] = lambda btn_config_rec=btn_config_rec: troca_tela('inte_conf')
-btn_config_rec.grid(row=1,column=3)
+btn_config = Button(interacao , config_btn , image = icon_config)
+btn_config['command'] = lambda: troca_tela('inte_conf')
+btn_config.grid(row=1,column=3,sticky=NSEW)
 
 # INTERACOES
-text_interacao = Text(interacao,background=fundo_f3,foreground=cor_text_preto,highlightthickness=0,border=0,font=("consolas", 12), undo=True, wrap='word')
+text_interacao = Text(interacao,bg='white',fg='black',highlightthickness=0,border=0,font=("consolas", 12), undo=True, wrap='word')
 text_interacao.grid(row=2,column=1,columnspan=3,sticky=NSEW)
 
 # AUDIO
-config_btn['image'] = inte_icon_voltar
-config_btn['command'] = def_tenho_que_falar
-som_interacao = Button(interacao,config_btn)
-som_interacao.grid(row=3,column=1)
+status_audio = Button(interacao , config_btn , image = icon_speak , command = def_tenho_que_falar)
+status_audio.grid(row=3,column=1)
 
 # ENTRADA
 entry_interacao = Entry(interacao,config_entry) 
@@ -354,9 +362,8 @@ entry_interacao.bind("<Return>", (lambda event: controlador_de_partes(entry_inte
 entry_interacao.grid(row=3,column=2,sticky=NSEW)
 
 # RECONHECIMENTO
-config_btn['image'] = inte_icon_mic,
-btn_rec = Button(interacao,config_btn)
-btn_rec['command'] = lambda btn_rec=btn_rec: controlador_de_partes(ouvir())
+btn_rec = Button(interacao,config_btn,image = icon_mic)
+btn_rec['command'] = lambda: controlador_de_partes(ouvir())
 btn_rec.grid(row=3,column=3)
 interacao.grid(row=1,column=1,sticky=NSEW)
 
@@ -407,13 +414,13 @@ configuracoes_frame = Frame(tela_frame_configuracoes)
 configuracoes_frame.configure(background=fundo_azul_titulo)
 
 # Meteoro para voltar
-configuracoes_voltar_texto = Button(configuracoes_frame,image=configuracoes_voltar_imagem,font=("",17),background=fundo_azul_titulo,foreground="white",highlightbackground=fundo_azul_titulo,activeforeground=fundo_azul_titulo,activebackground=fundo_azul_titulo,relief=FLAT)
+configuracoes_voltar_texto = Button(configuracoes_frame,image=configuracoes_voltar_imagem,font=("",17),background=fundo_azul_titulo,foreground="white",highlightbackground=fundo_azul_titulo,activeforeground=fundo_azul_titulo,activebackground=fundo_azul_titulo,relief=SUNKEN,border=0)
 configuracoes_voltar_texto['command'] = lambda configuracoes_voltar_texto=configuracoes_voltar_texto: troca_tela('conf_inte')
-configuracoes_voltar_texto.grid(row=1,column=1,sticky=EW,pady=10)
+configuracoes_voltar_texto.grid(row=1,column=1,sticky=EW)
 
 # Texto configurações gerais
 configuracoes_logo_texto = Label(configuracoes_frame,text="Configurações gerais   ",font=("",20),background=fundo_azul_titulo,foreground=letra_titulos)
-configuracoes_logo_texto.grid(row=1,column=2,sticky=EW,pady=10)
+configuracoes_logo_texto.grid(row=1,column=2,sticky=EW)
 configuracoes_frame.grid(row=0,column=1,sticky=EW)
 configuracoes_frame.grid_columnconfigure(1,weight=1)
 
