@@ -1,7 +1,7 @@
 # Diana Tecnologia
 Chatbot com um método de aprendizado
 
-# Versão 8.0 
+# Versão 8.0  - Atualizações 
 Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade
 
 - [X] Refazer a lógica da Diana por completo - Lógica novinha em folha
