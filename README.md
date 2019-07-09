@@ -1,4 +1,4 @@
-# Diana
+# Diana Tecnologia
 Chatbot com um método de aprendizado
 
 # Versão 8.0 
