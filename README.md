@@ -21,10 +21,12 @@ Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade
 - [X] Remoção das telas de esc_rec e seus respectivos lixos
 - [X] Remoção das telas de fala_rec e seus respectivos lixos
 - [X] Criar tela unica completa
-- [ ] Criar o design das novas telas
+- [X] Criar o design das novas telas
 - [X] Integrar reconhecimento de voz
 - [X] Integrar fala
-- [ ] Criar nova tela de splash ou não. Os testes são feitos em segundos.
+- [ ] Adicionar possibilidade de tocar música
+- [ ] Adicionar possibilidade se conectar com o arduino
+- [X] Criar novo menu
 - [ ] Salvar áudio de questões já respondidas
 - [X] Remoção da tela de Menu - Vamos direto ao ponto, telas são legais, mas o foco sempre foi conversar com a voz!
 - [X] Remoção da tela de histórico - Eu gosto, mas não vejo muita utilidade agora
