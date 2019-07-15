@@ -25,7 +25,7 @@ Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade
 - [X] Integrar reconhecimento de voz
 - [X] Integrar fala
 - [ ] Adicionar possibilidade de tocar música
-- [ ] Adicionar possibilidade se conectar com o arduino
+- [X] Adicionar possibilidade se conectar com o arduino
 - [X] Criar novo menu
 - [ ] Salvar áudio de questões já respondidas
 - [X] Remoção da tela de Menu - Vamos direto ao ponto, telas são legais, mas o foco sempre foi conversar com a voz!
