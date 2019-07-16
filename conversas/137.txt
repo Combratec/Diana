@@ -1,1 +1,0 @@
-Qual é sua comida favorita?;> BOT: Minha COMIDA favorita é LASANHA!
