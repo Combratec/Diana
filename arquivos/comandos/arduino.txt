@@ -1,0 +1,3 @@
+desligar luz;ok
+ligar luz;ligando
+voar;voando!

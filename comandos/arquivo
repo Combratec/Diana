@@ -1,4 +1,3 @@
-enviar:a:comando:nossa;bosta
-enviar:f:comando:sd;sd
-enviar:g:comando:Ligar luz;ligando!
-enviar:f:comando:df;df
+enviar:desligar:comando:desligar luz;ok
+enviar:ligar:comando:ligar luz;ligando
+enviar:nada:comando:voar;voando!

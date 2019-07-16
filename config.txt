@@ -1,8 +1,3 @@
-﻿reconhecimento=0
-fala=1
-mipand=0
-playsound=0
-gtts=0
-pyaudio=0
-speechRecognition=0
-variação=083
+pyanalise=68
+audio=nao
+link=com5

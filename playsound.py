@@ -2,17 +2,6 @@ class PlaysoundException(Exception):
     pass
 
 def _playsoundWin(sound, block = True):
-    '''
-    Utilizes windll.winmm. Tested and known to work with MP3 and WAVE on
-    Windows 7 with Python 2.7. Probably works with more file formats.
-    Probably works on Windows XP thru Windows 10. Probably works with all
-    versions of Python.
-
-    Inspired by (but not copied from) Michael Gundlach <gundlach@gmail.com>'s mp3play:
-    https://github.com/michaelgundlach/mp3play
-
-    I never would have tried using windll.winmm without seeing his code.
-    '''
     from ctypes import c_buffer, windll
     from random import random
     from time   import sleep
@@ -41,17 +30,6 @@ def _playsoundWin(sound, block = True):
         sleep(float(durationInMS) / 1000.0)
 
 def _playsoundOSX(sound, block = True):
-    '''
-    Utilizes AppKit.NSSound. Tested and known to work with MP3 and WAVE on
-    OS X 10.11 with Python 2.7. Probably works with anything QuickTime supports.
-    Probably works on OS X 10.5 and newer. Probably works with all versions of
-    Python.
-
-    Inspired by (but not copied from) Aaron's Stack Overflow answer here:
-    http://stackoverflow.com/a/34568298/901641
-
-    I never would have tried using AppKit.NSSound without seeing his code.
-    '''
     from AppKit     import NSSound
     from Foundation import NSURL
     from time       import sleep
@@ -71,27 +49,16 @@ def _playsoundOSX(sound, block = True):
         sleep(nssound.duration())
 
 def _playsoundNix(sound, block=True):
-    """Play a sound using GStreamer.
-
-    Inspired by this:
-    https://gstreamer.freedesktop.org/documentation/tutorials/playback/playbin-usage.html
-    """
     if not block:
         raise NotImplementedError(
             "block=False cannot be used on this platform yet")
 
-    # pathname2url escapes non-URL-safe characters
     import os
-    try:
-        from urllib.request import pathname2url
-    except ImportError:
-        # python 2
-        from urllib import pathname2url
-
+    from urllib.request import pathname2url
     import gi
-    gi.require_version('Gst', '1.0')
     from gi.repository import Gst
 
+    gi.require_version('Gst', '1.0')
     Gst.init(None)
 
     playbin = Gst.ElementFactory.make('playbin', 'playbin')
@@ -105,12 +72,9 @@ def _playsoundNix(sound, block=True):
         raise PlaysoundException(
             "playbin.set_state returned " + repr(set_result))
 
-    # FIXME: use some other bus method than poll() with block=False
-    # https://lazka.github.io/pgi-docs/#Gst-1.0/classes/Bus.html
     bus = playbin.get_bus()
     bus.poll(Gst.MessageType.EOS, Gst.CLOCK_TIME_NONE)
     playbin.set_state(Gst.State.NULL)
-
 
 from platform import system
 system = system()

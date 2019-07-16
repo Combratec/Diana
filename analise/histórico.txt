@@ -1,0 +1,26 @@
+VOCÊ: você gosta de queijo?
+diana: Só se for bem quentinho
+VOCÊ: Olá
+diana: Olá mundo!
+VOCÊ: iai
+diana: isso ai
+VOCÊ: ola
+diana: O que eu poderia responder?
+VOCÊ: isso
+diana: O que eu poderia responder?
+VOCÊ: desligar luz
+VOCÊ: ligar luz
+VOCÊ: ligar luz
+diana: ligandoVOCÊ: desligar luz
+diana: okVOCÊ: ligar luz
+diana: ligando
+VOCÊ: ligar
+diana: O que eu poderia responder?
+VOCÊ: ligar luz
+diana: ligando
+VOCÊ: desligar luz
+diana: ok
+VOCÊ: voar
+diana: voando!
+VOCÊ: voando
+diana: O que eu poderia responder?
