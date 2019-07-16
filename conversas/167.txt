@@ -1,1 +1,0 @@
-Qual é a linguagem de programação mais difícil?;Dizem que é a Malbolge, escrito em LISP
