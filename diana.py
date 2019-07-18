@@ -2,17 +2,17 @@
 # -*- coding: utf-8 -*-
 from arduino_code import comand_arduino
 from processamento import analise
-from processamento import analise_comande
+from processamento import analise_comandos
 from definicoes import comandar
-import speech_recognition as sr
 from tkinter import messagebox
 from definicoes import musica
 from pyanalise import compare
 from definicoes import basic
-from tkinter import * 
+from tkinter import *
 import alternativa
 import time
 import os
+
 
 global save_comand_object_position
 global save_music_object_position
@@ -24,10 +24,12 @@ global precisao_minima
 global nome_usuario
 global link_serial
 global nome_bot
+global tocando
 global fazer
 global placa
 global lista
 global texto
+global mixer
 
 save_comand_object_position = []
 save_music_object_position = []
@@ -39,7 +41,9 @@ precisao_minima = basic.ler_pyanalise()
 nome_usuario = 'você_: '
 link_serial =  basic.ler_link_serial()
 nome_bot = 'diana: '
+tocando = False
 fazer = 'nada'
+placa = None
 lista = []
 texto = '__'
 
@@ -58,10 +62,16 @@ def processamento(pergunta):
     global fazer
 
     if fazer == 'nada':
-        lista = analise_comande(pergunta)
+        lista = analise_comandos(pergunta,'arquivos/comandos/arduino.txt')
         if precisao_minima < lista[0]:
+            lista.append('é_comando')
             return '__comando_responder__'
 
+    if fazer == 'nada':
+        lista = analise_comandos(pergunta,'arquivos/comandos/musica.txt')
+        if precisao_minima < lista[0]:
+            lista.append('é_musica')
+            return '__comando_responder__'
 
     lista = analise(pergunta)
     if precisao_minima > lista[0]:
@@ -169,6 +179,28 @@ def controlador_de_partes(digitado):
                 add_item_historic(texto_add)
                 txt_intera.insert(END, texto_add)
                 fazer = 'nada'
+
+                o_que_responder = lista[1]
+                o_que_era = lista[2]
+
+                if lista[3] == 'é_musica':
+                    file = basic.abrir_arquivo('musica/arquivo')
+                    file = file.split('\n')
+                    for x in file:
+                        x = x.split(':')
+                        if x[3] == o_que_era+';'+o_que_responder:
+                            play_music(x[1])
+                            break
+
+
+                elif lista[3] == 'é_comando':
+                    file = basic.abrir_arquivo('comandos/arquivo')
+                    file = file.split('\n')
+                    for x in file:
+                        x = x.split(':')
+                        if x[3] == o_que_era+';'+o_que_responder:
+                            use_serial(x[1])
+                            break
             else:
                 alternativa_resposta = alternativa.pergunta(digitado)
                 if tenho_que_falar == 'sim':
@@ -176,14 +208,16 @@ def controlador_de_partes(digitado):
                 texto_add = str((nome_bot + alternativa_resposta + '\n'))
                 add_item_historic(texto_add)
                 txt_intera.insert(END, texto_add)
+
         elif fazer == '__continuar_assunto__':
             continuar_assunto(digitado)
+
         elif fazer == '__criar_assunto__':
             criar_assunto(perguntado_antes,digitado)
         perguntado_antes = digitado
     txt_intera.see("end")
 
-# INTERFACE DA FALA
+# INTERFACE PRINCIPAL
 def status_falar_ou_nao(parametro):
     global tenho_que_falar
     if parametro == 'ler':
@@ -208,6 +242,7 @@ def status_falar_ou_nao(parametro):
 class falar ():
     def rec_thread(texto_fala):
         global control_thread_espeak
+        import speech_recognition as sr
 
         if control_thread_espeak == True:
             basic.log('já existe um thread sendo usado para processar a fala')
@@ -226,17 +261,20 @@ class falar ():
 
         try:
             from gtts import gTTS
-            from playsound import playsound
+            from pygame import mixer
         except Exception as e:
-            messagebox.showinfo('ERRO',e)
+            messagebox.showinfo('ERRO_1',e)
         else:
             try:
                 tts = gTTS(text=texto_fala, lang='pt-br')
                 tts.save('audio.mp3')
-                playsound('audio.mp3')
+                mixer.init() 
+                mixer.music.load('audio.mp3')
+                mixer.music.play()
+
             except Exception as er:
                 basic.log('erro ao carregar e reproduzir audio. \n'+str(er))
-                messagebox.showinfo('ERRO',er)
+                messagebox.showinfo('ERRO_2',er)
             else:
                 basic.log('fala finalizada')
         finally:
@@ -293,9 +331,9 @@ class ouvir():
             rec =  recognizer.recognize_google(audio,language='pt-BR')
             texto = str(rec)
         except sr.UnknownValueError as e1:
-            texto = "[ERRO] O Reconhecimento de fala não conseguiu entender o áudio"+str(e1)
+            texto = "[ERRO] Eu não consegui entender nada!"+str(e1)
         except sr.RequestError as e2:
-            texto = "[ERRO] Não foi possível solicitar os resultados: {}"+str(e2)
+            texto = "[ERRO] parece que você tem um Problema com a internet! {}"+str(e2)
         except Exception as e3:
             texto = '[ERRO] ERRO DESCONHECIDO: '+str(e3)
         else:
@@ -304,7 +342,7 @@ class ouvir():
             control_thread_listen = True
             basic.log(texto)
 
-# HISTÓRICO
+# INTERFACE HISTÓRICO
 def limpar_historico():
     basic.clear_historic()
     atualizar_historico()
@@ -317,7 +355,7 @@ def atualizar_historico():
 def add_item_historic(interacao):
     basic.add_historic(interacao)
 
-# PYANALISE
+# INTERFACE PYANALISE
 def resize(event=None):
     global precisao_minima
     basic.atualizar_pyanalise(scale_pyanalise.get())
@@ -335,7 +373,7 @@ def testar_pyanalise(event):
     else:
         result_py_test['fg'] = 'blue'
 
-# TELA MUSICA
+# INTEFACE MUSICA
 def load_itens_musics():
     global save_music_object_position
     global music_itens
@@ -348,6 +386,7 @@ def load_itens_musics():
     music_itens = musica.read_musics_in_file()
     dic_load_entry = {'relief':GROOVE,'border':2}
 
+    basic.make_file_responses_music()
     for x in range(len(music_itens)):
         ent_load_file_music = Entry(fr_music_3 , dic_load_entry)
         ent_load_comm_music = Entry(fr_music_3 , dic_load_entry)
@@ -355,6 +394,7 @@ def load_itens_musics():
         btn_load_test_music = Button(fr_music_3,config_btns_itens,text='TESTAR',relief=RAISED,border=1)
 
         btn_remove_music_it['command'] = lambda btn_remove_music_it=btn_remove_music_it: remove_item_music(btn_remove_music_it)
+        btn_load_test_music['command'] = lambda btn_load_test_music=btn_load_test_music: set_music_play(btn_load_test_music)
 
         delete_insert_entry(ent_load_file_music,music_itens[x]['musica'])
         delete_insert_entry(ent_load_comm_music,music_itens[x]['comando'])
@@ -388,7 +428,37 @@ def add_item_music():
         ent_new_file_music.delete(0,END)
         ent_new_comand_music.delete(0,END)
 
-# TELA COMANDOS
+def set_music_play(btn):
+    global save_music_object_position
+    for y in save_music_object_position:
+        if y[3] == btn:
+            play_music(y[0].get())
+
+def play_music(link):
+    global tocando
+    global mixer
+    if tocando == False:
+        try:
+            from pygame import mixer
+        except Exception as e:
+            messagebox.showinfo('ERRO','Por favor, instale a biblioteca pygame com o comando: \npip install pygame\nerro: '+str(e))
+        else:
+            try:
+                mixer.init() 
+                mixer.music.load('musica/'+link)
+                mixer.music.play()
+            except Exception as er:
+                messagebox.showinfo('ERRO',er)
+            else:
+                tocando = True
+    else:
+        try:
+            mixer.music.pause()
+            tocando = False
+        except Exception as e:
+            messagebox.showinfo('ERRP',e)
+
+# INTERFACE COMANDO com arduino
 def load_itens_comand():
     global save_comand_object_position
     global itens
@@ -451,6 +521,19 @@ def acess_serial(btn_test_serial):
         if y[3] == btn_test_serial:
             test_use_serial(y[0].get(),btn_test_serial)
 
+def use_serial(send_message_for_serial):
+    global placa
+    if placa == None:
+        try:
+            placa = comand_arduino.start_connection(link_serial)
+        except:
+            messagebox.showinfo('ERRO','Por favor, defina uma serial válida!')
+            return 0
+    try:
+        comand_arduino.message(placa,None,send_message_for_serial,'nao')
+    except Exception as e:
+        messagebox.showinfo('ERRO!','Problema com esta serial. \n[ERRO] {}'.format(e))
+
 def test_use_serial(send_message_for_serial,btn_test_serial):
     global placa
 
@@ -478,12 +561,12 @@ def test_use_serial(send_message_for_serial,btn_test_serial):
             btn_test_serial.configure(bg='green',fg='white') 
             ent_serial_for_test['fg'] = 'green'
 
-# GERAL
+# GERAIS
 def delete_insert_entry(entry_name,insert_entry_name):
     entry_name.delete(0,END)
     entry_name.insert(0,insert_entry_name)
 
-# INTERFACES
+# TROCA DE INTERFACES
 def troca_tela(carregar):
     if carregar == 'conf_inte':
         tela_frame_configuracoes.grid_forget()
@@ -842,7 +925,7 @@ btn_add_music = Button(fr_music_4,config_btns_itens,image=img_add,command=add_it
 btn_new_test_music = Button(fr_music_4,config_btns_itens,text='TESTAR',relief=RAISED,border=1)
 
 btn_return_screem['command'] = lambda: troca_tela('musi_opca')
-
+btn_new_test_music['command'] = lambda: play_music(ent_new_file_music.get())
 load_itens_musics()
 
 fr_music_1.grid(row=0,column=1,sticky=NSEW)

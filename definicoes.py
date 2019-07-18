@@ -191,12 +191,22 @@ class basic():
     def abrir_site(link):
         import webbrowser
         webbrowser.open(link)
+
     def make_file_responses_comands():
         dic = comandar.read_comands_in_file()
         string = ''
         for x in dic:
             string = string + x['comando'] + '\n'
         a = open('arquivos/comandos/arduino.txt','w',encoding='utf8')
+        a.write(string)
+        a.close()
+
+    def make_file_responses_music():
+        dic = musica.read_musics_in_file()
+        string = ''
+        for x in dic:
+            string = string + x['comando'] + '\n'
+        a = open('arquivos/comandos/musica.txt','w',encoding='utf8')
         a.write(string)
         a.close()
 

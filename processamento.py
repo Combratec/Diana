@@ -51,9 +51,9 @@ def analise(resposta):
     # precisão | pos_file | pos_fras | p_frase+1 existe?
     return maior
 
-def analise_comande(resposta):
+def analise_comandos(resposta,link):
     maior = [0,0]
-    arquivo = open ('arquivos/comandos/arduino.txt','r',encoding='utf8')
+    arquivo = open (link,'r',encoding='utf8')
     string = str(arquivo.read())
     arquivo.close()
 
@@ -65,6 +65,7 @@ def analise_comande(resposta):
             analise = compare.frase(resposta,y[0])
             if analise > float(maior[0]):
                 o_que_responder = y[1]
-                maior = [analise,o_que_responder] 
+                o_que_era = y[0]
+                maior = [analise,o_que_responder,o_que_era] 
 
     return maior

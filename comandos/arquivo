@@ -1,3 +1,3 @@
-enviar:desligar:comando:desligar luz;ok
 enviar:ligar:comando:ligar luz;ligando
-enviar:nada:comando:voar;voando!
+enviar:desligar:comando:desligar luz;desligando
+enviar:nada:comando:fazer nada;fazendo
