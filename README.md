@@ -1,7 +1,3 @@
-[![Unix Build Status][travis-image]][travis-link]
-[![Package Control Downloads][pc-image]][pc-link]
-![License][license-image]
-
 # Diana Tecnologia
 Chatbot com um método de aprendizado.
 
