@@ -6,7 +6,7 @@ A Diana 8.0 é um chatbot que aprende, escuta, fala, toca música e pode control
 - [Como a Diana Aprende](#Como-a-Diana-Aprende)
 - [Instalação de bibliotecas](#Instalação-de-bibliotecas)
 - [Como ativar o reconhecimento de voz](#Como-ativar-o-reconhecimento-de-voz)
-    - [1° instale a biblioteca PyAudio](*1°-instale-a-biblioteca-PyAudio)
+    - [1° instale a biblioteca PyAudio](#1°-instale-a-biblioteca-PyAudio)
 
 **2° instale a biblioteca SpeechRecognition**
 **3° pratique**
@@ -61,7 +61,7 @@ Portanto, torna necessário a instalação manual das mesmas. Caso você esteja 
 
 ----------
 ### Como ativar o reconhecimento de voz
-**1° instale a biblioteca PyAudio**
+####1° instale a biblioteca PyAudio
 É altamente recomendádo o uso do Python3.6. Outras versões, podem ainda não terem o PyAudio compartível.  
 No Ubuntu  
 ```
