@@ -1,6 +1,7 @@
 # Diana 8.0
-A Diana 8.0 é um chatbot que aprende, escuta, fala, toca música e pode controlar um Arduíno. Ela é feita em Python, e foi bem testada no Python3.6. Está é a versão mais recente!
+A Diana 8.0 é um chatbot que aprende, escuta, fala, toca música e pode controlar um Arduíno. Ela é feita em Python, e foi bem testada no Python3.6. Está é a versão mais recente!  
 
+----------
 ## Tópicos
 - [Interagindo com a Diana](#Interagindo-com-a-Diana)
 - [Como a Diana Aprende](#Como-a-Diana-Aprende)
@@ -10,7 +11,7 @@ A Diana 8.0 é um chatbot que aprende, escuta, fala, toca música e pode control
 - [ Como controlar um Arduíno?](#Como-controlar-um-Arduíno)
 - [Como tocar uma música?](#Como-tocar-uma-música)
 - [Atualizações da versão 8.0](#Atualizações-da-versão-8)
-
+----------
 ### Interagindo com a Diana
 Ao executar a Diana, basta fazer uma pergunta que ela poderá responder.  
 
@@ -19,6 +20,8 @@ Você pode ativar a fala, assim ela irá usar a biblioteca Pygame e a biblioteca
 Você também pode clicar no reconhecimento de fala, assim a Diana irá reconhecer a sua fala, atravéz da biblioteca PyAudio e da biblioteca SpeechRecognition.  
 
 É necessário que você instale as bibliotecas manualmente.
+
+----------
 
 ### Como a Diana Aprende
 A biblioteca pyanalise acessa um conjunto de arquivos de conversação, em cada arquivos, existe uma conversa especifica, onde cada frase está separada por ponto e virgula. Cada posição é considerada uma lista.
@@ -39,65 +42,48 @@ Portanto, torna necessário a instalação manual das mesmas. Caso você esteja 
 É super recomendado o uso do Python3.6 para a execução da Diana, algumas bibliotecas podem estar indisponíveis em versões posteriores e inferiores.  
 
 ----------
+
 ### Como ativar o reconhecimento de voz
 **1° instale a biblioteca PyAudio**
 É altamente recomendádo o uso do Python3.6. Outras versões, podem ainda não terem o PyAudio compartível.  
 No Ubuntu  
-```
-sudo pip3.6 install pyaudio --no-cache  
-``` 
+``` sudo pip3.6 install pyaudio --no-cache  ``` 
 
 No Windows  
-```
-pip3.6 install pyaudio --no-cache  
-```
+``` pip3.6 install pyaudio --no-cache ```
 **2° instale a biblioteca SpeechRecognition**
 No Ubuntu  
-```
-sudo pip3.6 install speechrecognition --no-cache  
-``` 
+```sudo pip3.6 install speechrecognition --no-cache  ``` 
 
 No Windows  
-```
-pip3.6 install speechrecognition --no-cache  
-```
+``` pip3.6 install speechrecognition --no-cache ```
 **3° pratique**
 O reconhecimento de voz na tela de interação, é uma funcionalidade beta, e problemas com o seu microfone, podem acontecer. Use-a sabendo que ela pode ser bem limitada!
 
 ----------
+
 ### Como ativar a fala
 **1° Instale o PyGame**
 No Ubuntu  
-```
-sudo pip3.6 install pygame --no-cache  
-``` 
+``` sudo pip3.6 install pygame --no-cache ``` 
 
 No Windows  
-```
-pip3.6 install pygame --no-cache  
-```
+```pip3.6 install pygame --no-cache```
 **2° Instale o GTTS**
 No Ubuntu  
-```
-sudo pip3.6 install gtts --no-cache  
-``` 
+``` sudo pip3.6 install gtts --no-cache  ``` 
 
 No Windows  
-```
-pip3.6 install gtts --no-cache  
-```
+``` pip3.6 install gtts --no-cache  ```
+
 ----------
 ### Como controlar um Arduíno
 **1° Instale a biblioteca pyfirmata**
 No Ubuntu  
-```
-sudo pip3.6 install pyfirmata --no-cache  
-``` 
+``` sudo pip3.6 install pyfirmata --no-cache  ``` 
 
 No Windows  
-```
-pip3.6 install pyfirmata --no-cache  
-```
+``` pip3.6 install pyfirmata --no-cache  ```
 
 **2° carregue a biblioteca StandartFirmata**
 Carregue a biblioteca **StandartFirmata** na IDE do Arduíno. Caso você esteja no Linux, use o sudo para executar a IDE. 
@@ -128,18 +114,16 @@ Aproveite também, e faça os testes, para verificar se o comando funciona ou n�
 Digite a palavra-chave na tela de interação, e veja seu Arduíno reagindo!  
 ![musicas][image-diana-ativar]  
 
-----------
-### Como tocar uma música
+----------  
+
+### Como tocar uma música  
 **1° instale a biblioteca do Pygame**
 No Ubuntu   
-```
-sudo pip3.6 install pygame --no-cache  
-```  
+``` sudo pip3.6 install pygame --no-cache ```  
 
 No Windows  
-```
-python -m pip install pygame --no-cache  
-```  
+``` python -m pip install pygame --no-cache  ```  
+
 **2° Mova os arquivos**
 Mova os arquivos .mp3 para a pasta música, dentro da Diana. Alguns arquivos .mp3 podem não funcionar. Usamos músicas do Youtube Library e tudo funcionou:  
 ![musicas][image-music]  
@@ -148,11 +132,12 @@ Mova os arquivos .mp3 para a pasta música, dentro da Diana. Alguns arquivos .mp
 Com a Diana em execução, acesse **config > Tocar música** e adicione as informações pedidas  
 ![configurando a diana][image-music-load]  
 
-**4° Pratique**
-No modo de interação, digite o comando escolhido, de acordo com música.  
-![tocando uma música][image-music-play]   
+**4° Pratique**  
+No modo de interação, digite o comando escolhido, de acordo com música.   
+
 ----------
-### Atualizações da versão 8
+
+### Atualizações da versão 8  
 Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade	 
 
 - [X] Refazer a lógica da Diana por completo
@@ -194,4 +179,3 @@ Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade
 [image-diana-ativar]: https://1.bp.blogspot.com/-I9ZFSD79nYM/XTdPqAwyymI/AAAAAAAAA4M/8zsrm7PXGL0yHiOkjoIr7BUG6WhQUQ4qACLcBGAs/s320/ligar.png  
 [image-music]: https://1.bp.blogspot.com/-KPCOK6yLPmE/XTdCGiLk92I/AAAAAAAAA28/yMGBOCieQ5s5YVU2zaf9uPl76SqDNANwwCLcBGAs/s1600/musica%2Bdentro.png  
 [image-music-load]: https://1.bp.blogspot.com/-zUWMDP_ZCBk/XTdCGnWAjhI/AAAAAAAAA3E/sYqPiT7wrXcrU3e18AQ8Ct6WS33bRRDrgCLcBGAs/s1600/tocar%2Bmusicas.png  
-[image-music-play]: https://1.bp.blogspot.com/-MPvDSp0zVXc/XTdCGop63qI/AAAAAAAAA3A/Huu4-gBdruI3MPnxOBHnL6eqI2VRV4USQCLcBGAs/s1600/tocando%2Bm%25C3%25BAsica%2Bem%2Bpython.png  
