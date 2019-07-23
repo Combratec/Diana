@@ -1,7 +1,7 @@
 # Diana Tecnologia
 Chatbot com um método de aprendizado.
 
-[![Build Status][image-arduino-configurar]][#]
+[![Build Status][image-arduino-configurar]][]  
 # Bibliotecas
 
 ## Como controlar um Arduino?
@@ -108,12 +108,12 @@ Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade
 - [X] Refatoração completa do código	
 - [ ] Fazer documentação	
 - [ ] Atualizar por completo o respositório da Diana. Versões offline por enquanto!
-[image-arduino-configurar]: https://1.bp.blogspot.com/-E1yNWD-D8To/XTcakPehJDI/AAAAAAAAA14/uuZHfViDvRY2yi8VeYdQN26LdN9A_0eNwCLcBGAs/s1600/porta%2Barduino.png
-[image-arduino-compilar]: https://1.bp.blogspot.com/-qSF25ZLyGTQ/XTcahSoQY3I/AAAAAAAAA1U/Fl9_irvvzckHvKGf4EYr6f-te57uf92bgCLcBGAs/s1600/compilar.png
-[image-def-programar]: https://1.bp.blogspot.com/-4F3n1GwPcO0/XTdNymQqlTI/AAAAAAAAA30/r5j161uXZH0h6ALGdY6vrRgT2nGE1UB2QCLcBGAs/s1600/arduino_code.png
-[image-diana-porta]: https://1.bp.blogspot.com/-Jm5m9ORKsek/XTdMbjgX-4I/AAAAAAAAA3g/ibZTB2zY0jAf_n3ntDI8-b5jujIIO6s5QCLcBGAs/s1600/conectado.png
-[image-diana-chaves]: https://1.bp.blogspot.com/-ts3tQtde1f8/XTdMbtNYxoI/AAAAAAAAA3k/K5lunyjBiMYW41XR1igqvdYa2W4h3eh2ACLcBGAs/s1600/adicionando%2Bcomandos.png
-[image-diana-ativar]: https://1.bp.blogspot.com/-I9ZFSD79nYM/XTdPqAwyymI/AAAAAAAAA4M/8zsrm7PXGL0yHiOkjoIr7BUG6WhQUQ4qACLcBGAs/s320/ligar.png
-[image-music]: https://1.bp.blogspot.com/-KPCOK6yLPmE/XTdCGiLk92I/AAAAAAAAA28/yMGBOCieQ5s5YVU2zaf9uPl76SqDNANwwCLcBGAs/s1600/musica%2Bdentro.png
-[image-music-load]: https://1.bp.blogspot.com/-zUWMDP_ZCBk/XTdCGnWAjhI/AAAAAAAAA3E/sYqPiT7wrXcrU3e18AQ8Ct6WS33bRRDrgCLcBGAs/s1600/tocar%2Bmusicas.png
-[image-music-play]: https://1.bp.blogspot.com/-MPvDSp0zVXc/XTdCGop63qI/AAAAAAAAA3A/Huu4-gBdruI3MPnxOBHnL6eqI2VRV4USQCLcBGAs/s1600/tocando%2Bm%25C3%25BAsica%2Bem%2Bpython.png
+[image-arduino-configurar]: https://1.bp.blogspot.com/-E1yNWD-D8To/XTcakPehJDI/AAAAAAAAA14/uuZHfViDvRY2yi8VeYdQN26LdN9A_0eNwCLcBGAs/s1600/porta%2Barduino.png  
+[image-arduino-compilar]: https://1.bp.blogspot.com/-qSF25ZLyGTQ/XTcahSoQY3I/AAAAAAAAA1U/Fl9_irvvzckHvKGf4EYr6f-te57uf92bgCLcBGAs/s1600/compilar.png  
+[image-def-programar]: https://1.bp.blogspot.com/-4F3n1GwPcO0/XTdNymQqlTI/AAAAAAAAA30/r5j161uXZH0h6ALGdY6vrRgT2nGE1UB2QCLcBGAs/s1600/arduino_code.png  
+[image-diana-porta]: https://1.bp.blogspot.com/-Jm5m9ORKsek/XTdMbjgX-4I/AAAAAAAAA3g/ibZTB2zY0jAf_n3ntDI8-b5jujIIO6s5QCLcBGAs/s1600/conectado.png  
+[image-diana-chaves]: https://1.bp.blogspot.com/-ts3tQtde1f8/XTdMbtNYxoI/AAAAAAAAA3k/K5lunyjBiMYW41XR1igqvdYa2W4h3eh2ACLcBGAs/s1600/adicionando%2Bcomandos.png  
+[image-diana-ativar]: https://1.bp.blogspot.com/-I9ZFSD79nYM/XTdPqAwyymI/AAAAAAAAA4M/8zsrm7PXGL0yHiOkjoIr7BUG6WhQUQ4qACLcBGAs/s320/ligar.png  
+[image-music]: https://1.bp.blogspot.com/-KPCOK6yLPmE/XTdCGiLk92I/AAAAAAAAA28/yMGBOCieQ5s5YVU2zaf9uPl76SqDNANwwCLcBGAs/s1600/musica%2Bdentro.png  
+[image-music-load]: https://1.bp.blogspot.com/-zUWMDP_ZCBk/XTdCGnWAjhI/AAAAAAAAA3E/sYqPiT7wrXcrU3e18AQ8Ct6WS33bRRDrgCLcBGAs/s1600/tocar%2Bmusicas.png  
+[image-music-play]: https://1.bp.blogspot.com/-MPvDSp0zVXc/XTdCGop63qI/AAAAAAAAA3A/Huu4-gBdruI3MPnxOBHnL6eqI2VRV4USQCLcBGAs/s1600/tocando%2Bm%25C3%25BAsica%2Bem%2Bpython.png  
