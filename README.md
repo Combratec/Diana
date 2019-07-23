@@ -26,7 +26,7 @@ Selecione a **Placa**, **Processador** e **Porta**, de acordo com o seu arduino.
 
 #### 4° passo
 Agora, compile o programa para o Arduino
-![musicas][image-arduino-compilar]
+[musicas][image-arduino-compilar]
 
 #### 5° passo
 Caso tudo esteja funcionando, acesse o arquivo **arduino_code.py** dentro da Diana. As instruções para o Arduino estão dentro da definição **code_instructions**, a qual ela recebe a conexão, e uma mensagem. Podemos portanto, usar uma lógica bem simples, e escrever um programa que liga ou desliga um LED. A Diana deve estar fechada neste momento.
