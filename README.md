@@ -44,7 +44,7 @@ Portanto, torna necessário a instalação manual das mesmas. Caso você esteja 
 ----------
 
 ### Como ativar o reconhecimento de voz
-**1° instale a biblioteca PyAudio**
+**1° instale a biblioteca PyAudio**  
 É altamente recomendádo o uso do Python3.6. Outras versões, podem ainda não terem o PyAudio compartível.  
 No Ubuntu  
 ``` sudo pip3.6 install pyaudio --no-cache ```  
@@ -52,25 +52,25 @@ No Ubuntu
 No Windows  
 ``` pip3.6 install pyaudio --no-cache ```  
 
-**2° instale a biblioteca SpeechRecognition**
+**2° instale a biblioteca SpeechRecognition**  
 No Ubuntu  
 ```sudo pip3.6 install speechrecognition --no-cache  ```  
 
 No Windows  
 ``` pip3.6 install speechrecognition --no-cache ```  
-**3° pratique**
+**3° pratique**  
 O reconhecimento de voz na tela de interação, é uma funcionalidade beta, e problemas com o seu microfone, podem acontecer. Use-a sabendo que ela pode ser bem limitada!
 
 ----------
 
 ### Como ativar a fala
-**1° Instale o PyGame**
+**1° Instale o PyGame**  
 No Ubuntu  
 ``` sudo pip3.6 install pygame --no-cache ```  
 
 No Windows  
 ```pip3.6 install pygame --no-cache```  
-**2° Instale o GTTS**
+**2° Instale o GTTS**  
 No Ubuntu  
 ``` sudo pip3.6 install gtts --no-cache  ```  
 
@@ -79,61 +79,61 @@ No Windows
 
 ----------
 ### Como controlar um Arduíno
-**1° Instale a biblioteca pyfirmata**
+**1° Instale a biblioteca pyfirmata**  
 No Ubuntu  
 ``` sudo pip3.6 install pyfirmata --no-cache  ```   
 
 No Windows  
 ``` pip3.6 install pyfirmata --no-cache  ```  
 
-**2° carregue a biblioteca StandartFirmata**
-Carregue a biblioteca **StandartFirmata** na IDE do Arduíno. Caso você esteja no Linux, use o sudo para executar a IDE. 
-**Arquivo>Exemplos>Firmata>StandartFirmata**
+**2° carregue a biblioteca StandartFirmata**  
+Carregue a biblioteca **StandartFirmata** na IDE do Arduíno. Caso você esteja no Linux, use o sudo para executar a IDE.  
+**Arquivo>Exemplos>Firmata>StandartFirmata**  
 
-**3° configure a IDE**
+**3° configure a IDE**  
 Selecione a **Placa**, **Processador** e **Porta**, de acordo com o seu Arduíno. Salve a informação em Roxo, precisaremos da porta, em breve. No Windows 10, costuma ser  "COM"+numero, é no Ubuntu costuma ser "/dev/ttyACM"+número. **Fique atento a este detalhe.**  
 ![musicas][image-arduino-configurar]
 
-**4° compile o programa**
+**4° compile o programa**  
 Agora, compile o programa para o Arduino  
 ![musicas][image-arduino-compilar]
 
-**5° Programe**
+**5° Programe**  
 Caso tudo esteja funcionando, acesse o arquivo **arduino_code.py** dentro da Diana. As instruções para o Arduíno estão dentro da definição **code_instructions**, a qual ela recebe a conexão, e uma mensagem. Podemos portanto, usar uma lógica bem simples, e escrever um programa que liga ou desliga um LED. A Diana deve estar fechada neste momento.  
 ![musicas][image-def-programar]
 
-**6° configure a porta**
+**6° configure a porta**  
 Com o seu Arduíno conectado, abra a Diana, use o **sudo** caso você esteja em uma distro Linux, acesse **config > Comandos** e no primeiro campo, digite o endereço da sua porta, obtida no 3° passo.  
 ![musicas][image-diana-porta]
 
-**7° configure os comandos**
+**7° configure os comandos**  
 Com o programa escrito, vamos enviar a mensagem **"ligar"** e **"desligar"**, também vamos programar qual palavra-chave a Diana usará, para enviar cada uma das mensagens. A Diana também usa o **Pyanalise** para tomar as decisões, portanto, qualquer coisa parecida com as palavras chaves, será confundida e poderá enviar a mensagem.  
 ![musicas][image-diana-chaves]  
 Aproveite também, e faça os testes, para verificar se o comando funciona ou não!
 
-**8° pratique**
+**8° pratique**  
 Digite a palavra-chave na tela de interação, e veja seu Arduíno reagindo!  
 ![musicas][image-diana-ativar]  
 
 ----------  
 
 ### Como tocar uma música  
-**1° instale a biblioteca do Pygame**
+**1° instale a biblioteca do Pygame**  
 No Ubuntu   
 ``` sudo pip3.6 install pygame --no-cache ```   
 
 No Windows  
 ``` python -m pip install pygame --no-cache  ```   
 
-**2° Mova os arquivos**
+**2° Mova os arquivos**  
 Mova os arquivos .mp3 para a pasta música, dentro da Diana. Alguns arquivos .mp3 podem não funcionar. Usamos músicas do Youtube Library e tudo funcionou:  
 ![musicas][image-music]  
 
-**3°Configure a Diana**
+**3°Configure a Diana**  
 Com a Diana em execução, acesse **config > Tocar música** e adicione as informações pedidas  
 ![configurando a diana][image-music-load]  
 
-**4° Pratique**  
+**4° Pratique**    
 No modo de interação, digite o comando escolhido, de acordo com música.   
 
 ----------
