@@ -1,9 +1,12 @@
-# Diana Tecnologia
-Chatbot com um método de aprendizado.
+# Diana 8.0
 
-# Bibliotecas
+A Diana 8.0 é um chatbot que aprende, escuta, fala, toca música e pode controlar um Arduíno. Ela é feita em Python, e foi bem testada no Python3.6.
 
-## Como controlar um Arduino?
+# Instalação de bibliotecas
+## Como ativar o reconhecimento de voz
+## Como ativar a fala
+
+## Como controlar um Arduíno?
 #### 1° passo
 Instale a biblioteca pyfirmata  
 No Ubuntu  
@@ -17,11 +20,11 @@ pip3.6 install pyfirmata --no-cache
 ```
 
 #### 2° passo
-Carregue a biblioteca **StandartFirmata** na IDE do Arduino. Caso você esteja no Linux, use o sudo para executar a IDE. 
+Carregue a biblioteca **StandartFirmata** na IDE do Arduíno. Caso você esteja no Linux, use o sudo para executar a IDE. 
 **Arquivo>Exemplos>Firmata>StandartFirmata**
 
 #### 3° passo
-Selecione a **Placa**, **Processador** e **Porta**, de acordo com o seu arduino. Salve a informação em Roxo, precisaremos da porta, em breve. No Windows 10, costuma ser  "COM"+numero, é no Ubuntu costuma ser "/dev/ttyACM"+número. **Fique atento a este detalhe.**  
+Selecione a **Placa**, **Processador** e **Porta**, de acordo com o seu Arduíno. Salve a informação em Roxo, precisaremos da porta, em breve. No Windows 10, costuma ser  "COM"+numero, é no Ubuntu costuma ser "/dev/ttyACM"+número. **Fique atento a este detalhe.**  
 ![musicas][image-arduino-configurar]
 
 #### 4° passo
@@ -29,20 +32,20 @@ Agora, compile o programa para o Arduino
 ![musicas][image-arduino-compilar]
 
 #### 5° passo
-Caso tudo esteja funcionando, acesse o arquivo **arduino_code.py** dentro da Diana. As instruções para o Arduino estão dentro da definição **code_instructions**, a qual ela recebe a conexão, e uma mensagem. Podemos portanto, usar uma lógica bem simples, e escrever um programa que liga ou desliga um LED. A Diana deve estar fechada neste momento.  
+Caso tudo esteja funcionando, acesse o arquivo **arduino_code.py** dentro da Diana. As instruções para o Arduíno estão dentro da definição **code_instructions**, a qual ela recebe a conexão, e uma mensagem. Podemos portanto, usar uma lógica bem simples, e escrever um programa que liga ou desliga um LED. A Diana deve estar fechada neste momento.  
 ![musicas][image-def-programar]
 
 #### 6° passo
-Com o seu Arduino conectado, abra a Diana, use o **sudo** caso você esteja em uma distro linux, acesse **config > Comandos** e no primeiro campo, digite o endereço da sua porta, obitida no 3° passo.  
+Com o seu Arduíno conectado, abra a Diana, use o **sudo** caso você esteja em uma distro Linux, acesse **config > Comandos** e no primeiro campo, digite o endereço da sua porta, obtida no 3° passo.  
 ![musicas][image-diana-porta]
 
 #### 7° passo
-Com o programa escrito, vamos enviar a mensagem **"ligar"** e **"desligar"**, também vamos programar qual palavra chave a Diana irá usar, para enviar cada uma das mensagens. A Diana também usa o **Pyanalise** para tomar as decisões, portanto, qualquer coisa parecida com as palavras chaves, será confundida e poderá enviar a mensagem.  
+Com o programa escrito, vamos enviar a mensagem **"ligar"** e **"desligar"**, também vamos programar qual palavra-chave a Diana usará, para enviar cada uma das mensagens. A Diana também usa o **Pyanalise** para tomar as decisões, portanto, qualquer coisa parecida com as palavras chaves, será confundida e poderá enviar a mensagem.  
 ![musicas][image-diana-chaves]  
 Aproveite também, e faça os testes, para verificar se o comando funciona ou não!
 
 #### 8° passo
-Digite a palavra chave na tela de interação, e veja seu Arduino reagindo!  
+Digite a palavra-chave na tela de interação, e veja seu Arduíno reagindo!  
 ![musicas][image-diana-ativar]  
 - - - 
 
@@ -83,20 +86,20 @@ Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade
 - [X] Remoção de tela hack - ninguém usava	
 - [X] Remoção das imanges hack - peso desnecessário	
 - [X] Remoção da tela de avaliação - chato!	
-- [X] Remover audios salvos	
+- [X] Remover áudios salvos	
 
 - - - 	
 
 - [X] Remoção das telas de fala_esc e seus respectivos lixos	
 - [X] Remoção das telas de esc_rec e seus respectivos lixos	
 - [X] Remoção das telas de fala_rec e seus respectivos lixos	
-- [X] Criar tela unica completa	
+- [X] Criar tela única completa	
 - [X] Criar o design das novas telas	
 - [X] Integrar reconhecimento de voz	
 - [X] Integrar fala	
 - [X] Adicionar possibilidade de tocar música	
-- [X] Adicionar possibilidade se conectar com o arduino	
-- [X] Criar novo menu	
+- [X] Adicionar possibilidade se conectar com o Arduíno	
+- [X] Criar menu	
 - [X] Remover playsound
 - [X] Adicionar Pygame
 - [X] Remoção da tela de Menu - Vamos direto ao ponto, telas são legais, mas o foco sempre foi conversar com a voz!	
@@ -106,7 +109,7 @@ Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade
 
 - [X] Refatoração completa do código	
 - [ ] Fazer documentação	
-- [ ] Atualizar por completo o respositório da Diana. Versões offline por enquanto!
+- [ ] Atualizar por completo o repositório da Diana. Versões offline por enquanto!
 
 
 [image-arduino-configurar]: https://1.bp.blogspot.com/-E1yNWD-D8To/XTcakPehJDI/AAAAAAAAA14/uuZHfViDvRY2yi8VeYdQN26LdN9A_0eNwCLcBGAs/s1600/porta%2Barduino.png  
