@@ -47,16 +47,17 @@ Portanto, torna necessário a instalação manual das mesmas. Caso você esteja 
 **1° instale a biblioteca PyAudio**
 É altamente recomendádo o uso do Python3.6. Outras versões, podem ainda não terem o PyAudio compartível.  
 No Ubuntu  
-``` sudo pip3.6 install pyaudio --no-cache  ``` 
+``` sudo pip3.6 install pyaudio --no-cache ```  
 
 No Windows  
-``` pip3.6 install pyaudio --no-cache ```
+``` pip3.6 install pyaudio --no-cache ```  
+
 **2° instale a biblioteca SpeechRecognition**
 No Ubuntu  
-```sudo pip3.6 install speechrecognition --no-cache  ``` 
+```sudo pip3.6 install speechrecognition --no-cache  ```  
 
 No Windows  
-``` pip3.6 install speechrecognition --no-cache ```
+``` pip3.6 install speechrecognition --no-cache ```  
 **3° pratique**
 O reconhecimento de voz na tela de interação, é uma funcionalidade beta, e problemas com o seu microfone, podem acontecer. Use-a sabendo que ela pode ser bem limitada!
 
@@ -65,25 +66,25 @@ O reconhecimento de voz na tela de interação, é uma funcionalidade beta, e pr
 ### Como ativar a fala
 **1° Instale o PyGame**
 No Ubuntu  
-``` sudo pip3.6 install pygame --no-cache ``` 
+``` sudo pip3.6 install pygame --no-cache ```  
 
 No Windows  
-```pip3.6 install pygame --no-cache```
+```pip3.6 install pygame --no-cache```  
 **2° Instale o GTTS**
 No Ubuntu  
-``` sudo pip3.6 install gtts --no-cache  ``` 
+``` sudo pip3.6 install gtts --no-cache  ```  
 
 No Windows  
-``` pip3.6 install gtts --no-cache  ```
+``` pip3.6 install gtts --no-cache  ```  
 
 ----------
 ### Como controlar um Arduíno
 **1° Instale a biblioteca pyfirmata**
 No Ubuntu  
-``` sudo pip3.6 install pyfirmata --no-cache  ``` 
+``` sudo pip3.6 install pyfirmata --no-cache  ```   
 
 No Windows  
-``` pip3.6 install pyfirmata --no-cache  ```
+``` pip3.6 install pyfirmata --no-cache  ```  
 
 **2° carregue a biblioteca StandartFirmata**
 Carregue a biblioteca **StandartFirmata** na IDE do Arduíno. Caso você esteja no Linux, use o sudo para executar a IDE. 
@@ -119,10 +120,10 @@ Digite a palavra-chave na tela de interação, e veja seu Arduíno reagindo!
 ### Como tocar uma música  
 **1° instale a biblioteca do Pygame**
 No Ubuntu   
-``` sudo pip3.6 install pygame --no-cache ```  
+``` sudo pip3.6 install pygame --no-cache ```   
 
 No Windows  
-``` python -m pip install pygame --no-cache  ```  
+``` python -m pip install pygame --no-cache  ```   
 
 **2° Mova os arquivos**
 Mova os arquivos .mp3 para a pasta música, dentro da Diana. Alguns arquivos .mp3 podem não funcionar. Usamos músicas do Youtube Library e tudo funcionou:  
