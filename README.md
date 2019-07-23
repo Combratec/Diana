@@ -1,5 +1,5 @@
 # Diana 8.0
-A Diana 8.0 é um chatbot que aprende, escuta, fala, toca música e pode controlar um Arduíno. Ela é feita em Python, e foi bem testada no Python3.6. Está é a versão mais recente!  
+A Diana 8.0 é um chatbot que aprende, escuta, fala, toca música e pode controlar um Arduíno. Ela é feita em Python, e foi bem testada no [Python3.6](https://www.python.org/downloads/). Está é a versão mais recente.
 
 ----------
 ## Tópicos
@@ -8,29 +8,34 @@ A Diana 8.0 é um chatbot que aprende, escuta, fala, toca música e pode control
 - [Instalação de bibliotecas](#Instalação-de-bibliotecas)
 - [Como ativar o reconhecimento de voz](#Como-ativar-o-reconhecimento-de-voz)
 - [Como ativar a fala](#Como-ativar-a-fala)
-- [ Como controlar um Arduíno?](#Como-controlar-um-Arduíno)
+- [Como controlar um Arduíno?](#Como-controlar-um-Arduíno)
 - [Como tocar uma música?](#Como-tocar-uma-música)
 - [Atualizações da versão 8.0](#Atualizações-da-versão-8)
 ----------
 ### Interagindo com a Diana
 Ao executar a Diana, basta fazer uma pergunta que ela poderá responder.  
 
-Você pode ativar a fala, assim ela irá usar a biblioteca Pygame e a biblioteca GTTS para gerar e executar uma fala com a resposta.  
+Você pode [ativar a fala](#Como-ativar-a-fala), assim ela usará a biblioteca [Pygame](https://pypi.org/project/pygame/) e a biblioteca [GTTS](https://pypi.org/project/gTTS/) para gerar e executar uma fala com a resposta.
 
-Você também pode clicar no reconhecimento de fala, assim a Diana irá reconhecer a sua fala, atravéz da biblioteca PyAudio e da biblioteca SpeechRecognition.  
+Você também pode clicar no [reconhecimento de fala](#Como-ativar-o-reconhecimento-de-voz), assim a Diana reconhecerá a sua fala, através da biblioteca [PyAudio](https://pypi.org/project/PyAudio/) e da biblioteca [SpeechRecognition](https://pypi.org/project/SpeechRecognition/).  
 
 É necessário que você instale as bibliotecas manualmente.
 
 ----------
 
 ### Como a Diana Aprende
-A biblioteca pyanalise acessa um conjunto de arquivos de conversação, em cada arquivos, existe uma conversa especifica, onde cada frase está separada por ponto e virgula. Cada posição é considerada uma lista.
+A biblioteca [pyanalise](https://github.com/gabrielogregorio/pyanalise) recebe centenas de frases, localizadas em um conjunto de arquivos de conversação, e retorna uma semelhança entre a pergunta feita pelo usuário, e cada frase nos arquivos de conversação.
 
-Usando o PyAnalise, podem acontecer 3 coisas no modo interação. A Diana pode encontrar uma frase que seja muito semelhante a que você digitou, e se a semelhança for mair que a precisaõ definida em **config>pyanalise**, a diana irá responder a posição encontrada +1. Esse é o modo responder.
+Estas frases, estão organizados desta forma:
+frase_1;frase_2;frase_3
 
-Mas caso não exista a posição+1, ou seja, a frase mais semelhante a digitada é a ultima de um arquivo, então a Diana irá ativa o modo continuar assunto, ou seja, ela irá continuar aquele arquivo especifico.
+Cada arquivo possui algumas frases, de forma que elas estão de alguma forma relacionadas, como se fosse uma conversa. Ou seja, Cada arquivo é como se fosse uma conversa diferente. O que a Diana faz, é ler todas as frases, seguindo o exemplo acima, é como se ela pegasse a frase digitada pelo usuário, e comparasse com a frase_1, depois com a frase_2 e depois com a frase_3. Caso a frase_2 tenha uma boa semelhança com a pergunta do usuário, ela responderá com a frase_3
 
-Caso a melhor semelhança esteja abaixo da precisão minima definidade em **config>pyanalise**, A Diana irá ativar o modo criar_assunto. Neste modo, a Diana tenará criar um arquivo com sua pergunta e a sua resposta. Estas são as duas formas básicas da Diana Aprender.
+Mas, e se a pergunta for muito semelhante a frase_3?
+
+Bom, não existe a frase_4, nesse caso, a frase mais semelhante a digitada é a última deste arquivo, então a Diana ativará o modo continuar_assunto, ou seja, ela continuará aquele arquivo específico.
+
+Caso a melhor semelhança esteja abaixo da precisão mínima definida em **config>pyanalise**, A Diana ativará o modo criar_assunto. Neste modo, a Diana tentará criar um arquivo com sua pergunta e a sua resposta. Estas são as duas formas básicas da Diana Aprender.
 
 ----------
 
@@ -39,13 +44,13 @@ Com o Python já instalado e devidamente pré configurado, é hora de instalar a
 
 Portanto, torna necessário a instalação manual das mesmas. Caso você esteja usando o Windows, terá que abrir o CMD para executar os comandos. Se você tiver em uma distro Linux, terá que usar o terminal.  
 
-É super recomendado o uso do Python3.6 para a execução da Diana, algumas bibliotecas podem estar indisponíveis em versões posteriores e inferiores.  
+É recomendado o uso do Python3.6 para a execução da Diana, algumas bibliotecas podem estar indisponíveis em versões posteriores e inferiores.  
 
 ----------
 
 ### Como ativar o reconhecimento de voz
 **1° instale a biblioteca PyAudio**  
-É altamente recomendádo o uso do Python3.6. Outras versões, podem ainda não terem o PyAudio compartível.  
+É altamente recomendado o uso do Python3.6. Outras versões, podem ainda não terem o PyAudio compartível.  
 No Ubuntu  
 ``` sudo pip3.6 install pyaudio --no-cache ```  
 
