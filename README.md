@@ -108,6 +108,8 @@ Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade
 - [X] Refatoração completa do código	
 - [ ] Fazer documentação	
 - [ ] Atualizar por completo o respositório da Diana. Versões offline por enquanto!
+
+
 [image-arduino-configurar]: https://1.bp.blogspot.com/-E1yNWD-D8To/XTcakPehJDI/AAAAAAAAA14/uuZHfViDvRY2yi8VeYdQN26LdN9A_0eNwCLcBGAs/s1600/porta%2Barduino.png  
 [image-arduino-compilar]: https://1.bp.blogspot.com/-qSF25ZLyGTQ/XTcahSoQY3I/AAAAAAAAA1U/Fl9_irvvzckHvKGf4EYr6f-te57uf92bgCLcBGAs/s1600/compilar.png  
 [image-def-programar]: https://1.bp.blogspot.com/-4F3n1GwPcO0/XTdNymQqlTI/AAAAAAAAA30/r5j161uXZH0h6ALGdY6vrRgT2nGE1UB2QCLcBGAs/s1600/arduino_code.png  
