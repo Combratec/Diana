@@ -3,7 +3,7 @@ A Diana 8.0 é um chatbot que aprende, escuta, fala, toca música e pode control
 
 ## Tópicos
 - [Contributing to GraphQL Zeus](#Contributing-to-GraphQL-Zeus)
-  - [Table of Contents](#Como a Diana Aprende)
+  - [Table of Contents](#Como-a-Diana-Aprende)
   - [Reporting Issues](#Reporting-Issues)
   - [Code Contribution](#Code-Contribution)
   
