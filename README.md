@@ -22,7 +22,7 @@ Carregue a biblioteca **StandartFirmata** na IDE do Arduino. Caso você esteja n
 
 #### 3° passo
 Selecione a **Placa**, **Processador** e **Porta**, de acordo com o seu arduino. Salve a informação em Roxo, precisaremos da porta, em breve. No Windows 10, costuma ser  "COM"+numero, é no Ubuntu costuma ser "/dev/ttyACM"+número. **Fique atento a este detalhe.**
-![musicas][image-arduino-configurar]
+![musicas](image-arduino-configurar)
 
 #### 4° passo
 Agora, compile o programa para o Arduino
