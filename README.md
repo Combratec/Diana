@@ -1,6 +1,7 @@
 # Diana Tecnologia
 Chatbot com um método de aprendizado.
 
+[![Build Status][image-arduino-configurar]][#]
 # Bibliotecas
 
 ## Como controlar um Arduino?
