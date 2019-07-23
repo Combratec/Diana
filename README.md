@@ -2,22 +2,12 @@
 A Diana 8.0 é um chatbot que aprende, escuta, fala, toca música e pode controlar um Arduíno. Ela é feita em Python, e foi bem testada no Python3.6. Está é a versão mais recente!
 
 ## Tópicos
-- [Contributing to GraphQL Zeus](#Contributing-to-GraphQL-Zeus)
-  - [Table of Contents](#Como-a-Diana-Aprende)
-  - [Reporting Issues](#Reporting-Issues)
-  - [Code Contribution](#Code-Contribution)
-  
+- [Interagindo com a Diana](#Interagindo-com-a-Diana)
+- [Como a Diana Aprende](#Como-a-Diana-Aprende)
+- [Instalação de bibliotecas](#Instalação-de-bibliotecas)
+- [Como ativar o reconhecimento de voz](#Como-ativar-o-reconhecimento-de-voz)
+    - [1° instale a biblioteca PyAudio](*1°-instale-a-biblioteca-PyAudio)
 
-
-
-
-
-# Interagindo com a Diana
-
-#Como a Diana Aprende
-# Instalação de bibliotecas
-# Como ativar o reconhecimento de voz
-**1° instale a biblioteca PyAudio**
 **2° instale a biblioteca SpeechRecognition**
 **3° pratique**
 
