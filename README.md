@@ -11,7 +11,7 @@ A Diana 8.0 é um chatbot que aprende, escuta, fala, toca música e pode control
 - [Como tocar uma música?](#Como-tocar-uma-música)
 - [Atualizações da versão 8.0](#Atualizações-da-versão-8)
 
-###Interagindo com a Diana
+### Interagindo com a Diana
 Ao executar a Diana, basta fazer uma pergunta que ela poderá responder.  
 
 Você pode ativar a fala, assim ela irá usar a biblioteca Pygame e a biblioteca GTTS para gerar e executar uma fala com a resposta.  
@@ -31,7 +31,7 @@ Caso a melhor semelhança esteja abaixo da precisão minima definidade em **conf
 
 ----------
 
-###Instalação de bibliotecas
+### Instalação de bibliotecas
 Com o Python já instalado e devidamente pré configurado, é hora de instalar as bibliotecas. Por padrão, a Diana não vem mais com bibliotecas pré instaladas e nem tentar instalar, executando comandos de instalação em máquinas desconhecidas.  
 
 Portanto, torna necessário a instalação manual das mesmas. Caso você esteja usando o Windows, terá que abrir o CMD para executar os comandos. Se você tiver em uma distro Linux, terá que usar o terminal.  
@@ -39,7 +39,7 @@ Portanto, torna necessário a instalação manual das mesmas. Caso você esteja 
 É super recomendado o uso do Python3.6 para a execução da Diana, algumas bibliotecas podem estar indisponíveis em versões posteriores e inferiores.  
 
 ----------
-###Como ativar o reconhecimento de voz
+### Como ativar o reconhecimento de voz
 **1° instale a biblioteca PyAudio**
 É altamente recomendádo o uso do Python3.6. Outras versões, podem ainda não terem o PyAudio compartível.  
 No Ubuntu  
@@ -65,7 +65,7 @@ pip3.6 install speechrecognition --no-cache
 O reconhecimento de voz na tela de interação, é uma funcionalidade beta, e problemas com o seu microfone, podem acontecer. Use-a sabendo que ela pode ser bem limitada!
 
 ----------
-###Como ativar a fala
+### Como ativar a fala
 **1° Instale o PyGame**
 No Ubuntu  
 ```
@@ -87,7 +87,7 @@ No Windows
 pip3.6 install gtts --no-cache  
 ```
 ----------
-###Como controlar um Arduíno
+### Como controlar um Arduíno
 **1° Instale a biblioteca pyfirmata**
 No Ubuntu  
 ```
@@ -129,7 +129,7 @@ Digite a palavra-chave na tela de interação, e veja seu Arduíno reagindo!
 ![musicas][image-diana-ativar]  
 
 ----------
-###Como tocar uma música
+### Como tocar uma música
 **1° instale a biblioteca do Pygame**
 No Ubuntu   
 ```
@@ -152,7 +152,7 @@ Com a Diana em execução, acesse **config > Tocar música** e adicione as infor
 No modo de interação, digite o comando escolhido, de acordo com música.  
 ![tocando uma música][image-music-play]   
 ----------
-###Atualizações da versão 8
+### Atualizações da versão 8
 Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade	 
 
 - [X] Refazer a lógica da Diana por completo
