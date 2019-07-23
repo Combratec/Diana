@@ -5,7 +5,7 @@ Chatbot com um método de aprendizado.
 
 ## Como controlar um Arduino?
 #### 1° passo
-Instale a biblioteca pyfirmata
+Instale a biblioteca pyfirmata  
 No Ubuntu  
 ```
 sudo pip3.6 install pyfirmata --no-cache  
