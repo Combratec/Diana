@@ -42,7 +42,7 @@ Bom, não existe a frase_4, nesse caso, a frase mais semelhante a digitada, é a
 Caso a melhor semelhança entre o conteudo digitado pelo usuário, em relação a cada uma das frases localizadas em cada arquivo, esteja abaixo da precisão mínima definida em **config>pyanalise**, A Diana ativará o modo criar_assunto. Neste modo, a Diana tentará criar um arquivo com sua pergunta e a sua resposta. Estas são as duas formas básicas da Diana Aprender.
 
 ### Funções especiais
-Caso a Diana não esteja executando a funcionalidade de continuar ou de criar assunto, ela tentará ver se existe alguma semelhança entre o conteudo que o usuário digitou, e os comandos pré-programados para [tocar a música](#Como-tocar-uma-música) e para [Como controlar um Arduíno?](#Como-controlar-um-Arduíno).  
+Caso a Diana não esteja executando a funcionalidade de continuar ou de criar assunto, ela tentará ver se existe alguma semelhança entre o conteudo que o usuário digitou, e os comandos pré-programados para [tocar a música](#Como-tocar-uma-música) e para [controlar o Arduíno](#Como-controlar-um-Arduíno).  
 
 Caso exista, e ele seja maior que a precisão mínima definida pelo usuário em **config>pyanalise**, ela responderá de acordo com o que foi programado nestas etapas. Caso não exista, ela simplismente vai continuar a fazer sua análise normal.
 
