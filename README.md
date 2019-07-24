@@ -60,7 +60,6 @@ Portanto, torna necessário a instalação manual das mesmas. Caso você esteja 
 ### Como ativar o reconhecimento de voz
 **1° instale a biblioteca PyAudio**  
 É altamente recomendado o uso do [Python3.6](https://www.python.org/downloads/). Outras versões, podem ainda não terem o PyAudio compartível, e isso pode ser uma grande dor de cabeça,portando, vamos aos comandos.  
-Ele será responsável por acessar o microfone
 No Ubuntu  
 ```console
 $ sudo pip3.6 install pyaudio --no-cache 
