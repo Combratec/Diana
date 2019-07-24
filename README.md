@@ -81,7 +81,7 @@ $ python -m pip install speechrecognition --no-cache
 ```  
 
 **3° tente usar**  
-O reconhecimento de voz na tela de interação, é uma funcionalidade beta, e problemas com o seu microfone, podem acontecer. use-a sabendo que ela pode ser bem limitada, já que ainda não dominamos totalmente a biblioteca!
+O reconhecimento de voz na tela de interação, é uma funcionalidade beta, e problemas com o seu microfone, podem acontecer. Use-a sabendo que ela pode ser bem limitada, já que ainda não dominamos totalmente a biblioteca!
 
 ----------
 
@@ -130,7 +130,7 @@ Carregue a biblioteca **StandartFirmata** na IDE do seu Arduíno. Caso você est
 **Arquivo>Exemplos>Firmata>StandartFirmata**  
 
 **3° configure a IDE**  
-Selecione a **Placa**, **Processador** e **Porta**, de acordo com o seu Arduíno. Salve a informação em Roxo, precisaremos da porta, em breve. No Windows 10, costuma ser  "COM"+numero, é no Ubuntu costuma ser "/dev/ttyACM"+número. E então, compile o programa.
+Selecione a **Placa**, **Processador** e **Porta**, de acordo com o seu Arduíno. Salve a informação em roxo, precisaremos da porta, em breve. No Windows 10, costuma ser  "COM"+numero, é no Ubuntu costuma ser "/dev/ttyACM"+número. E então, compile o programa.  
 ![musicas][image-arduino-configurar]
 
 **4° Programe**  
