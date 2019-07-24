@@ -157,7 +157,7 @@ def controlador_de_partes(digitado):
     ent_main_writ_0.delete(0, 'end')
     tela.update()
 
-    if digitado.isspace() == True or ';' in digitado:
+    if (digitado.isspace()==True or (';' in digitado) or (digitado == '')):
         messagebox.showinfo('OPS','Dados inválidos foram enviados. Espaços e ; não são permitidos!')
     elif '[ERRO]' in digitado:
         messagebox.showinfo('Problema ',digitado)
@@ -172,7 +172,7 @@ def controlador_de_partes(digitado):
             if fazer == '__responder__':
                 resposta_diana = responder()
                 
-                texto_add = nome_bot + resposta_diana
+                texto_add = nome_bot + resposta_diana 
                 add_item_historic(texto_add)
                 txt_main_inte_0.insert(END, texto_add)
 
@@ -247,6 +247,7 @@ def gerar_som(texto_fala):
         from gtts import gTTS
     except Exception as e_1:
         messagebox.showinfo('erro','Instale o gtts!\n'+str(e_1))
+        basic.abrir_site('https://github.com/Combratec/Diana/blob/master/README.md#Como-ativar-a-fala')
     else:
         try:
             tts = gTTS(text=texto_fala, lang='pt-br')
@@ -256,15 +257,17 @@ def gerar_som(texto_fala):
             try:
                 tts.save('audio.mp3')
             except Exception as e_3:
-                messagebox.showinfo('erro','Erro ao salvar audio\n'+str(e_3))
+                messagebox.showinfo('erro','Erro ao salvar audio, tente mover a Diana para a sua Desktop\n'+str(e_3))
             else:
-            	basic.log('Audio gerado com sucesso')
+                basic.log('Audio gerado com sucesso')
+                return 0
+    return 1
 
 def reproduzir_som(link):
     basic.log('reproduzir_som')
     try:
         from pygame import mixer
-    except Exception as e:
+    except Exception as e_1:
         messagebox.showinfo('erro','Instale o pygame!\n'+str(e_1))
     else:
         try:
@@ -312,9 +315,11 @@ class falar ():
                 control_thread_espeak = True
 
     def resp_speak(texto_fala):
+        global control_thread_espeak
         basic.log('resp_speak')
-        gerar_som(texto_fala)
-        reproduzir_som('audio.mp3')
+        analise = gerar_som(texto_fala)
+        if analise == 0:
+            reproduzir_som('audio.mp3')
         control_thread_espeak = False
 
 # RECONHECIMENTO DE VOZ
@@ -324,29 +329,37 @@ class ouvir():
         global texto
         global control_thread_listen
         global sr
-        import speech_recognition as sr
-        if control_thread_listen == True:
-            messagebox.showinfo('Já existe um Thread sendo usado para reconhecimento de fala!')
+        try:
+            import speech_recognition as sr
+        except Exception as e_1:
+            messagebox.showinfo('Erro','Por favor, instale a biblioteca speechrecognition\nErro:'+str(e_1))
+            basic.abrir_site('https://github.com/Combratec/Diana/blob/master/README.md#Como-ativar-o-reconhecimento-de-voz')
         else:
-            btn_main_reco_0['state'] = 'disabled'
-            tela.update()
-            m = sr.Microphone()
-            r = sr.Recognizer()
-            basic.log('diga alguma coisa: ')
-            with m as source:
-                r.adjust_for_ambient_noise(source,duration=0.3)
-            stop_listening = r.listen_in_background(m, ouvir.callback)
-            btn_main_reco_0.update()
-            tela.update()
-            while control_thread_listen == False:
+            if control_thread_listen == True:
+                messagebox.showinfo('Já existe um Thread sendo usado para reconhecimento de fala!')
+            else:
+                btn_main_reco_0['state'] = 'disabled'
                 tela.update()
-                time.sleep(0.3)
-            control_thread_listen = False
-            stop_listening(wait_for_stop=False)
-            basic.log('Parei de ouvir!')
-            btn_main_reco_0['state'] = 'normal'
-            btn_main_reco_0.update()
-            return texto
+                try:
+                    m = sr.Microphone()
+                    r = sr.Recognizer()
+                    basic.log('diga alguma coisa: ')
+                    with m as source:
+                        r.adjust_for_ambient_noise(source,duration=0.3)
+                    stop_listening = r.listen_in_background(m, ouvir.callback)
+                    while control_thread_listen == False:
+                        tela.update()
+                        time.sleep(0.3)
+                    control_thread_listen = False
+                    stop_listening(wait_for_stop=False)
+                    basic.log('Parei de ouvir!')
+                except:
+                    texto = '[ERRO] Erro desconhecido_fala:'
+                    btn_main_reco_0.update()
+                    tela.update()
+                btn_main_reco_0['state'] = 'normal'
+                btn_main_reco_0.update()
+                return texto
 
     def callback(recognizer, audio):
         basic.log('callback')
@@ -473,6 +486,7 @@ def play_music(link):
             from pygame import mixer
         except Exception as e:
             messagebox.showinfo('ERRO','Por favor, instale a biblioteca pygame com o comando: \npip install pygame\nerro: '+str(e))
+            basic.abrir_site('https://github.com/Combratec/Diana/blob/master/README.md#Como-tocar-uma-m%C3%BAsica')
         else:
             try:
                 mixer.init() 
@@ -1015,7 +1029,7 @@ ent_command_seri_0.insert(END,link_serial)
 btn_command_addi_0['command'] = add_commands
 btn_command_test_0['command'] = lambda: send_serial_message(None,btn_command_test_0)
 btn_command_test_1['command'] = lambda: send_serial_message(ent_command_send_0.get(),btn_command_test_1)
-btn_command_help_0['command'] = lambda: basic.abrir_site('https://dianachatbot.blogspot.com/')
+btn_command_help_0['command'] = lambda: basic.abrir_site('https://github.com/Combratec/Diana/blob/master/README.md#Como-controlar-um-Ardu%C3%ADno')
 btn_command_retu_0['command'] = lambda: trocar_interface('coma_opca')
 
 fr_command_1.grid(row=0,column=1,sticky=NSEW)

@@ -1,3 +1,3 @@
 pyanalise=75
 audio=nao
-link=/dev/ttyACM0
+link=com5
