@@ -12,6 +12,7 @@ A Diana 8.0 é um chatbot que aprende, escuta, fala, toca música e pode control
 - [Como ativar a fala](#Como-ativar-a-fala)
 - [Como controlar um Arduíno?](#Como-controlar-um-Arduíno)
 - [Como tocar uma música?](#Como-tocar-uma-música)
+- [Faça parte desse projeto!](#Faça-parte-desse-projeto)
 - [Atualizações da versão 8.0](#Atualizações-da-versão-8)
 
 ----------
@@ -189,7 +190,7 @@ No modo de interação, digite o comando escolhido, de acordo com música e veja
 
 ----------  
 
-## Faça parte desse projeto
+### Faça parte desse projeto
 **Correção de bugs**  
 Encontre bugs e reporte eles para nós, caso você corrija um bug, envie a correção para o repositório com uma descrição detalhada do problema resolvido. Não se esqueça de enviar todas os logs envolvidos na detecção do bug, assim como SO e a versão do Python usado.  
 
