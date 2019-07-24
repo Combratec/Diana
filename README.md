@@ -105,7 +105,7 @@ $ sudo pip3.6 install pygame --no-cache
 ```  
 No Windows  
 ```console
-$ python -m pip3.6 install pygame --no-cache
+$ python -m pip install pygame --no-cache
 ```  
 
 **2° Instale o GTTS**  
@@ -116,7 +116,7 @@ $ sudo pip3.6 install gtts --no-cache
 ```  
 No Windows  
 ```console
-$ python -m pip3.6 install gtts --no-cache  
+$ python -m pip install gtts --no-cache  
 ```  
 
 **3° tente usar**  
@@ -133,7 +133,7 @@ $ sudo pip3.6 install pyfirmata --no-cache
 ```   
 No Windows    
 ```console
-$ python -m pip3.6 install pyfirmata --no-cache  
+$ python -m pip install pyfirmata --no-cache  
 ```  
 
 **2° carregue a biblioteca StandartFirmata**  
