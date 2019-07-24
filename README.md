@@ -219,7 +219,7 @@ Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade
 - [X] Mudança na forma de análisar os arquivos
 - [X] mudança na forma de ler os arquivos
 - [X] Remoção de todas as interações. 1.txt, 2.txt,...450.txt
-- [X] Adição de novos arquivos, com português revisadoS
+- [X] Adição de novos arquivos, com português revisado
 
 [image-arduino-configurar]: https://1.bp.blogspot.com/-E1yNWD-D8To/XTcakPehJDI/AAAAAAAAA14/uuZHfViDvRY2yi8VeYdQN26LdN9A_0eNwCLcBGAs/s1600/porta%2Barduino.png  
 [image-arduino-compilar]: https://1.bp.blogspot.com/-qSF25ZLyGTQ/XTcahSoQY3I/AAAAAAAAA1U/Fl9_irvvzckHvKGf4EYr6f-te57uf92bgCLcBGAs/s1600/compilar.png  
