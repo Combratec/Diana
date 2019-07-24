@@ -11,7 +11,9 @@ A Diana 8.0 é um chatbot que aprende, escuta, fala, toca música e pode control
 - [Como controlar um Arduíno?](#Como-controlar-um-Arduíno)
 - [Como tocar uma música?](#Como-tocar-uma-música)
 - [Atualizações da versão 8.0](#Atualizações-da-versão-8)
+
 ----------
+
 ### Interagindo com a Diana
 Ao executar a Diana, basta fazer uma pergunta que ela poderá responder.  
 
@@ -52,17 +54,24 @@ Portanto, torna necessário a instalação manual das mesmas. Caso você esteja 
 **1° instale a biblioteca PyAudio**  
 É altamente recomendado o uso do Python3.6. Outras versões, podem ainda não terem o PyAudio compartível.  
 No Ubuntu  
-``` sudo pip3.6 install pyaudio --no-cache ```  
-
+```console
+$ sudo pip3.6 install pyaudio --no-cache 
+```  
 No Windows  
-``` pip3.6 install pyaudio --no-cache ```  
+```console
+$ pip3.6 install pyaudio --no-cache 
+```  
 
 **2° instale a biblioteca SpeechRecognition**  
 No Ubuntu  
-```sudo pip3.6 install speechrecognition --no-cache  ```  
-
+```console
+$ sudo pip3.6 install speechrecognition --no-cache 
+```  
 No Windows  
-``` pip3.6 install speechrecognition --no-cache ```  
+```console
+$ pip3.6 install speechrecognition --no-cache 
+```  
+
 **3° pratique**  
 O reconhecimento de voz na tela de interação, é uma funcionalidade beta, e problemas com o seu microfone, podem acontecer. Use-a sabendo que ela pode ser bem limitada!
 
@@ -71,25 +80,36 @@ O reconhecimento de voz na tela de interação, é uma funcionalidade beta, e pr
 ### Como ativar a fala
 **1° Instale o PyGame**  
 No Ubuntu  
-``` sudo pip3.6 install pygame --no-cache ```  
-
+```console
+$ sudo pip3.6 install pygame --no-cache 
+```  
 No Windows  
-```pip3.6 install pygame --no-cache```  
+```console
+$ pip3.6 install pygame --no-cache
+```  
+
 **2° Instale o GTTS**  
 No Ubuntu  
-``` sudo pip3.6 install gtts --no-cache  ```  
-
+```console
+$ sudo pip3.6 install gtts --no-cache  
+```  
 No Windows  
-``` pip3.6 install gtts --no-cache  ```  
+```console
+$ pip3.6 install gtts --no-cache  
+```  
 
 ----------
+
 ### Como controlar um Arduíno
 **1° Instale a biblioteca pyfirmata**  
 No Ubuntu  
-``` sudo pip3.6 install pyfirmata --no-cache  ```   
-
-No Windows  
-``` pip3.6 install pyfirmata --no-cache  ```  
+```console
+$ sudo pip3.6 install pyfirmata --no-cache  
+```   
+No Windows    
+```console
+$ pip3.6 install pyfirmata --no-cache  
+```  
 
 **2° carregue a biblioteca StandartFirmata**  
 Carregue a biblioteca **StandartFirmata** na IDE do Arduíno. Caso você esteja no Linux, use o sudo para executar a IDE.  
@@ -124,11 +144,14 @@ Digite a palavra-chave na tela de interação, e veja seu Arduíno reagindo!
 
 ### Como tocar uma música  
 **1° instale a biblioteca do Pygame**  
-No Ubuntu   
-``` sudo pip3.6 install pygame --no-cache ```   
-
+No Ubuntu    
+```console
+$ sudo pip3.6 install pygame --no-cache 
+```   
 No Windows  
-``` python -m pip install pygame --no-cache  ```   
+```console
+$ python -m pip install pygame --no-cache  
+```   
 
 **2° Mova os arquivos**  
 Mova os arquivos .mp3 para a pasta música, dentro da Diana. Alguns arquivos .mp3 podem não funcionar. Usamos músicas do Youtube Library e tudo funcionou:  
