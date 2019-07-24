@@ -98,7 +98,7 @@ $ python -m pip3.6 install pygame --no-cache
 ```  
 
 **2° Instale o GTTS**  
-Ele será responsável por gerar os arquivos de áudio
+Ele será responsável por gerar os arquivos de áudio  
 No Ubuntu  
 ```console
 $ sudo pip3.6 install gtts --no-cache  
