@@ -153,7 +153,7 @@ Digite a palavra-chave na tela de interação, e veja seu Arduíno reagindo!
 
 ### Como tocar uma música  
 **1° instale a biblioteca do Pygame**  
-Ela seria a responsável por tocar as músicas  
+Ela será a responsável por tocar as músicas  
 No Ubuntu    
 ```console
 $ sudo pip3.6 install pygame --no-cache 
