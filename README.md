@@ -33,7 +33,7 @@ A biblioteca [pyanalise](https://github.com/gabrielogregorio/pyanalise) recebe c
 Estas frases, estão organizados desta forma dentro de cada arquivo:
 frase_1;frase_2;frase_3  
 
-Cada arquivo possui algumas frases, de forma que elas estão de alguma forma relacionadas, como se fosse uma conversa. Ou seja, cada arquivo é como se fosse uma conversa diferente. O que a Diana faz, é ler todas as frases, seguindo o exemplo acima, é como se ela pegasse a frase digitada pelo usuário, e comparasse com a frase_1, depois com a frase_2 e depois com a frase_3. Caso a frase_2 tenha uma boa semelhança com a pergunta do usuário, ela responderá com a frase_3
+Cada arquivo possui algumas frases, e elas estão de alguma forma relacionadas, como se fosse uma conversa. Ou seja, cada arquivo é como se fosse uma conversa diferente. O que a Diana faz, é ler todas as frases, seguindo o exemplo acima, é como se ela pegasse a frase digitada pelo usuário, e comparasse com a frase_1, depois com a frase_2 e depois com a frase_3. Caso a frase_2 tenha uma boa semelhança com a pergunta do usuário, ela responderá com a frase_3
 
 Mas, e se a pergunta for muito semelhante a frase_3?
 
