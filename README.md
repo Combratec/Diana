@@ -187,6 +187,21 @@ Com a Diana em execução, acesse **config > Tocar música** e adicione as infor
 **4° Teste**    
 No modo de interação, digite o comando escolhido, de acordo com música e veja se a música toca ou não. Está funcionalidade é muito recente e ainda não tem uma boa maturidade. A mesma palavra-chave para tocar, é a mesma para parar!  
 
+----------  
+
+## Faça parte desse projeto
+**Correção de bugs**  
+Encontre bugs e reporte eles para nós, caso você corrija um bug, envie a correção para o repositório com uma descrição detalhada do problema resolvido. Não se esqueça de enviar todas os logs envolvidos na detecção do bug, assim como SO e a versão do Python usado.  
+
+**Adição de conversas**  
+Você pode criar um arquivo com uma conversa, onde cada frase está seguida de um ponto e vírgula ";" e enviá-lo para a base de dados da Diana. Caso ela seja interessante para nós, aceitaremos a adição.  
+
+**Refatoração de código**  
+Você pode refatorar o código, trocando nomes de variáveis, mudando outros detalhes e até adicionando comentários ou técnicas de Clean Code (Deixe o código melhor).
+
+**Correção de erros ortográficos**
+Caso você encontre erros ortográficos, tanto no README, quanto no código da Diana, você pode corrigi-los e enviar para o nosso repositório. Deixe uma descrição dos erros.(Evite usar acentos no código da Diana)  
+
 ----------
 
 ### Atualizações da versão 8  
