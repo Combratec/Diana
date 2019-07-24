@@ -55,6 +55,17 @@ Portanto, torna necessário a instalação manual das mesmas. Caso você esteja 
 
 É recomendado o uso do [Python3.6](https://www.python.org/downloads/release/python-368/) para a execução da Diana, já que algumas bibliotecas podem estar indisponíveis em versões posteriores e inferiores.  
 
+Depois de ter o Python3.6 instalado, vamos atualizar o pip, o instalador de bibliotecas do Python.
+No Ubuntu  
+```console
+$ sudo pip3.6 install --upgrade pip
+```  
+No Windows  
+```console
+$ python -m pip install --upgrade pip
+```  
+
+
 ----------
 
 ### Como ativar o reconhecimento de voz
