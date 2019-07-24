@@ -87,7 +87,7 @@ O reconhecimento de voz na tela de interação, é uma funcionalidade beta, e pr
 
 ### Como ativar a fala
 **1° Instale o PyGame**  
-Ele será responsável por executar os arquivos de áudio
+Ele será responsável por executar os arquivos de áudio  
 No Ubuntu  
 ```console
 $ sudo pip3.6 install pygame --no-cache 
@@ -112,7 +112,7 @@ $ python -m pip3.6 install gtts --no-cache
 
 ### Como controlar um Arduíno
 **1° Instale a biblioteca pyfirmata**  
-Ela será responsável por permitir o controle remoto do Arduino
+Ela será responsável por permitir o controle remoto do Arduino  
 No Ubuntu  
 ```console
 $ sudo pip3.6 install pyfirmata --no-cache  
@@ -150,7 +150,7 @@ Digite a palavra-chave na tela de interação, e veja seu Arduíno reagindo!
 
 ### Como tocar uma música  
 **1° instale a biblioteca do Pygame**  
-Ela seria a responsável por tocar as músicas
+Ela seria a responsável por tocar as músicas  
 No Ubuntu    
 ```console
 $ sudo pip3.6 install pygame --no-cache 
