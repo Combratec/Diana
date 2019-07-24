@@ -136,9 +136,9 @@ No Windows
 $ python -m pip install pyfirmata --no-cache  
 ```  
 
-**2° carregue a biblioteca StandartFirmata**  
-Carregue a biblioteca **StandartFirmata** na IDE do seu Arduíno. Caso você esteja usando uma distro Linux, use o sudo para executar a IDE.  
-**Arquivo>Exemplos>Firmata>StandartFirmata**  
+**2° carregue a biblioteca StandardFirmata**  
+Carregue a biblioteca **StandardFirmata** na IDE do seu Arduíno. Caso você esteja usando uma distro Linux, use o sudo para executar a IDE.  
+**Arquivo>Exemplos>Firmata>StandardFirmata**  
 
 **3° configure a IDE**  
 Selecione a **Placa**, **Processador** e **Porta**, de acordo com o seu Arduíno. Salve a informação em roxo, precisaremos da porta, em breve. No Windows 10, costuma ser  "COM" + número e no Ubuntu costuma ser "/dev/ttyACM" + número. E então, compile o programa.  
