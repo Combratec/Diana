@@ -21,7 +21,7 @@ Ao executar a Diana, basta fazer uma pergunta, e ela responderá.
 
 Você pode [ativar a fala](#Como-ativar-a-fala), assim ela usará a biblioteca [pygame](https://pypi.org/project/pygame/) e a biblioteca [GTTS](https://pypi.org/project/gTTS/) para gerar e executar uma fala com a resposta.
 
-Você também pode clicar no [reconhecimento de fala](#Como-ativar-o-reconhecimento-de-voz), assim a Diana reconhecerá a sua fala, através da biblioteca [pyAudio](https://pypi.org/project/PyAudio/) e da biblioteca [speech recognition](https://pypi.org/project/SpeechRecognition/).  
+Você também pode clicar no [reconhecimento de fala](#Como-ativar-o-reconhecimento-de-voz), assim a Diana reconhecerá a sua fala, através da biblioteca [pyaudio](https://pypi.org/project/PyAudio/) e da biblioteca [speech recognition](https://pypi.org/project/SpeechRecognition/).  
 
 É necessário que você instale as bibliotecas manualmente.
 
