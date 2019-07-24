@@ -172,7 +172,7 @@ Com a Diana em execução, acesse **config > Tocar música** e adicione as infor
 ![configurando a diana][image-music-load]  
 
 **4° Teste**    
-No modo de interação, digite o comando escolhido, de acordo com música e veja se a música toca ou não.   
+No modo de interação, digite o comando escolhido, de acordo com música e veja se a música toca ou não. Está funcionalidade é muito recente e ainda não tem uma boa maturidade. A mesma palavra chave para tocar, é a mesma para parar!  
 
 ----------
 
