@@ -59,7 +59,7 @@ Portanto, torna necessário a instalação manual das mesmas. Caso você esteja 
 
 ### Como ativar o reconhecimento de voz
 **1° instale a biblioteca PyAudio**  
-É altamente recomendado o uso do [Python3.6](https://www.python.org/downloads/). Outras versões, podem ainda não terem o PyAudio compartível, e isso pode ser uma grande dor de cabeça. Outro detalhe importante, é que para executar está o reconhecimento de fala, um [Threadind](https://docs.python.org/3/library/threading.html) será criado, e ele ficará rodando em segundo plano ouvindo a sua voz, caso a sua internet seja lenta, esta funcionalidade ficará em modo de processamento até que todas as tarefas sejam executadas, portanto, será impossivel usar o reconhecimento de voz nesse periodo. Vamos aos comandos.  
+É altamente recomendado o uso do [Python3.6](https://www.python.org/downloads/). Outras versões, podem ainda não terem o PyAudio compartível, e isso pode ser uma grande dor de cabeça. Outro detalhe importante, é que para executar o reconhecimento de fala, um [Threadind](https://docs.python.org/3/library/threading.html) será criado, e ele ficará rodando em segundo plano ouvindo a sua voz, caso a sua internet seja lenta, esta funcionalidade ficará em modo de processamento até que todas as tarefas sejam executadas, portanto, será impossivel usar o reconhecimento de voz nesse periodo. Vamos aos comandos.  
 No Ubuntu  
 ```console
 $ sudo pip3.6 install pyaudio --no-cache 
