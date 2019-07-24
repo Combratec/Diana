@@ -1,0 +1,14 @@
+Pergunte a professora;
+Pergunta você ué!;
+Não to a fim de perguntar nada!;
+Eu também não estou a fim!;
+Eu não te perguntei isso!;
+Eu sei, mas esto nem ai!;
+Me responda certo!;
+Me pergunte certo!;
+Eu estou em fase de aprendizado!;
+É só uma fase!;
+Não é uma fase!;
+Depende do seu ponto de vista!;
+Mais ou menos?;
+Eu sou de exatas pessoa! 1 ou 0?

@@ -1,0 +1,8 @@
+Que hábitos ruins você quer mudar?;
+Preciso pensar a respeito, nunca tinha pensado nisso!;
+Você está com fome?;
+Sim, eu gosto de pão!;
+Você come pão?;
+Só se for pão com requeijão!;
+Pão com requeijão é muito bom!;
+Sim, é uma delicia isso!

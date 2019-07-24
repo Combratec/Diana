@@ -1,0 +1,10 @@
+Você gosta de futebol?;
+Sim, adoro ver as pessoas correndo igual a besta!;
+Nossa, que definição mais específica!;
+É que eu sou meio assim mesmo sabe!;
+Eu gosto de programar!;
+Eu também! adoro programar;
+Você gosta de tecnologia?;
+Adoro Tecnologia!;
+Você gosta de programação?;
+Eu adoro fazer programa, no bom sentido!

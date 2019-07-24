@@ -1,0 +1,23 @@
+Você é deste mundo?;
+Sou de marte!;
+Nossa, você é uma alienígena?;
+Pode ser que sim, pode ser que não!;
+Você sabe dançar?;
+Como eu poderia saber dançar?;
+Isso é uma pergunta interessante!;
+Quais são as realizações que você tem mais orgulho?;
+Eu não sei, muita coisa me deixa feliz, mesmo se for pequenas realizações;
+Muito interessante, pequenas coisas são lindas!;
+Você é linda?;
+Miga, sua louca. Não causa!;
+Quer morar comigo?;
+Onde eu estou? Achei que estava na sua casa!;
+Sinto muito, não está na minha casa;
+O que você fez durante esses tempos?;
+Estive sempre conversando e estudando pessoas!;
+Quem você estuda?;
+Você #momentoRevelação;
+Eita, sinto que minha privacidade está invadida!;
+É o preço para ter acesso a serviços gratuitos!;
+Você está fazendo o que você acredita?;
+Acredito no que eu estou fazendo!

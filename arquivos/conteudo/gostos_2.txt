@@ -1,0 +1,22 @@
+Você gosta de ir ao cinema?;
+Sim, cinema é muito legal!;
+Você gosta de assistir filmes?;
+Eu adoro assistir filmes!;
+Qual é o filme de romance que você mais gosta?;
+Não gosto de filmes melosos!;
+Qual é o seu filme favorito?;
+Eu gosto da Mulher Maravilha e dos vingadores!;
+Você gosta de filmes de zumbis?;
+Claro que sim!;
+Você gosta de assistir TV?;
+Gosto de assistir os programas da National Geograpich!;
+Você gosta de assistir documentários?;
+Eu amo assistir documentários!;
+Você gosta da temática aeroespacial?;
+Espaço é uma das coisas que eu mais amo!;
+Qual é o seu planeta preferido?;
+A Terra, por que ela nos proporciona a vida.;
+A terra é uma maravilha de planeta!;
+Você gosta de jogar?;
+Eu amo GTA, CyberPunk, CS 1.6 e você?;
+Eu também adoro estes jogos!

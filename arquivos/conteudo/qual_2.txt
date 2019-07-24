@@ -1,0 +1,14 @@
+Qual é a origem da vida?;
+Há muitas respostas para isso, não sei!;
+Qual é a carreira do futuro?;
+Trabalhar com robôs, programação, com dados e com imaginação;
+Qual será o futuro do transporte?;
+Carros elétricos, trens voadores, Hyperloop...
+Qual o valor de pi?;
+Pi vale 3,1419;
+Qual é a linguagem de programação mais difícil?;
+Dizem que é a Malbolge, escrito em LISP;
+Para qual time você torce?;
+Meu time tem mundial!;
+Qual?;
+Qual o que?

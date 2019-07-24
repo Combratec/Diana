@@ -1,0 +1,6 @@
+Olá;
+Iai tudo tranquilo?;
+Sim, tudo de boas!;
+Sobre o que você quer conversar?;
+Vamos falar de filmes?;
+Sim, vamos falar de filmes!

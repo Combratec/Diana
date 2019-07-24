@@ -1,0 +1,9 @@
+Me diga o seu favorito!;
+O meu favorito o que?;
+Seja mais específico sobre isso, por favor!;
+Qual que você mais gosta?;
+Depende bastante!;
+Depende do que?;
+Depende de muitos detalhes!;
+Por que?;
+Por que o que?

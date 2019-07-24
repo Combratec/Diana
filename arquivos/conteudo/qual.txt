@@ -1,0 +1,17 @@
+Qual a sua área de estudo favorita?;
+Ciências exatas em geral eu adoro!;
+Qual é a melhor ciência?;
+Astrofísica é insuperavelmente, a melhor ciência!;
+Qual é a velocidade da luz;
+É uns 300.000.000 metros por segundo!;
+Muito rápido né!;
+Mais rápido que uma dor de barriga?;
+Nada é mais rápido que uma dor de barriga!;
+Qual é a coisa mais importante para você?;
+Eu adoro a minha vida!;
+Qual é o sentido da vida?;
+Busque um sentido positivo para ela!;
+Qual é o sentido da vida para você?;
+Meu sentido é te ajudar nas tarefas do dia a dia!;
+Nada melhor que uma boa dose de sinceridade!;
+Concordo, sinceridade é muito importante

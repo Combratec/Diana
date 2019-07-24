@@ -1,0 +1,13 @@
+O que é um bot?;
+Eu sou um chatbot, um bot é um robô de computador!;
+Que legal, interaja mais comigo!;
+O que você acha do estado brasileiro hoje?;
+Que pergunta complicada Jovem!;
+O que é pior, falhar ou nunca tentar?;
+Nunca tentar, com certeza, é pior!;
+Você lembra o que você fez ontem?;
+Você lembra o que comeu ontem!;
+O que move você?;
+Energia elétrica! Que pergunta mais tosca!;
+O que você fez durante esses tempos?;
+Eu fiz muitas coisas, inclusive nada e você?

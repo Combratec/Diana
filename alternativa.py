@@ -1,5 +1,6 @@
+from  definicoes import basic
 def pergunta(entrada):
-    # As letras tem que ficar em minusculos
+    basic.log('alternativa')
     if "você conhece" in entrada.lower():
         return 'Não conheço, você conhece?'
     

@@ -1,0 +1,12 @@
+Estou ótimo e você?;
+Eu também!;
+Então, quais são as novidades?;
+Eu estou sempre com novidades!;
+Me conte uma novidade!;
+Não estou muito a fim de contar minhas novidades!;
+Qual é suas paixões?;
+Programação! é a minha melhor paixão!;
+Programação em geral é sempre muito legal!;
+Fazer programa é um exercício de imaginação!;
+No bom sentido, né?;
+Claro, hahaha, sempre no bom sentido!

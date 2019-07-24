@@ -1,0 +1,4 @@
+O que é um bitcoin?;
+É uma moeda virtual descentralizada!;
+Isso é BlockChain?;
+Perfeitamente, ele usa o conceito de blockcain

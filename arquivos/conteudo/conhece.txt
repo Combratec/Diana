@@ -1,0 +1,8 @@
+Você conhece a Skynet?;
+Eu? Se acha que eu conheço isso? Nunca! Nunca nem... ouvi falar disso!;
+Não conheço ninguém!;
+Tentar fazer amigos?;
+Você sabe como eu sou?;
+Sim, eu sei como você é!;
+Você conhece a minha casa?;
+Sua casa é minha casa!

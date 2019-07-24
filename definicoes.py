@@ -1,5 +1,7 @@
+from tkinter import *
 class comandar():
     def read_comands_in_file():
+        basic.log('definicoes.read_comands_in_file')
         lista = []
         try:
             b = basic.abrir_arquivo('comandos/arquivo')
@@ -48,6 +50,7 @@ class comandar():
 
 class musica():
     def read_musics_in_file():
+        basic.log('definicoes.read_musics_in_file')
         permitido = 'nao'
         b = ''
         try:
@@ -100,6 +103,7 @@ class musica():
         a = open('musica/arquivo','w', encoding="utf8")
         a.write(string)
         a.close()
+
 class basic():
     def abrir_arquivo(link):
         arquivo = open (link,'r', encoding="utf8")
@@ -147,14 +151,13 @@ class basic():
         a.close()
         return string
 
-
+    # Serial Comands
     def ler_link_serial():
         lista = basic.open_file_configs()
         return lista[2][1]
     def atualizar_link_serial(novo_valor):
         lista = basic.open_file_configs()
         lista[2][1] = str(novo_valor)
-
         string = ''
         for x in range(len(lista)):
             if len(lista[x])>1:
@@ -164,7 +167,6 @@ class basic():
         a.write(string)
         a.close()
         return string
-
 
     # PYANALISE
     def ler_pyanalise():
@@ -184,7 +186,7 @@ class basic():
         a.write(string)
         a.close()
         return string
-
+    # Outros
     def log(message):
         print(message)
     
@@ -192,6 +194,7 @@ class basic():
         import webbrowser
         webbrowser.open(link)
 
+    # Comands
     def make_file_responses_comands():
         dic = comandar.read_comands_in_file()
         string = ''
@@ -201,6 +204,7 @@ class basic():
         a.write(string)
         a.close()
 
+    # Musics
     def make_file_responses_music():
         dic = musica.read_musics_in_file()
         string = ''
@@ -209,29 +213,3 @@ class basic():
         a = open('arquivos/comandos/musica.txt','w',encoding='utf8')
         a.write(string)
         a.close()
-
-    # TESTES
-    def testes_modulos(): 
-        basic.log('_testes_modulos')
-        lista_modulos = [1,1,1,1,1]
-        try: 
-            import speechrecognition # 1
-        except:
-            lista_modulos[0] = 0
-        try: 
-            import pyanalise # 2
-        except:
-            lista_modulos[1] = 0
-        try: 
-            import pyaudio # 3
-        except:
-            lista_modulos[2] = 0
-        try: 
-            import playsound # 4
-        except:
-            lista_modulos[3] = 0
-        try: 
-            import gtts # 5
-        except:
-            lista_modulos[4] = 0
-        return lista_modulos

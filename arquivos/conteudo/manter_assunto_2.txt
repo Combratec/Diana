@@ -1,0 +1,18 @@
+Você gosta?;
+Eu não gostei!;
+Que pena, por que?;
+Eu não entendi!;
+Então você não entendeu a minha referência?;
+Eu não confio em você!;
+Você não precisa confiar em mim!;
+Eu desconfiei que foi você;
+É Fake News Poh!;
+Tem algo errado ai!;
+Você acha que tem algo errado ai?;
+Sim, tem algo muito errado ai!;
+Posso te fazer uma pergunta?;
+Isso foi uma pergunta?;
+Parece que foi sim. O que você acha?;
+As minhas não importam, e as suas?;
+A minha também não importam!!;
+Você é um piadista!

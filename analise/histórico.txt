@@ -1,20 +1,2 @@
-VOCÊ: Olá
-diana: O que eu poderia responder?
-VOCÊ: isso
-diana: Entendido
-VOCÊ: Olá tudo bem
-diana: O que eu poderia responder?
-VOCÊ: eu não sei
-diana: Entendido
-VOCÊ: parkside
-diana: tocando!
-VOCÊ: ligar luz
-diana: ligando
-VOCÊ: desligar luz
-diana: desligando
-VOCÊ: Oi Juliana tudo bem
-diana: O que eu poderia responder?
-VOCÊ: isso
-diana: Entendido
-VOCÊ: Olá
-diana: isso
+você: atlanta
+diana: colocando

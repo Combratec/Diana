@@ -9,63 +9,46 @@ __date__         = '18/04/2019'
 __last_update__  = '18/06/2019'
 __version__      = '1.2'
 
-# Importação do pyanalise
 from pyanalise import compare
 import os
 
 def analise(resposta):
-
-    maior = [0,0,0,0]
-    tem_depois = 0
-
-    for rota in os.listdir('arquivos/conteudo/'):
-        rota_full = str('arquivos/conteudo/' + str(rota))
-
-        arquivo = open (rota_full,'r',encoding='utf8')
-        string = str(arquivo.read())
-        arquivo.close()
-
+    best_likeness = [0,0,0,0]
+    have_after = 0
+    for route in os.listdir('arquivos/conteudo/'):
+        route_full = str('arquivos/conteudo/' + str(route))
+        file = open (route_full,'r',encoding='utf8')
+        string = str(file.read())
+        file.close()
         lista = string.split(';')
-
         y = 0
-
         while True:
             try:
-                analise = compare.frase(resposta,lista[y])
+                analyze = compare.frase(resposta,lista[y])
             except:
                 break
-
-            # Precisão
-            if analise > float(maior[0]):
-
-                # Tem alguma frase na posicao + 1?
+            if analyze > float(best_likeness[0]):
                 if (len(lista) <= y+1):
-                    tem_depois = 0
+                    have_after = 0
                 else:
-                    tem_depois = 1
-
-                # precisão | pos_file | pos_fras | p_frase+1 existe?
-                maior = [analise,rota,y,tem_depois] 
+                    have_after = 1
+                best_likeness = [analyze,route,y,have_after] 
             y = y+1
-   
-    # precisão | pos_file | pos_fras | p_frase+1 existe?
-    return maior
+    # [precisão , pos_file , pos_fras , p_frase+1 existe]
+    return best_likeness
 
 def analise_comandos(resposta,link):
-    maior = [0,0]
-    arquivo = open (link,'r',encoding='utf8')
-    string = str(arquivo.read())
-    arquivo.close()
-
+    best_likeness = [0,0]
+    file = open (link,'r',encoding='utf8')
+    string = str(file.read())
+    file.close()
     lista = string.split('\n')
-
     for x in range (len(lista)):
         y = lista[x].split(';')
         if len(y)>0:
-            analise = compare.frase(resposta,y[0])
-            if analise > float(maior[0]):
-                o_que_responder = y[1]
-                o_que_era = y[0]
-                maior = [analise,o_que_responder,o_que_era] 
-
-    return maior
+            analyze = compare.frase(resposta,y[0])
+            if analyze > float(best_likeness[0]):
+                what_to_answer = y[1]
+                what_was = y[0]
+                best_likeness = [analyze,what_to_answer,what_was] 
+    return best_likeness

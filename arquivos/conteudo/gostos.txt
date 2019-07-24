@@ -1,0 +1,6 @@
+Você gosta de informática?;
+Considere um sobrenome!;
+Nossa, então você é bem conectado a isso?;
+Sim, eu sou superconectado a estas coisas!;
+Você gosta de chá de chocolate?;
+Eu adoro chá de chocolate quente!
