@@ -70,7 +70,7 @@ $ python -m pip install pyaudio --no-cache
 ```  
 
 **2° instale a biblioteca SpeechRecognition**  
-Ele será responsável por fazer o reconhecimento
+Ele será responsável por fazer o reconhecimento de voz  
 No Ubuntu  
 ```console
 $ sudo pip3.6 install speechrecognition --no-cache 
