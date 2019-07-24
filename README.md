@@ -6,7 +6,7 @@ A Diana 8.0 é um chatbot que aprende, escuta, fala, toca música e pode control
 ## Tópicos
 - [Interagindo com a Diana](#Interagindo-com-a-Diana)
 - [Como a Diana Aprende](#Como-a-Diana-Aprende)
-- [Como a Diana Aprende](# Funções-especiais)
+- [Como a Diana Aprende](#Funções-especiais)
 - [Instalação de bibliotecas](#Instalação-de-bibliotecas)
 - [Como ativar o reconhecimento de voz](#Como-ativar-o-reconhecimento-de-voz)
 - [Como ativar a fala](#Como-ativar-a-fala)
