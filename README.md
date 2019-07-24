@@ -30,7 +30,7 @@ Você também pode clicar no [reconhecimento de fala](#Como-ativar-o-reconhecime
 ### Como a Diana Aprende
 A biblioteca [pyanalise](https://github.com/gabrielogregorio/pyanalise) recebe centenas de frases, localizadas em um conjunto de arquivos de conversação, e retorna uma semelhança entre a pergunta feita pelo usuário, e cada frase nos arquivos de conversação.
 
-Estas frases, estão organizados desta forma dentro de cada arquivo:
+Estas frases, estão organizados desta forma dentro de cada arquivo:  
 **frase_1;frase_2;frase_3**
 
 Cada arquivo possui algumas frases, e elas estão de alguma forma relacionadas, como se fosse uma conversa. Ou seja, cada arquivo é como se fosse uma conversa diferente. O que a Diana faz, é ler todas as frases, seguindo o exemplo acima, é como se ela pegasse a frase digitada pelo usuário, e comparasse com a frase_1, depois com a frase_2 e depois com a frase_3. Caso a frase_2 tenha uma boa semelhança com a pergunta do usuário, ela responderá com a frase_3
@@ -38,6 +38,8 @@ Cada arquivo possui algumas frases, e elas estão de alguma forma relacionadas, 
 **Mas, e se a pergunta for muito semelhante a frase_3?**
 
 Bom, não existe a frase_4, nesse caso, a frase mais semelhante a digitada, é a última deste arquivo, então a Diana ativará o modo continuar_assunto, ou seja, ela continuará aquele arquivo específico, dando um retorno para o usuário. A resposta do usuário, será adicionada como frase_4 naquele arquivo específico.  
+
+**Mas, e se a pergunta não se parecer com nada dentro da base de dados?**
 
 Caso a melhor semelhança entre o conteúdo digitado pelo usuário, em relação a cada uma das frases localizadas em cada arquivo, esteja abaixo da precisão mínima definida em **config>pyanalise**, A Diana ativará o modo criar_assunto. Neste modo, a Diana tentará criar um arquivo com sua pergunta e a sua resposta. Estas são as duas formas básicas da Diana Aprender.
 
