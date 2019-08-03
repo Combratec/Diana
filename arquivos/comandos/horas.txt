@@ -1,0 +1,4 @@
+Que horas são?;São {} horas e {} minutos
+Que dia é hoje?;Hoje é dia {}
+Que mês estamos?;Estamos no mês {} de {}
+Que anos estamos?;Estamos em {}

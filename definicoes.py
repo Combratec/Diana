@@ -111,6 +111,12 @@ class basic():
         arquivo.close()
         return file
 
+    # Caso o usuário pergunte que horas são
+    def retornar_time():
+        from datetime import datetime
+        horas = datetime.now()
+        return {'day':horas.day,'month':horas.month,'hour':horas.hour,'minute':horas.minute,'year':horas.year}
+
     # HISTÓRICO
     def load_historic():
         file = basic.abrir_arquivo('analise/histórico.txt')

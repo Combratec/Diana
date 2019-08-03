@@ -66,6 +66,12 @@ def processamento(pergunta):
     global fazer
 
     if fazer == 'nada':
+        lista = analise_comandos(pergunta,'arquivos/comandos/horas.txt')
+        if precisao_minima < lista[0]:
+            lista.append('é_horas')
+            return '__comando_responder__'
+
+    if fazer == 'nada':
         lista = analise_comandos(pergunta,'arquivos/comandos/arduino.txt')
         if precisao_minima < lista[0]:
             lista.append('é_comando')
@@ -178,8 +184,32 @@ def controlador_de_partes(digitado):
 
                 if tenho_que_falar == 'sim':
                     falar.rec_thread(resposta_diana)
+
             elif fazer == '__comando_responder__':
-                texto_add = nome_bot + lista[1] + '\n'
+
+                if lista[3] == 'é_horas':
+                    dt = basic.retornar_time()
+
+                    if lista[1] == 'São {} horas e {} minutos':
+                        msg_resposta = lista[1].format(dt['hour'],dt['minute'])
+
+                    elif lista[1] == 'Hoje é dia {}':
+                        msg_resposta = lista[1].format(dt['day'])
+
+                    elif lista[1] == 'Estamos no mês {} de {}':
+                        msg_resposta = lista[1].format(dt['month'],dt['year'])
+
+                    elif lista[1] == 'Estamos em {}':
+                        msg_resposta = lista[1].format(dt['year'])
+
+                    texto_add = nome_bot + msg_resposta + '\n'
+
+                    if tenho_que_falar == 'sim':
+                        falar.rec_thread(msg_resposta)
+
+                else:
+                    texto_add = nome_bot + lista[1] + '\n'
+
                 add_item_historic(texto_add)
                 txt_main_inte_0.insert(END, texto_add)
                 fazer = 'nada'
@@ -204,6 +234,7 @@ def controlador_de_partes(digitado):
                         if x[3] == o_que_era+';'+o_que_responder:
                             send_serial_message(x[1],None)
                             break
+
             else:
                 alternativa_resposta = pergunta(digitado)
                 if tenho_que_falar == 'sim':
