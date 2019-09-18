@@ -1,23 +1,43 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-from processamento import analise_comandos
-from arduino_code import comand_arduino
-from design import design_principal
-from design import design_historico
-from design import design_pyanalise
-from processamento import analise
-from design import design_comando
-from design import design_opcoes
-from design import design_musica
-from alternativa import pergunta
-from definicoes import comandar
+from design  import design_principal
+from design  import design_historico
+from design  import design_pyanalise
+from design  import design_comando
+from design  import design_opcoes
+from design  import design_musica
 from tkinter import messagebox
-from definicoes import musica
-from pyanalise import compare
-from definicoes import basic
-from tkinter import *
-import time
-import os
+from tkinter import PhotoImage
+from tkinter import HORIZONTAL
+from tkinter import Scrollbar
+from tkinter import GROOVE
+from tkinter import RAISED
+from tkinter import Button
+from tkinter import Entry
+from tkinter import Label
+from tkinter import Frame
+from tkinter import Scale
+from tkinter import Text
+from tkinter import NSEW
+from tkinter import END
+from tkinter import Tk
+from tkinter import EW
+from tkinter import NS
+from tkinter import W
+from definicoes    import comandar
+from definicoes    import musica
+from definicoes    import basic
+from arduino_code  import comand_arduino
+from alternativa   import pergunta
+from pyanalise     import compare
+from processamento import analise_comandos
+from processamento import analise
+
+from time import sleep
+from os   import remove
+
+basic.log('biliotecas importadas')
+
 global save_comand_object_position
 global save_music_object_position
 global control_thread_listen
@@ -51,6 +71,8 @@ placa = None
 lista = []
 texto = '__'
 
+basic.log('variaveis globais definidas')
+
 tela = Tk() 
 tela.resizable(width=False, height=False)
 tela.configure(background="white",border=0)
@@ -59,8 +81,10 @@ tela.rowconfigure(1, weight=1)
 tela.title('Diana chatbot - Combratec Inova')
 tela.geometry("446x546+100+100")
 
+basic.log('tela configurada')
+
 def processamento(pergunta):
-    basic.log('processamento')
+    basic.log('processamento = {}'.format(pergunta))
     global precisao_minima
     global lista
     global fazer
@@ -104,7 +128,7 @@ def responder():
     return str(resposta  + '\n')
 
 def continuar_assunto(digitado):
-    basic.log('continuar_assunto')
+    basic.log('continuar assunto = {}'.format(digitado))
     global lista
     global nome_bot
     global nome_usuario
@@ -126,7 +150,7 @@ def continuar_assunto(digitado):
     fazer = 'nada'
 
 def criar_assunto(perguntado,digitado):
-    basic.log('criar_assunto')
+    basic.log('criar assunto, perguntado = {}, digitado = {}'.format(perguntado,digitado))
     global lista
     global nome_bot
     global nome_usuario
@@ -153,7 +177,7 @@ def criar_assunto(perguntado,digitado):
     fazer = 'nada'
 
 def controlador_de_partes(digitado):
-    basic.log('controlador_de_partes')
+    basic.log('controlador de partes, digitado = {}'.format(digitado))
     global fazer
     global lista
     global perguntado_antes
@@ -252,7 +276,7 @@ def controlador_de_partes(digitado):
     txt_main_inte_0.see("end")
 
 def status_falar_ou_nao(parametro):
-    basic.log('status_falar_ou_nao')
+    basic.log('status falar ou nao, parametro = {}'.format(parametro))
     global tenho_que_falar
     if parametro == 'ler':
         if tenho_que_falar == 'sim':
@@ -273,7 +297,7 @@ def status_falar_ou_nao(parametro):
     basic.atualizar_tenho_que_falar(tenho_que_falar)
 
 def gerar_som(texto_fala):
-    basic.log('gerar_som')
+    basic.log('gerar som, texto_fala = {}'.format(texto_fala))
     try:
         from gtts import gTTS
     except Exception as e_1:
@@ -295,7 +319,7 @@ def gerar_som(texto_fala):
     return 1
 
 def reproduzir_som(link):
-    basic.log('reproduzir_som')
+    basic.log('reproduzir som, link = {}'.format(link))
     try:
         from pygame import mixer
     except Exception as e_1:
@@ -318,7 +342,7 @@ def reproduzir_som(link):
                 else:
                     try:
                         while mixer.music.get_busy():
-                            time.sleep(0.5)
+                            sleep(0.5)
                     except:
                         messagebox.showinfo('erro','um erro improvável aconteceu!')
                     else:
@@ -327,13 +351,13 @@ def reproduzir_som(link):
 
 class falar ():
     def rec_thread(texto_fala):
-        basic.log('rec_thread')
+        basic.log('rec thread, texto_fala = {}'.format(texto_fala))
         global control_thread_espeak
         if control_thread_espeak == True:
             basic.log('já existe um thread sendo usado para processar a fala')
         else:
             try:
-                os.remove('audio.mp3')
+                remove('audio.mp3')
             except Exception as er2:
                 basic.log('impossivel deletar o arquivo residual. \n'+str(er2))
             try:
@@ -346,8 +370,8 @@ class falar ():
                 control_thread_espeak = True
 
     def resp_speak(texto_fala):
+        basic.log('resp_speak, texto_fala = {}'.format(texto_fala))
         global control_thread_espeak
-        basic.log('resp_speak')
         analise = gerar_som(texto_fala)
         if analise == 0:
             reproduzir_som('audio.mp3')
@@ -356,7 +380,7 @@ class falar ():
 # RECONHECIMENTO DE VOZ
 class ouvir():
     def agora():
-        basic.log('agora')
+        basic.log('agora ()')
         global texto
         global control_thread_listen
         global sr
@@ -380,7 +404,7 @@ class ouvir():
                     stop_listening = r.listen_in_background(m, ouvir.callback)
                     while control_thread_listen == False:
                         tela.update()
-                        time.sleep(0.3)
+                        sleep(0.3)
                     control_thread_listen = False
                     stop_listening(wait_for_stop=False)
                     basic.log('Parei de ouvir!')
@@ -393,7 +417,7 @@ class ouvir():
                 return texto
 
     def callback(recognizer, audio):
-        basic.log('callback')
+        basic.log('callback, recognizer = {}, audio = {}'.format(recognizer,audio))
         global control_thread_listen
         global texto
         global sr
@@ -413,28 +437,28 @@ class ouvir():
             basic.log(texto)
 
 def limpar_historico():
-    basic.log('limpar_historico')
+    basic.log('*** limpar_historico ***')
     basic.clear_historic()
     atualizar_historico()
 
 def atualizar_historico():
-    basic.log('atualizar_historico')
+    basic.log('*** atualizar_historico ***')
     txt_historic_data_0.delete(1.0, END)
     txt_historic_data_0.insert(1.0,basic.load_historic())
     txt_historic_data_0.see("end")
 
 def add_item_historic(interacao):
-    basic.log('add_item_historic')
+    basic.log('add item historic, interacao = {}'.format(interacao))
     basic.add_historic(interacao)
 
 def resize(event=None):
-    basic.log('resize')
+    basic.log('resize, event = {}'.format(event))
     global precisao_minima
     basic.atualizar_pyanalise(scl_pyanalise_prec_0.get())
     precisao_minima = basic.ler_pyanalise()
 
 def testar_pyanalise(event):
-    basic.log('testar_pyanalise')
+    basic.log('testar pyanalise, event = {}'.format(event))
     global precisao_minima
     ent_pyanalise_fras_0.update()
     busca_semelhanca = compare.frase(ent_pyanalise_fras_0.get(),ent_pyanalise_fras_1.get())
@@ -445,7 +469,7 @@ def testar_pyanalise(event):
         lbl_pyanalise_resu_0['fg'] = 'blue'
 
 def load_songs():
-    basic.log('load_songs')
+    basic.log('load songs ()')
     global save_music_object_position
     global music_itens
 
@@ -479,7 +503,7 @@ def load_songs():
         save_music_object_position.append(new_list_itens) 
 
 def remove_songs(btn):
-    basic.log('remove_songs')
+    basic.log('remove songs, btn = {}'.format(btn))
     global save_music_object_position
     total = len(save_music_object_position)
     for x in range(total):
@@ -489,7 +513,7 @@ def remove_songs(btn):
             break # importante
 
 def add_songs():
-    basic.log('add_songs')
+    basic.log('add songs ()')
     a = ent_music_file_0.get() 
     b = ent_music_comm_0.get()
 
@@ -502,14 +526,14 @@ def add_songs():
         ent_music_comm_0.delete(0,END)
 
 def select_music(btn):
-    basic.log('select_music')
+    basic.log('select music, btn = {}'.format(btn))
     global save_music_object_position
     for y in save_music_object_position:
         if y[3] == btn:
             play_music(y[0].get())
 
 def play_music(link):
-    basic.log('play_music')
+    basic.log('play music, link = {}'.format(link))
     global tocando
     global mixer
     if tocando == False:
@@ -539,7 +563,7 @@ def play_music(link):
             messagebox.showinfo('ERRP',e)
 
 def load_commands():
-    basic.log('load_commands')
+    basic.log('load commands ()')
     global save_comand_object_position
     global itens
 
@@ -572,7 +596,7 @@ def load_commands():
         save_comand_object_position.append([ent_command_send_1,ent_command_comm_0,ent_command_dele_0,btn_command_test_2]) 
 
 def remove_commands(btn):
-    basic.log('remove_commands')
+    basic.log('remove commands, btn = {}'.format(btn))
     global save_comand_object_position
     total = len(save_comand_object_position)
     for x in range(total):
@@ -582,7 +606,7 @@ def remove_commands(btn):
             break
 
 def add_commands():
-    basic.log('add_commands')
+    basic.log('add commands ()')
     a = ent_command_send_0.get() 
     b = ent_command_comm_0.get()
     if  a == '' or  b =='' or a.isspace() or b.isspace() or not ';' in b or ':' in b or ':' in a:
@@ -596,14 +620,14 @@ def add_commands():
         ent_command_comm_0.delete(0,END)
 
 def select_serial(btn_command_test_2):
-    basic.log('select_serial')
+    basic.log('select serial, btn_command_test_2 = {}'.format(btn_command_test_2))
     global save_comand_object_position
     for y in save_comand_object_position:
         if y[3] == btn_command_test_2:
             send_serial_message(y[0].get(),btn_command_test_2)
 
 def send_start_serial(send_message_for_serial):
-    basic.log('send_start_serial')
+    basic.log('send start serial, send_message_for_serial = {}'.format(send_message_for_serial))
     global placa
     if placa == None:
         try:
@@ -617,7 +641,7 @@ def send_start_serial(send_message_for_serial):
         messagebox.showinfo('ERRO!','Problema com esta serial. \n[ERRO] {}'.format(e))
 
 def send_serial_message(send_message_for_serial,btn_command_test_2):
-    basic.log('send_serial_message')
+    basic.log('send serial message, send_message_for_serial = {}, btn_command_test_2 = {}'.format(send_message_for_serial,btn_command_test_2))
     global placa
     if placa == None:
         try:
@@ -647,12 +671,12 @@ def send_serial_message(send_message_for_serial,btn_command_test_2):
                 ent_command_seri_0['fg'] = cor
 
 def delete_and_insert(entry_name,insert_entry_name):
-    basic.log('delete_and_insert')
+    basic.log('delete and insert, entry_name = {}, insert_entry_name = {}'.format(entry_name,insert_entry_name))
     entry_name.delete(0,END)
     entry_name.insert(0,insert_entry_name)
 
 def trocar_interface(carregar):
-    basic.log('trocar_interface')
+    basic.log('trocar interface, carregar = {}'.format(carregar))
     if carregar == 'conf_inte':
         tela_frame_configuracoes.grid_forget()
         interacao.grid(row=1,column=1,sticky=NSEW)

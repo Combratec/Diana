@@ -1,4 +1,4 @@
-from tkinter import *
+#from tkinter import *
 class comandar():
     def read_comands_in_file():
         basic.log('definicoes.read_comands_in_file')

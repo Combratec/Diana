@@ -1,4 +1,8 @@
-from tkinter import *
+from tkinter import SUNKEN
+from tkinter import FLAT
+from tkinter import GROOVE
+from tkinter import RAISED
+
 class design_principal():
     def config_main_btns(): 
         return {
