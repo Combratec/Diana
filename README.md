@@ -1,5 +1,5 @@
-# Diana 8.0
-A Diana 8.0 é um chatbot que aprende, escuta, fala, toca música e pode controlar um Arduíno. Ela é feita em Python, e foi bem testada no [Python3.6](https://www.python.org/downloads/release/python-368/), está é a versão que recomendamos para o uso da Diana.
+# Diana 8.0.1
+A Diana 8.0.1 é um chatbot que aprende, escuta, fala, toca música e pode controlar um Arduíno. Ela é feita em Python, e foi bem testada no [Python3.6](https://www.python.org/downloads/release/python-368/), está é a versão que recomendamos para o uso da Diana.
 
 ----------
 
