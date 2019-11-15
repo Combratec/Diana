@@ -36,13 +36,12 @@ from processamento import analise
 from time import sleep
 from os   import remove
 
-basic.log('biliotecas importadas')
-
 global save_comand_object_position
 global save_music_object_position
 global control_thread_listen
 global control_thread_espeak
 global perguntado_antes
+global ativarWikipedia
 global tenho_que_falar
 global precisao_minima
 global nome_usuario
@@ -55,59 +54,60 @@ global lista
 global texto
 global mixer
 
-save_comand_object_position = []
-save_music_object_position = []
-control_thread_listen = False
-control_thread_espeak = False
-perguntado_antes = 'nada'
-tenho_que_falar = basic.ler_tenho_que_falar()
-precisao_minima = basic.ler_pyanalise()
-nome_usuario = 'você_: '
-link_serial =  basic.ler_link_serial()
-nome_bot = 'diana: '
-tocando = False
-fazer = 'nada'
-placa = None
-lista = []
-texto = '__'
-
-basic.log('variaveis globais definidas')
+tenho_que_falar = basic.ler_tenho_que_falar() # A Diana irá falar a resposta
+precisao_minima = basic.ler_pyanalise()       # Precisão para saber se a Diana entendeu algo ou não.
+link_serial =  basic.ler_link_serial()        # Endereço usado pela serial
+save_comand_object_position = []              # Salva a posição dos objetos de comando (Arduino)
+save_music_object_position = []               # Salva a posição dos objetos música
+control_thread_listen = False                 # Impede que o reconhecimento de voz seja ativado mais de uma vez por vez.
+control_thread_espeak = False                 # impede que o sistema de fala seja ativadao mais de uma vez por vez.
+ativarWikipedia = False                       # Ativa a busca pela biblioteca da wikipedia
+perguntado_antes = 'nada'                     # O que foi perguntado anteriormente
+nome_usuario = 'você_: '                      # Usuario
+nome_bot = 'Diana: '                          # Diana
+tocando = False                               # Indica se uma música está tocando
+fazer = 'nada'                                # O que fazer agora?
+placa = None                                  # Placa do arduino
+lista = []                                    # Lista com os resultados do processamento
 
 tela = Tk() 
 tela.resizable(width=False, height=False)
 tela.configure(background="white",border=0)
 tela.grid_columnconfigure(1, weight=1)
 tela.rowconfigure(1, weight=1)
-tela.title('Diana chatbot - Combratec Inova')
+tela.title('Diana chatbot - Combratec')
 tela.geometry("446x546+100+100")
 
-basic.log('tela configurada')
-
 def processamento(pergunta):
-    basic.log('processamento = {}'.format(pergunta))
     global precisao_minima
     global lista
     global fazer
 
+    # Verifica se houve uma pergunta de horas
     if fazer == 'nada':
         lista = analise_comandos(pergunta,'arquivos/comandos/horas.txt')
         if precisao_minima < lista[0]:
             lista.append('é_horas')
             return '__comando_responder__'
 
+    # Verifica se houve um comando para o Arduino
     if fazer == 'nada':
         lista = analise_comandos(pergunta,'arquivos/comandos/arduino.txt')
         if precisao_minima < lista[0]:
             lista.append('é_comando')
             return '__comando_responder__'
 
+    # Verifica se houve um comando de tocar música
     if fazer == 'nada':
         lista = analise_comandos(pergunta,'arquivos/comandos/musica.txt')
         if precisao_minima < lista[0]:
             lista.append('é_musica')
             return '__comando_responder__'
 
+    # Analisa a pergunta do usuário
     lista = analise(pergunta)
+
+    # Analisa o comportamento para gerar uma resposta
     if precisao_minima > lista[0]:
         return '__criar_assunto__'
     else:
@@ -117,24 +117,25 @@ def processamento(pergunta):
             return '__continuar_assunto__'
 
 def responder():
-    basic.log('responder')
     global lista
     global fazer
+
     resp = basic.abrir_arquivo("arquivos/conteudo/{}".format(lista[1]))
     resp = resp.split(';')
     resposta = str(resp[ lista[2] + 1])
     resposta = resposta.rstrip().lstrip()
     fazer = 'nada'
+
     return str(resposta  + '\n')
 
 def continuar_assunto(digitado):
-    basic.log('continuar assunto = {}'.format(digitado))
     global lista
     global nome_bot
     global nome_usuario
     global fazer
     global tenho_que_falar
 
+    # Adicionar a resposta no arquivo
     texto = ';' + digitado
     rota = 'arquivos/conteudo/' + lista[1]
 
@@ -142,147 +143,293 @@ def continuar_assunto(digitado):
     arquivo.write(texto)
     arquivo.close()
 
+    # Texto padrão
     texto_add = str((nome_bot + "Aprendido\n"))
-    add_item_historic(texto_add)
+
+    # Adicionar no histórico
+    basic.add_historic(texto_add)
+
+    # Adicionar no Text principal
     txt_main_inte_0.insert(END, texto_add)
+
+    # Iniciar a resposta da fala
     if tenho_que_falar == 'sim':
-        falar.rec_thread('Aprendido')
+        falar.ThreadDeFala('Aprendido')
+
+    # liberar para outros comandos
     fazer = 'nada'
 
 def criar_assunto(perguntado,digitado):
-    basic.log('criar assunto, perguntado = {}, digitado = {}'.format(perguntado,digitado))
-    global lista
     global nome_bot
-    global nome_usuario
     global fazer
     global tenho_que_falar
 
-    entrada_add = digitado
-    texto_add = str((nome_bot + "Entendido\n"))
-    add_item_historic(texto_add)
+    # Texto padrão
+    texto_add = nome_bot + "Entendido\n"
+
+    # Adicionar no histórico
+    basic.add_historic(texto_add)
+
+    # Adicionar no Text principal
     txt_main_inte_0.insert(END, texto_add)
 
+    # Verifica se a Diana vai falar alguma coisa
     if tenho_que_falar == 'sim':
-        falar.rec_thread('Entendido')
+        falar.ThreadDeFala('Entendido')
+
+    # Cria um arquivo inexistente
     x = 0
     while True:
+        # tente abrir esse arquivo
         try:
             arquivo = basic.abrir_arquivo('arquivos/conteudo/{}{}'.format(x,'.txt'))
+
+        # Se não conseguir, ele não deve existir!
         except:
             arquivo = open ('arquivos/conteudo/'+str(x)+'.txt','w', encoding="utf8")
-            arquivo.write(str(perguntado)+';'+str(entrada_add))
+            arquivo.write(str(perguntado)+';'+str(digitado))
             arquivo.close()
             break
+
         x = x + 1
+
+    # Libera o fazer.
     fazer = 'nada'
 
+
+def criar_assunto_wikipedia(perguntado,resposta_encontrada):
+    global nome_bot
+
+    # Cria um arquivo inexistente
+    x = 0
+    while True:
+        # tente abrir esse arquivo
+        try:
+            arquivo = basic.abrir_arquivo('arquivos/conteudo/{}{}'.format(x,'.txt'))
+
+        # Se não conseguir, ele não deve existir!
+        except:
+            arquivo = open ('arquivos/conteudo/'+str(x)+'.txt','w', encoding="utf8")
+            arquivo.write(str(perguntado)+';'+str(resposta_encontrada))
+            arquivo.close()
+            break
+
+        x = x + 1
+
+def responderHoras():
+    global fazer
+    global lista
+    global tenho_que_falar
+    global nome_bot
+
+    dt = basic.retornar_time()
+
+    if lista[1] == 'São {} horas e {} minutos':
+        msg_resposta = lista[1].format(dt['hour'],dt['minute'])
+
+    elif lista[1] == 'Hoje é dia {}':
+        msg_resposta = lista[1].format(dt['day'])
+
+    elif lista[1] == 'Estamos no mês {} de {}':
+        msg_resposta = lista[1].format(dt['month'],dt['year'])
+
+    elif lista[1] == 'Estamos em {}':
+        msg_resposta = lista[1].format(dt['year'])
+
+    texto_add = nome_bot + msg_resposta + '\n'
+
+    if tenho_que_falar == 'sim':
+        falar.ThreadDeFala(msg_resposta)
+    return texto_add
+                    
+def abrirArquivoEReproduzirMusica(o_que_era,o_que_responder):
+    file = basic.abrir_arquivo('musica/arquivo')
+    file = file.split('\n')
+    for x in file:
+        x = x.split(':')
+        if x[3] == o_que_era+';'+o_que_responder:
+            play_music(x[1])
+            break
+
+def abrirArquivoExecutarComando(o_que_era,o_que_responder):
+    file = basic.abrir_arquivo('comandos/arquivo')
+    file = file.split('\n')
+    for x in file:
+        x = x.split(':')
+        if x[3] == o_que_era+';'+o_que_responder:
+            send_serial_message(x[1],None)
+            break
+
 def controlador_de_partes(digitado):
-    basic.log('controlador de partes, digitado = {}'.format(digitado))
     global fazer
     global lista
     global perguntado_antes
     global tenho_que_falar
     global nome_bot
+    global ativarWikipedia
 
+    # Deletar a entrada
     ent_main_writ_0.delete(0, 'end')
+
+    # Atualizar a tela
     tela.update()
 
+    # Digitos inválidos
     if (digitado.isspace()==True or (';' in digitado) or (digitado == '')):
-        messagebox.showinfo('OPS','Dados inválidos foram enviados. Espaços e ; não são permitidos!')
+        messagebox.showinfo('Não faça isso','Espaços e ; não são tem poder aqui!')
+
+    # Erro no que foi digitado ou falado.
     elif '[ERRO]' in digitado:
-        messagebox.showinfo('Problema ',digitado)
+        messagebox.showinfo('Eita!',digitado)
+
+    # Sem erros
     else:
-        texto_add = 'você: ' + digitado + '\n'
-        add_item_historic(texto_add)
+        # texto padrão
+        texto_add = 'você: ' + digitado + '\n'   
+
+        # adiciona no histórico
+        basic.add_historic(texto_add)
+
+        # adiciona na tela principal
         txt_main_inte_0.insert(END, texto_add)
 
+        # atualiza a tela
         tela.update()
+
+        # Nenhuma ação especial a fazer
         if fazer == 'nada':
+
+            # Verifica se será necessário ativar uma ação especial
             fazer = processamento(digitado)
+
+            # A Diana pode responder a essa pergunta.            
             if fazer == '__responder__':
+
+                # A Diana vai buscar uma resposta
                 resposta_diana = responder()
-                
-                texto_add = nome_bot + resposta_diana 
-                add_item_historic(texto_add)
+
+                # Texto padrão
+                texto_add = nome_bot + resposta_diana  
+
+                # Adicionar no histórico
+                basic.add_historic(texto_add)
+
+                # Adicionar no Text principal
                 txt_main_inte_0.insert(END, texto_add)
 
+                # A opção de fala está ativa?
                 if tenho_que_falar == 'sim':
-                    falar.rec_thread(resposta_diana)
 
+                    # A Diana vai falar
+                    falar.ThreadDeFala(resposta_diana)
+
+            # Um comando foi acionado
             elif fazer == '__comando_responder__':
 
+                # O usuário fez uma pergunta sobre horas
                 if lista[3] == 'é_horas':
-                    dt = basic.retornar_time()
-
-                    if lista[1] == 'São {} horas e {} minutos':
-                        msg_resposta = lista[1].format(dt['hour'],dt['minute'])
-
-                    elif lista[1] == 'Hoje é dia {}':
-                        msg_resposta = lista[1].format(dt['day'])
-
-                    elif lista[1] == 'Estamos no mês {} de {}':
-                        msg_resposta = lista[1].format(dt['month'],dt['year'])
-
-                    elif lista[1] == 'Estamos em {}':
-                        msg_resposta = lista[1].format(dt['year'])
-
-                    texto_add = nome_bot + msg_resposta + '\n'
-
-                    if tenho_que_falar == 'sim':
-                        falar.rec_thread(msg_resposta)
-
+                    texto_add = responderHoras()
                 else:
                     texto_add = nome_bot + lista[1] + '\n'
 
-                add_item_historic(texto_add)
+                # adiciona ao histórico
+                basic.add_historic(texto_add)
+
+                # insere no Text principal
                 txt_main_inte_0.insert(END, texto_add)
+
+                # libera o fazer
                 fazer = 'nada'
 
+                # Resposta que a diana vai dar
                 o_que_responder = lista[1]
+
+                # O que o usuário perguntou
                 o_que_era = lista[2]
 
+                # O usuário pediu para tocar uma música
                 if lista[3] == 'é_musica':
-                    file = basic.abrir_arquivo('musica/arquivo')
-                    file = file.split('\n')
-                    for x in file:
-                        x = x.split(':')
-                        if x[3] == o_que_era+';'+o_que_responder:
-                            play_music(x[1])
-                            break
+                    abrirArquivoEReproduzirMusica(o_que_era,o_que_responder)
 
+                # O usuário deu um comando programado para o Arduino
                 elif lista[3] == 'é_comando':
-                    file = basic.abrir_arquivo('comandos/arquivo')
-                    file = file.split('\n')
-                    for x in file:
-                        x = x.split(':')
-                        if x[3] == o_que_era+';'+o_que_responder:
-                            send_serial_message(x[1],None)
-                            break
+                    abrirArquivoExecutarComando(o_que_era,o_que_responder)
 
+            # Futuramente a Diana vai continuar ou criar um assunto
             else:
-                alternativa_resposta = pergunta(digitado)
-                if tenho_que_falar == 'sim':
-                    falar.rec_thread(alternativa_resposta)
-                texto_add = str((nome_bot + alternativa_resposta + '\n'))
-                add_item_historic(texto_add)
-                txt_main_inte_0.insert(END, texto_add)
 
+                # Busca na wikipedia ativada
+                if ativarWikipedia:
+
+                    from wikiDiana import wiki
+                    respWiki = wiki()
+
+                    # A Diana vai buscar uma resposta na Wikipedia
+                    resposta_diana = respWiki.wikiAnalise(digitado)
+
+                    if resposta_diana[0] == False:
+                        basic.log('Não foi possível obter uma respota de wikipedia\n Erro: {}'.format(resposta_diana[1]))
+    
+                    else:
+
+                        # Texto padrão
+                        texto_add = nome_bot + resposta_diana[1] + '\n'
+
+                        # Adicionar no histórico
+                        basic.add_historic(texto_add)
+
+                        # Adicionar no Text principal
+                        txt_main_inte_0.insert(END, texto_add)
+
+                        # A opção de fala está ativa?
+                        if tenho_que_falar == 'sim':
+                            # A Diana vai falar
+                            falar.ThreadDeFala(resposta_diana[1])
+
+                        criar_assunto_wikipedia(digitado,resposta_diana[1])
+                        fazer = 'nada'
+
+                # Se a Wikipedia deu errado
+                if fazer != 'nada':
+                    # Respostas alteranativas
+                    alternativa_resposta = pergunta(digitado)
+
+                    # Executar a fala
+                    if tenho_que_falar == 'sim':
+                        falar.ThreadDeFala(alternativa_resposta)
+ 
+                    # texto padrão
+                    texto_add = nome_bot + alternativa_resposta + '\n'
+
+                    # Adicionar ao histórioc
+                    basic.add_historic(texto_add)
+
+                    # Adicionar na tela principal
+                    txt_main_inte_0.insert(END, texto_add)
+
+        # continuar uma conversa
         elif fazer == '__continuar_assunto__':
             continuar_assunto(digitado)
 
+        # Criar um novo assunto
         elif fazer == '__criar_assunto__':
             criar_assunto(perguntado_antes,digitado)
+
+        # pergunta anterior do usuário
         perguntado_antes = digitado
+
+    # Atualiza o Text
     txt_main_inte_0.see("end")
 
 def status_falar_ou_nao(parametro):
-    basic.log('status falar ou nao, parametro = {}'.format(parametro))
     global tenho_que_falar
+
     if parametro == 'ler':
         if tenho_que_falar == 'sim':
             imagem = PhotoImage(file='Imagens/reconhece_escreve/icon_speak.png')
         else:
             imagem = PhotoImage(file='Imagens/reconhece_escreve/icon_speak_rev.png')
+
     elif parametro == 'trocar':
         if tenho_que_falar == 'sim':
             tenho_que_falar = 'nao'
@@ -290,186 +437,226 @@ def status_falar_ou_nao(parametro):
         else:
             tenho_que_falar = 'sim'
             imagem = PhotoImage(file='Imagens/reconhece_escreve/icon_speak.png')
+
     imagem = imagem.subsample(16,16)
     btn_main_audi_0['image'] = imagem
     btn_main_audi_0.image = imagem
 
     basic.atualizar_tenho_que_falar(tenho_que_falar)
 
-def gerar_som(texto_fala):
-    basic.log('gerar som, texto_fala = {}'.format(texto_fala))
-    try:
-        from gtts import gTTS
-    except Exception as e_1:
-        messagebox.showinfo('erro','Instale o gtts!\n'+str(e_1))
-        basic.abrir_site('https://github.com/Combratec/Diana/blob/master/README.md#Como-ativar-a-fala')
-    else:
-        try:
-            tts = gTTS(text=texto_fala, lang='pt-br')
-        except Exception as e_2:
-            messagebox.showinfo('erro','Erro ao gerar audio'+str(e_2))
-        else:
-            try:
-                tts.save('audio.mp3')
-            except Exception as e_3:
-                messagebox.showinfo('erro','Erro ao salvar audio, tente mover a Diana para a sua Desktop\n'+str(e_3))
-            else:
-                basic.log('Audio gerado com sucesso')
-                return 0
-    return 1
-
-def reproduzir_som(link):
-    basic.log('reproduzir som, link = {}'.format(link))
-    try:
-        from pygame import mixer
-    except Exception as e_1:
-        messagebox.showinfo('erro','Instale o pygame!\n'+str(e_1))
-    else:
-        try:
-            mixer.init() 
-        except Exception as e_2:
-            messagebox.showinfo('erro','Erro ao iniciar o mixer\n'+str(e_2))
-        else:
-            try:
-                mixer.music.load(link)
-            except Exception as e_3:
-                messagebox.showinfo('erro','Erro ao carregar audio\n'+str(e_3))
-            else:
-                try:
-                    mixer.music.play()
-                except Exception as e_4:
-                    messagebox.showinfo('erro','Erro ao iniciar audio\n'+str(e_4))
-                else:
-                    try:
-                        while mixer.music.get_busy():
-                            sleep(0.5)
-                    except:
-                        messagebox.showinfo('erro','um erro improvável aconteceu!')
-                    else:
-                        basic.log('Reprodução de som filizada com sucesso')
-            mixer.quit()
-
 class falar ():
-    def rec_thread(texto_fala):
-        basic.log('rec thread, texto_fala = {}'.format(texto_fala))
+    def ThreadDeFala(texto_fala):
+        # impede que seja criados multiplos Threads
         global control_thread_espeak
+
+        # Se Alguém já estiver usando o Thread
         if control_thread_espeak == True:
             basic.log('já existe um thread sendo usado para processar a fala')
+
         else:
+
+            # Tenta deletar o áudio
             try:
                 remove('audio.mp3')
             except Exception as er2:
-                basic.log('impossivel deletar o arquivo residual. \n'+str(er2))
+                basic.log('impossivel deletar o arquivo residual de audio. \n'+str(er2))
+
+            # Tenta criar um Thread
             try:
                 import threading
-                tts_thread = threading.Thread(target = falar.resp_speak, args=[texto_fala])
+                tts_thread = threading.Thread(target = falar.orquestraAFala, args=[texto_fala])
                 tts_thread.start()
             except Exception as e:
                 basic.log('Erro ao criar thread para a fala.\n'+str(e))
             else:
+
+                # Se o Thread foi criado, ele bloqueia a criação de novos Threads
                 control_thread_espeak = True
 
-    def resp_speak(texto_fala):
-        basic.log('resp_speak, texto_fala = {}'.format(texto_fala))
+    def orquestraAFala(texto_fala):
+        # Impede que novos threads sejam criados
         global control_thread_espeak
-        analise = gerar_som(texto_fala)
+
+        # Gerar o som
+        analise = falar.gerar_som(texto_fala)
+
+        # O áudio foi gerado com sucesso
         if analise == 0:
             reproduzir_som('audio.mp3')
+
+        # Liberar a execução da fala
         control_thread_espeak = False
+
+    def gerar_som(texto_fala):
+        # Tentar importar a biblioteca
+        try:
+            from gtts import gTTS
+        except Exception as e_1:
+            messagebox.showinfo('Aviso','O módulo GTTS não está instalado, eu precido dele para falar, portanto, vou abrir o site para que você possa fazer a instalação do gtts: \nErro:'+ e_1)
+            basic.abrir_site('https://github.com/Combratec/Diana/blob/master/README.md#Como-ativar-a-fala')
+        else:
+
+            # Tentar buscar o audio
+            try:
+                tts = gTTS(text=texto_fala, lang='pt-br')
+            except Exception as e_2:
+                messagebox.showinfo('erro','Não consegui buscar o áudio na internet.\n Erro:'+e_2)
+            else:
+
+                # Tentar salvar o audio
+                try:
+                    tts.save('audio.mp3')
+                except Exception as e_3:
+                    messagebox.showinfo('erro','Erro ao salvar audio, tente me mover para a sua Desktop ou dar mais permissões para mim!\n'+e_3)
+                else:
+                    return 0
+        return 1
+
+    def reproduzir_som(link):
+        # Tente importar a biblioteca do PyGame
+        try:
+            from pygame import mixer
+        except Exception as e_1:
+            messagebox.showinfo('erro','Instale o pygame!\n'+str(e_1))
+        else:
+
+            # Inicialização do mixer
+            try:
+                mixer.init() 
+            except Exception as e_2:
+                messagebox.showinfo('erro','Erro ao iniciar o mixer\n'+str(e_2))
+            else:
+
+                # Tente carregar o link
+                try:
+                    mixer.music.load(link)
+                except Exception as e_3:
+                    messagebox.showinfo('erro','Erro ao carregar audio\n'+str(e_3))
+                else:
+
+                    # Tente tocar o áudio
+                    try:
+                        mixer.music.play()
+                    except Exception as e_4:
+                        messagebox.showinfo('erro','Erro ao iniciar audio\n'+str(e_4))
+                    else:
+
+                        # <>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><
+                        try:
+                            while mixer.music.get_busy():
+                                sleep(0.5)
+                        except:
+                            messagebox.showinfo('erro','um erro improvável aconteceu!')
+                        else:
+                            basic.log('Reprodução de som filizada com sucesso')
+
+                mixer.quit()
 
 # RECONHECIMENTO DE VOZ
 class ouvir():
     def agora():
-        basic.log('agora ()')
         global texto
         global control_thread_listen
         global sr
+
+        # Tente importar a biblioteca
         try:
             import speech_recognition as sr
         except Exception as e_1:
             messagebox.showinfo('Erro','Por favor, instale a biblioteca speechrecognition\nErro:'+str(e_1))
             basic.abrir_site('https://github.com/Combratec/Diana/blob/master/README.md#Como-ativar-o-reconhecimento-de-voz')
         else:
+
+            # O Thread está oculpado
             if control_thread_listen == True:
                 messagebox.showinfo('Já existe um Thread sendo usado para reconhecimento de fala!')
+            
+            # O Thread está disponível
             else:
+                # Desabilite o botão
                 btn_main_reco_0['state'] = 'disabled'
+
+                # Atualize a tela
                 tela.update()
+
+                # Tente fazer o reconhecimento
                 try:
                     m = sr.Microphone()
                     r = sr.Recognizer()
-                    basic.log('diga alguma coisa: ')
+
                     with m as source:
                         r.adjust_for_ambient_noise(source,duration=0.3)
-                    stop_listening = r.listen_in_background(m, ouvir.callback)
+                    stop_listening = r.listen_in_background(m, ouvir.inicarLeituraDoMicrofone)
+
                     while control_thread_listen == False:
                         tela.update()
                         sleep(0.3)
+
                     control_thread_listen = False
                     stop_listening(wait_for_stop=False)
-                    basic.log('Parei de ouvir!')
+
                 except:
                     texto = '[ERRO] Erro desconhecido_fala:'
                     btn_main_reco_0.update()
                     tela.update()
+
                 btn_main_reco_0['state'] = 'normal'
                 btn_main_reco_0.update()
+
                 return texto
 
-    def callback(recognizer, audio):
-        basic.log('callback, recognizer = {}, audio = {}'.format(recognizer,audio))
+    def inicarLeituraDoMicrofone(recognizer, audio):
         global control_thread_listen
         global texto
         global sr
+
         try:
             rec =  recognizer.recognize_google(audio,language='pt-BR')
             texto = str(rec)
+
         except sr.UnknownValueError as e1:
-            texto = '[ERRO] Eu não consegui entender nada!'+str(e1)
+            texto = '[ERRO] Eu não consegui entender nada!' + e1
+
         except sr.RequestError as e2:
-            texto = '[ERRO] Parece que você tem um Problema com a internet! {}'+str(e2)
+            texto = '[ERRO] Parece que você tem um Problema com a internet! {}' + e2
+
         except Exception as e3:
-            texto = '[ERRO] Erro desconhecido: '+str(e3)
+            texto = '[ERRO] Erro desconhecido: ' + e3
+
         else:
             basic.log('reconhecimento de fala finalizado com sucesso')
+
         finally:
             control_thread_listen = True
-            basic.log(texto)
 
 def limpar_historico():
-    basic.log('*** limpar_historico ***')
     basic.clear_historic()
     atualizar_historico()
 
 def atualizar_historico():
-    basic.log('*** atualizar_historico ***')
     txt_historic_data_0.delete(1.0, END)
     txt_historic_data_0.insert(1.0,basic.load_historic())
     txt_historic_data_0.see("end")
 
-def add_item_historic(interacao):
-    basic.log('add item historic, interacao = {}'.format(interacao))
-    basic.add_historic(interacao)
-
 def resize(event=None):
-    basic.log('resize, event = {}'.format(event))
     global precisao_minima
+
     basic.atualizar_pyanalise(scl_pyanalise_prec_0.get())
     precisao_minima = basic.ler_pyanalise()
 
 def testar_pyanalise(event):
-    basic.log('testar pyanalise, event = {}'.format(event))
     global precisao_minima
+
     ent_pyanalise_fras_0.update()
     busca_semelhanca = compare.frase(ent_pyanalise_fras_0.get(),ent_pyanalise_fras_1.get())
     lbl_pyanalise_resu_0['text'] = str(busca_semelhanca)+str('%')
+
     if busca_semelhanca < precisao_minima:
         lbl_pyanalise_resu_0['fg'] = 'red'
     else:
         lbl_pyanalise_resu_0['fg'] = 'blue'
 
 def load_songs():
-    basic.log('load songs ()')
     global save_music_object_position
     global music_itens
 
@@ -482,6 +669,7 @@ def load_songs():
     config_music_load = {'relief':GROOVE,'border':2}
 
     basic.make_file_responses_music()
+
     for x in range(len(music_itens)):
         ent_music_file_1 = Entry(fr_music_3 , config_music_load)
         ent_music_comm_1 = Entry(fr_music_3 , config_music_load)
@@ -503,17 +691,16 @@ def load_songs():
         save_music_object_position.append(new_list_itens) 
 
 def remove_songs(btn):
-    basic.log('remove songs, btn = {}'.format(btn))
     global save_music_object_position
+
     total = len(save_music_object_position)
     for x in range(total):
         if save_music_object_position[x][2] == btn:
             musica.remover(x)
             load_songs()
-            break # importante
+            break 
 
 def add_songs():
-    basic.log('add songs ()')
     a = ent_music_file_0.get() 
     b = ent_music_comm_0.get()
 
@@ -526,16 +713,16 @@ def add_songs():
         ent_music_comm_0.delete(0,END)
 
 def select_music(btn):
-    basic.log('select music, btn = {}'.format(btn))
     global save_music_object_position
+
     for y in save_music_object_position:
         if y[3] == btn:
             play_music(y[0].get())
 
 def play_music(link):
-    basic.log('play music, link = {}'.format(link))
     global tocando
     global mixer
+
     if tocando == False:
         try:
             from pygame import mixer
@@ -563,7 +750,6 @@ def play_music(link):
             messagebox.showinfo('ERRP',e)
 
 def load_commands():
-    basic.log('load commands ()')
     global save_comand_object_position
     global itens
 
@@ -596,8 +782,8 @@ def load_commands():
         save_comand_object_position.append([ent_command_send_1,ent_command_comm_0,ent_command_dele_0,btn_command_test_2]) 
 
 def remove_commands(btn):
-    basic.log('remove commands, btn = {}'.format(btn))
     global save_comand_object_position
+
     total = len(save_comand_object_position)
     for x in range(total):
         if save_comand_object_position[x][2] == btn:
@@ -606,7 +792,6 @@ def remove_commands(btn):
             break
 
 def add_commands():
-    basic.log('add commands ()')
     a = ent_command_send_0.get() 
     b = ent_command_comm_0.get()
     if  a == '' or  b =='' or a.isspace() or b.isspace() or not ';' in b or ':' in b or ':' in a:
@@ -620,38 +805,43 @@ def add_commands():
         ent_command_comm_0.delete(0,END)
 
 def select_serial(btn_command_test_2):
-    basic.log('select serial, btn_command_test_2 = {}'.format(btn_command_test_2))
     global save_comand_object_position
+
     for y in save_comand_object_position:
         if y[3] == btn_command_test_2:
             send_serial_message(y[0].get(),btn_command_test_2)
 
 def send_start_serial(send_message_for_serial):
-    basic.log('send start serial, send_message_for_serial = {}'.format(send_message_for_serial))
     global placa
+
     if placa == None:
         try:
             placa = comand_arduino.start_connection(link_serial)
+
         except:
             messagebox.showinfo('ERRO','Por favor, defina uma serial válida!')
             return 0
     try:
         send_serial_message(None,None)
+
     except Exception as e:
         messagebox.showinfo('ERRO!','Problema com esta serial. \n[ERRO] {}'.format(e))
 
 def send_serial_message(send_message_for_serial,btn_command_test_2):
-    basic.log('send serial message, send_message_for_serial = {}, btn_command_test_2 = {}'.format(send_message_for_serial,btn_command_test_2))
     global placa
     if placa == None:
+
         try:
             placa = comand_arduino.start_connection(ent_command_seri_0.get())
+
         except Exception as e:
             messagebox.showinfo('ERRO!','Problema com esta serial. \n[ERRO] {}'.format(e))
             cor = 'red'
+
         else:
             basic.atualizar_link_serial(ent_command_seri_0.get())
             cor = 'green'
+
         finally:
             if btn_command_test_2 != None:
                 btn_command_test_2.configure(bg=cor,fg='white') 
@@ -660,23 +850,25 @@ def send_serial_message(send_message_for_serial,btn_command_test_2):
     if send_message_for_serial != None and placa != None and (send_message_for_serial != ''):
         try:
             comand_arduino.message(placa,send_message_for_serial)
+
         except Exception as e:
             messagebox.showinfo('ERRO!','Problema com esta serial. \n[ERRO] {}'.format(e))
             cor = 'red'
+
         else:
             cor = 'green'
+
         finally:
+
             if btn_command_test_2 != None:
                 btn_command_test_2.configure(bg=cor,fg='white') 
                 ent_command_seri_0['fg'] = cor
 
 def delete_and_insert(entry_name,insert_entry_name):
-    basic.log('delete and insert, entry_name = {}, insert_entry_name = {}'.format(entry_name,insert_entry_name))
     entry_name.delete(0,END)
     entry_name.insert(0,insert_entry_name)
 
 def trocar_interface(carregar):
-    basic.log('trocar interface, carregar = {}'.format(carregar))
     if carregar == 'conf_inte':
         tela_frame_configuracoes.grid_forget()
         interacao.grid(row=1,column=1,sticky=NSEW)
@@ -780,7 +972,7 @@ interacao.rowconfigure(2,weight=1)
 interacao.grid(row=1,column=1,sticky=NSEW)
 
 btn_main_gith_0 = Button(interacao,config_main_btns,image = icon_git)
-lbl_main_titl_0 = Label (interacao,config_main_titl,text="DIANA 8.0")
+lbl_main_titl_0 = Label (interacao,config_main_titl,text="DIANA")
 lbl_main_conf_0 = Button(interacao,config_main_btns , image = icon_config)
 txt_main_inte_0 = Text  (interacao,config_main_text)
 btn_main_audi_0 = Button(interacao,config_main_btns)
