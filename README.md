@@ -203,43 +203,6 @@ Você pode refatorar o código, trocando nomes de variáveis, mudando outros det
 **Correção de erros ortográficos**
 Caso você encontre erros ortográficos, tanto no README, quanto no código da Diana, você pode corrigi-los e enviar para o nosso repositório. Deixe uma descrição dos erros.(Evite usar acentos no código da Diana)  
 
-----------
-
-### Atualizações da versão 8  
-
-Objetivos: Refazer todo o conceito vigente até agora. Foco: Simplicidade	 
-
-- [X] Refazer a lógica da Diana por completo
-- [X] Adição da biblioteca pyanalise	
-- [X] Adaptação para a biblioteca pyanalise	
-- [X] Remoção da biblioteca mipand 
-- [X] Remoção de bibliotecas pesadas
-- [X] Remoção de instaladores
-- [X] Remoção de tela hack - ninguém usava	
-- [X] Remoção das imagens hack's - peso desnecessário
-- [X] Remoção da tela de avaliação - chato!	
-- [X] Remover áudios salvos	
-- [X] Remoção das telas de fala_esc e seus respectivos lixos	
-- [X] Remoção das telas de esc_rec e seus respectivos lixos	
-- [X] Remoção das telas de fala_rec e seus respectivos lixos	
-- [X] Criar tela única completa	
-- [X] Criar o design das novas telas	
-- [X] Integrar reconhecimento de voz	
-- [X] Integrar fala	
-- [X] Adicionar possibilidade de tocar música	
-- [X] Adicionar possibilidade se conectar com o Arduíno	
-- [X] Criar menu	
-- [X] Remover playsound
-- [X] Adicionar pygame
-- [X] Remoção da tela de Menu
-- [X] Refatoração completa do código	
-- [X] Fazer documentação	
-- [X] Atualizar por completo o repositório da Diana. 
-- [X] Mudança na forma de analisar os arquivos
-- [X] mudança na forma de ler os arquivos
-- [X] Remoção de todas as interações. 1.txt, 2.txt,...450.txt
-- [X] Adição de novos arquivos, com português revisado
-
 [image-arduino-configurar]: https://1.bp.blogspot.com/-E1yNWD-D8To/XTcakPehJDI/AAAAAAAAA14/uuZHfViDvRY2yi8VeYdQN26LdN9A_0eNwCLcBGAs/s1600/porta%2Barduino.png  
 [image-arduino-compilar]: https://1.bp.blogspot.com/-qSF25ZLyGTQ/XTcahSoQY3I/AAAAAAAAA1U/Fl9_irvvzckHvKGf4EYr6f-te57uf92bgCLcBGAs/s1600/compilar.png  
 [image-def-programar]: https://1.bp.blogspot.com/-4F3n1GwPcO0/XTdNymQqlTI/AAAAAAAAA30/r5j161uXZH0h6ALGdY6vrRgT2nGE1UB2QCLcBGAs/s1600/arduino_code.png  
