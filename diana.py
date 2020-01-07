@@ -41,7 +41,6 @@ global save_music_object_position
 global control_thread_listen
 global control_thread_espeak
 global perguntado_antes
-global ativarWikipedia
 global tenho_que_falar
 global precisao_minima
 global nome_usuario
@@ -61,7 +60,6 @@ save_comand_object_position = []              # Salva a posição dos objetos de
 save_music_object_position = []               # Salva a posição dos objetos música
 control_thread_listen = False                 # Impede que o reconhecimento de voz seja ativado mais de uma vez por vez.
 control_thread_espeak = False                 # impede que o sistema de fala seja ativadao mais de uma vez por vez.
-ativarWikipedia = False                       # Ativa a busca pela biblioteca da wikipedia
 perguntado_antes = 'nada'                     # O que foi perguntado anteriormente
 nome_usuario = 'você_: '                      # Usuario
 nome_bot = 'Diana: '                          # Diana
@@ -266,7 +264,6 @@ def controlador_de_partes(digitado):
     global perguntado_antes
     global tenho_que_falar
     global nome_bot
-    global ativarWikipedia
 
     # Deletar a entrada
     ent_main_writ_0.delete(0, 'end')
@@ -358,38 +355,6 @@ def controlador_de_partes(digitado):
             # Futuramente a Diana vai continuar ou criar um assunto
             else:
 
-                # Busca na wikipedia ativada
-                if ativarWikipedia:
-
-                    from wikiDiana import wiki
-                    respWiki = wiki()
-
-                    # A Diana vai buscar uma resposta na Wikipedia
-                    resposta_diana = respWiki.wikiAnalise(digitado)
-
-                    if resposta_diana[0] == False:
-                        basic.log('Não foi possível obter uma respota de wikipedia\n Erro: {}'.format(resposta_diana[1]))
-    
-                    else:
-
-                        # Texto padrão
-                        texto_add = nome_bot + resposta_diana[1] + '\n'
-
-                        # Adicionar no histórico
-                        basic.add_historic(texto_add)
-
-                        # Adicionar no Text principal
-                        txt_main_inte_0.insert(END, texto_add)
-
-                        # A opção de fala está ativa?
-                        if tenho_que_falar == 'sim':
-                            # A Diana vai falar
-                            falar.ThreadDeFala(resposta_diana[1])
-
-                        criar_assunto_wikipedia(digitado,resposta_diana[1])
-                        fazer = 'nada'
-
-                # Se a Wikipedia deu errado
                 if fazer != 'nada':
                     # Respostas alteranativas
                     alternativa_resposta = pergunta(digitado)
@@ -654,7 +619,7 @@ def testar_pyanalise(event):
     if busca_semelhanca < precisao_minima:
         lbl_pyanalise_resu_0['fg'] = 'red'
     else:
-        lbl_pyanalise_resu_0['fg'] = 'blue'
+        lbl_pyanalise_resu_0['fg'] = "#3399ff"
 
 def load_songs():
     global save_music_object_position
@@ -1003,7 +968,7 @@ config_options_opti = design_opcoes.config_options_opti()
 config_options_retu = design_opcoes.config_options_retu()
 
 fr_options_0 = Frame(tela)
-fr_options_1 = Frame(fr_options_0,bg='blue')
+fr_options_1 = Frame(fr_options_0,bg="#3399ff")
 fr_options_2 = Frame(fr_options_0,bg='white')
 
 fr_options_0.grid_columnconfigure(1, weight=1)
@@ -1183,7 +1148,7 @@ config_music_entr = design_musica.config_music_entr()
 config_music_fram = design_musica.config_music_fram()
 
 fr_music_0 = Frame(tela,bg='white')
-fr_music_1 = Frame(fr_music_0,bg='blue',padx=6)
+fr_music_1 = Frame(fr_music_0,bg="#3399ff",padx=6)
 fr_music_2 = Frame(fr_music_0,bg='white',padx=6)
 fr_music_3 = Frame(fr_music_0,bg='white',padx=6)
 fr_music_4 = Frame(fr_music_0,bg='white',padx=6)
@@ -1241,7 +1206,7 @@ config_command_test = design_comando.config_command_test()
 config_command_entr = design_comando.config_command_entr()
 
 fr_command_0 = Frame(tela,bg='white')
-fr_command_1 = Frame(fr_command_0,bg='blue',padx=6)
+fr_command_1 = Frame(fr_command_0,bg="#3399ff",padx=6)
 fr_command_2 = Frame(fr_command_0,bg='white',padx=6)
 fr_command_3 = Frame(fr_command_0,bg='white',padx=6)
 fr_command_4 = Frame(fr_command_0,bg='white',padx=6)

@@ -9,6 +9,9 @@ def pergunta(entrada):
     
     elif "você já" in entrada.lower():
         return 'Acho que não, conte-me mais!'
+
+    elif "você curte" in entrada.lower():
+        return 'Me diga você, você curte?'
     
     elif "você gosta de" in entrada.lower():
         return 'Não sei, você gosta?'
