@@ -13,7 +13,7 @@ A Diana é um chatbot que aprende, escuta, fala, toca música e pode controlar u
 - [Como controlar um Arduíno?](#Como-controlar-um-Arduíno)
 - [Como tocar uma música?](#Como-tocar-uma-música)
 - [Faça parte desse projeto!](#Faça-parte-desse-projeto)
-- [Atualizações da versão 8.0](#Atualizações-da-versão-8)
+- [Atualizações da versão 0.8](#Atualizações-da-versão-0.8)
 
 ----------
 
